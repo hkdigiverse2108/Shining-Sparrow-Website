@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "tailwindcss";
+
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "../public/assets/css/swiper.min.css";
+
+@import "../public/assets/css/style.css";
+@import "../public/assets/css/variable.css";
+@import "../public/assets/css/main.css";
+
+@import "aos/dist/aos.css";
+@import "../public/assets/css/loader.css";
+
+@import "../public/assets/css/brands.css";
+@import "../public/assets/css/blocks.style.build.css";
+@import "../public/assets/css/course-review.css";
+@import "../public/assets/css/custom-frontend-lite.min.css";
+@import "../public/assets/css/custom-widget-icon-list.min.css";
+@import "../public/assets/css/digiSkill-core-main.css";
+@import "../public/assets/css/digiSkill-custom-icons.css";
+@import "../public/assets/css/elementor-icons.min.css";
+@import "../public/assets/css/events.min.css";
+@import "../public/assets/css/font-awesome.css";
+@import "../public/assets/css/fontawesome.min.css";
+@import "../public/assets/css/jquery.countdown.css";
+@import "../public/assets/css/jquery.fancybox.min.css";
+@import "../public/assets/css/learnpress.min.css";
+@import "../public/assets/css/learnpress.css";
+@import "../public/assets/css/magnific-popup.css";
+@import "../public/assets/css/metisMenu.css";
+@import "../public/assets/css/nice-select.css";
+@import "../public/assets/css/odometer.min.css";
+@import "../public/assets/css/owl.carousel.css";
+@import "../public/assets/css/post-one.css";
+@import "../public/assets/css/post-two.css";
+@import "../public/assets/css/post-one.css.css";
+@import "../public/assets/css/post-three.css";
+@import "../public/assets/css/post-four.css";
+@import "../public/assets/css/remixicon.css";
+@import "../public/assets/css/solid.min.css";
+@import "../public/assets/css/style.min.css";
+@import "../public/assets/css/styles-two.css";
+@import "../public/assets/css/swiper-bundle.min.css";
+@import "../public/assets/css/tipped.min.css";
+@import "../public/assets/css/update.css";
+@import "../public/assets/css/wc-blocks.css";
+@import "../public/assets/css/widgets.min.css";
+@import "../public/assets/css/wishlist.min.css";
+@import "../public/assets/css/woocommerce-layout.css";
+/* @import "../public/assets/css/woocommerce-smallscreen.css"; */
+/* @import "../public/assets/css/woocommerce.css"; */
+/* @import "../public/assets/css/yith-quick-view.css"; */

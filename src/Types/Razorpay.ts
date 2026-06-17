@@ -1,0 +1,50 @@
+export interface RazorpayResponse {
+    razorpay_payment_id: string;
+    razorpay_order_id?: string;
+    razorpay_signature?: string;
+    error?: {
+        code?: string;
+        description?: string;
+        source?: string;
+        step?: string;
+        reason?: string;
+        metadata?: {
+            payment_id?: string;
+            order_id?: string;
+        };
+    };
+}
+
+export interface prefillUserData {
+    name?: string;
+    email?: string;
+    contact?: string;
+}
+
+export interface RazorpayOptions {
+    key: string;
+    amount: number;
+    currency: string;
+    name: string;
+    description?: string;
+    handler: (response: RazorpayResponse) => void;
+    prefill?: prefillUserData;
+    notes?: Record<string, string>;
+    theme?: {
+        color?: string;
+    };
+}
+
+export interface PaymentModalProps {
+    isLoading?: boolean;
+    btnText: string;
+    amount: number;
+    userData: prefillUserData;
+    onPaymentComplete: (
+        status: "COMPLETED" | "FAILED",
+        response: RazorpayResponse,
+        RazorPayKey?: string
+    ) => void;
+}
+
+export type PaymentStatusType = "COMPLETED" | "FAILED";

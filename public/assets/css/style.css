@@ -1,0 +1,264 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--edublink-font-primary) !important;
+}
+/* 
+.active {
+  color: var(--edublink-color-primary) !important;
+} */
+
+.container-p {
+  @apply px-6 sm:px-9;
+}
+
+/* ============== Contact Start ============== */
+
+.elementor-17213
+  .elementor-element.elementor-element-78ac899
+  .edublink-social-icon-each-item {
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e5e5e5;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 100px 100px 100px 100px;
+}
+
+.elementor-17213
+  .elementor-element.elementor-element-78ac899
+  .edublink-social-icon-each-item {
+  width: 46px;
+  height: 46px;
+  font-size: 16px;
+}
+.elementor-17213
+  .elementor-element.elementor-element-78ac899
+  .edublink-social-icon-each-item:hover {
+  background-color: #1ab69d;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1ab69d;
+  color: white;
+}
+
+.elementor-17213
+  .elementor-element.elementor-element-78ac899
+  .edublink-social-icon-each-item {
+  transition: all 0.3s ease;
+}
+
+.elementor-17213
+  .elementor-element.elementor-element-78ac899
+  .edublink-social-icon-each-item {
+  border-radius: 50%;
+}
+
+/* ============== Contact End  ============== */
+
+/* ============== Certificate Section Start  ============== */
+
+.hero {
+  width: 100%;
+  height: 420px;
+  background: #f0f4f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero-title {
+  font-size: var(--edublink-h2);
+  line-height: var(--edublink-h2-lineHeight);
+  font-weight: var(--edublink-p-bold);
+  font-family: var(--edublink-font-secondary);
+  color: var(--edublink-color-heading);
+  margin-bottom: 30px;
+}
+
+.hero-title span {
+  color: var(--edublink-color-secondary);
+}
+.hero .button-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Decorative Shapes ------------------------------- */
+
+.shape {
+  position: absolute;
+}
+
+.shape-left-1 {
+  width: 120px;
+  height: 80px;
+  bottom: 40px;
+  left: 280px;
+}
+
+.shape-left-2 {
+  bottom: 120px;
+  left: 320px;
+}
+
+.shape-right-1 {
+  width: 150px;
+  height: 150px;
+  right: 160px;
+  top: 10px;
+}
+.shape-right-2 {
+  right: 160px;
+  top: 10px;
+}
+
+.shape-bottom {
+  left: 300px;
+  bottom: 20px;
+}
+/* ============== Certificate Section End  ============== */
+
+/* ============== About Section Start  ============== */
+
+#about #content-section {
+  display: flex;
+  justify-content: center;
+}
+
+#about .shape-section {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 100px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.elementor-10337
+  .elementor-element.elementor-element-c34ae9f:not(
+    .elementor-motion-effects-element-type-background
+  ),
+.elementor-10337
+  .elementor-element.elementor-element-c34ae9f
+  > .elementor-motion-effects-container
+  > .elementor-motion-effects-layer {
+  background-color: #f7f5f2;
+  /* background-image: url(https://demo.edublink.co/wp-content/uploads/2023/11/cta-university.png); */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.elementor-10337 .elementor-element.elementor-element-c34ae9f {
+  overflow: hidden;
+  transition:
+    background 0.3s,
+    border 0.3s,
+    border-radius 0.3s,
+    box-shadow 0.3s;
+  padding: 87px 0px 95px 0px;
+}
+.elementor-element {
+  --widgets-spacing: 20px 20px;
+  --widgets-spacing-row: 20px;
+  --widgets-spacing-column: 20px;
+}
+.elementor-element,
+.elementor-lightbox {
+  --swiper-theme-color: #000;
+  --swiper-navigation-size: 44px;
+  --swiper-pagination-bullet-size: 6px;
+  --swiper-pagination-bullet-horizontal-gap: 6px;
+}
+.elementor-section {
+  position: relative;
+}
+
+/* ============== About Section End  ============== */
+
+/* ============== FAQ Section Start  ============== */
+
+#faq #content-section {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+}
+/* ============== FAQ Section End  ============== */
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.rotate-slow {
+  animation: spinSlow 10s linear infinite;
+}
+
+/* ============== Auth  Start  ============== */
+
+.auth-form input {
+  @apply rounded-md! focus-within:border-primary!;
+}
+
+.auth-form {
+  @apply text-black!;
+}
+
+.auth-form .woocommerce-form-row {
+  @apply mb-8!;
+}
+/* ============== Auth  End  ============== */
+
+
+.video-container {
+  /* position: relative; */
+  /* width: 800px/; */
+  /* height: 450px; */
+  /* margin: 20px auto; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* The invisible shield over the top area */
+.overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: transparent;
+  box-shadow: none !important;
+  /* Covers Title, Share, Watch Later */
+  /* background-color: beige; */
+  background: transparent;
+  z-index: 10;  
+}
+
+/* Shield over the bottom right "Watch on YouTube" */
+.overlay-bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 45px;
+  width: 80px;
+  /* Reduced to expose Settings/CC, covers Logo/Fullscreen */
+  height: 40px;
+  /* background-color: red; */
+  /* padding: 10px; */
+  background: transparent;
+  z-index: 10;
+}
