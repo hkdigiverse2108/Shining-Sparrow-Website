@@ -21,7 +21,7 @@ import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
 export const PageRoutes = [
-  { path: ROUTES.HOME, element: <Home /> },
+  { path: "/", element: <Home /> },
   { path: ROUTES.COURSE.BASE, element: <Course /> },
   { path: ROUTES.COURSE.DETAILS, element: <CourseDetails /> },
   { path: ROUTES.WORKSHOP.BASE, element: <Workshop /> },

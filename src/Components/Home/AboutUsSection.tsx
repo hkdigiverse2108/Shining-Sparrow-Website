@@ -6,28 +6,24 @@ const AboutUsSection = () => {
     <section
       className="elementor-section elementor-top-section elementor-element elementor-element-ec98f4b elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
       data-id="ec98f4b"
-      data-element_type="section"
-    >
+      data-element_type="section">
       <MouseParallax className="elementor-container elementor-column-gap-extended">
         <div
           className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-0d1b25b"
           data-id="0d1b25b"
-          data-element_type="column"
-        >
+          data-element_type="column">
           <div className="elementor-widget-wrap elementor-element-populated">
             <div
               className="elementor-element elementor-element-dea475a elementor-widget__width-auto elementor-absolute elementor-hidden-tablet_extra elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-edublink-animation"
               data-aos="zoom-in"
-              data-aos-duration={1200}
-            >
+              data-aos-duration={1200}>
               <div className="elementor-widget-container">
                 <div className="edublink-animation-widget edublink-animation-display-type-mouse-track edublink-animation-content-type-image edublink-mouse-track-item">
                   <span data-depth={2}>
-                    <img
-                      decoding="async"
+                    <img decoding="async"
                       src={`${ImagePath}shapes/shape-6.png`}
-                      alt="About Shape 4"
-                    />
+                      alt="About Shape 6"
+                      style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}/>
                   </span>
                 </div>
               </div>
@@ -35,8 +31,7 @@ const AboutUsSection = () => {
             <div
               className="elementor-element elementor-element-2ad3e77 elementor-widget__width-auto elementor-absolute elementor-hidden-tablet_extra elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-edublink-animation"
               data-aos="zoom-in"
-              data-aos-duration={1200}
-            >
+              data-aos-duration={1200}>
               <div className="elementor-widget-container">
                 <div className="edublink-animation-widget edublink-animation-display-type-mouse-track edublink-animation-content-type-image edublink-mouse-track-item">
                   <span data-depth={-2}>
@@ -44,7 +39,7 @@ const AboutUsSection = () => {
                       decoding="async"
                       src={`${ImagePath}shapes/shape-7.png`}
                       alt="About-Shape-2"
-                    />
+                      style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}/>
                   </span>
                 </div>
               </div>
@@ -61,6 +56,7 @@ const AboutUsSection = () => {
                       decoding="async"
                       src={`${ImagePath}shapes/shape-8.png`}
                       alt="About Shape 5"
+                      style={{ filter: "brightness(0) saturate(100%) invert(47%) sepia(61%) saturate(2975%) hue-rotate(347deg) brightness(80%) contrast(92%)" }}
                     />
                   </span>
                 </div>
@@ -69,8 +65,7 @@ const AboutUsSection = () => {
             <div
               className="elementor-element elementor-element-5a9ffbd elementor-widget__width-auto elementor-absolute bounce-slide elementor-hidden-mobile elementor-widget elementor-widget-edublink-icon-box"
               data-aos="zoom-in"
-              data-aos-duration={1200}
-            >
+              data-aos-duration={1200} >
               <div className="elementor-widget-container">
                 <div className="edublink-icon-box-wrapper edublink-icon-box-icon edublink-icon-box-icon-position-left">
                   <div className="edublink-icon-box-icon edublink-icon-box-enable">
@@ -88,8 +83,7 @@ const AboutUsSection = () => {
             <div
               className="elementor-element elementor-element-fa40940 elementor-widget__width-auto elementor-absolute elementor-hidden-mobile elementor-widget elementor-widget-edublink-icon-box"
               data-aos="zoom-in"
-              data-aos-duration={1000}
-            >
+              data-aos-duration={1000}>
               <div className="elementor-widget-container">
                 <div className="edublink-icon-box-wrapper edublink-icon-box-img edublink-icon-box-icon-position-top">
                   <div className="edublink-icon-box-icon edublink-icon-box-disable">
@@ -97,6 +91,7 @@ const AboutUsSection = () => {
                       decoding="async"
                       src={`${ImagePath}shapes/shape-9.png`}
                       alt="shape-03"
+                      style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
                     />
                   </div>
                   <div className="edublink-icon-box-content">

@@ -5,10 +5,11 @@ import { getToken } from "../../Utils";
 export async function Delete<T, TInput>(url: string, data?: TInput): Promise<T> {
     const authToken = getToken();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const finalUrl = (BASE_URL?.endsWith("/") ? BASE_URL : `${BASE_URL}/`) + url;
 
     const config: AxiosRequestConfig = {
         method: "DELETE",
-        url: BASE_URL + url,
+        url: finalUrl,
         headers: {
             Authorization: authToken,
         },

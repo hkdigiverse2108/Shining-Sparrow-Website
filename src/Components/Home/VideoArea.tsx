@@ -36,6 +36,7 @@ const VideoAreaSection = () => {
                       decoding="async"
                       src={`${ImagePath}shapes/shape-7.png`}
                       alt="About-Shape-2"
+                      style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
                     />
                   </span>
                 </div>
@@ -53,13 +54,14 @@ const VideoAreaSection = () => {
                       decoding="async"
                       src={`${ImagePath}shapes/shape-5.png`}
                       alt="Hero-Shape-18"
+                      style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.4)" }}
                     />
                   </span>
                 </div>
               </div>
             </div>
             <div
-              className="elementor-element elementor-element-ffb7425 elementor-widget__width-auto elementor-absolute elementor-hidden-tablet_extra elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-edublink-animation"
+              className="elementor-element elementor-element-ffb7425 elementor-widget__width-auto elementor-absolute elementor-hidden-tablet_extra elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-edublink-animation z-50!"
               data-aos="zoom-in"
               data-aos-duration={1200}
             >
@@ -70,6 +72,8 @@ const VideoAreaSection = () => {
                       decoding="async"
                       src={`${ImagePath}shapes/shape-14.png`}
                       alt="shape-14"
+                      style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
+
                     />
                   </span>
                 </div>

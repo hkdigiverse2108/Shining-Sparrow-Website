@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { FormInput } from "../Components/FormFields";
 import { AntdNotification } from "../Utils/AntNotification";
 import { notification } from "antd";
+import { ImagePath } from "../Constants";
 
 const Footer = () => {
   const AllSettings = useAppSelector((state) => state.settings.settings);
@@ -62,7 +63,7 @@ const Footer = () => {
                       <div className="edublink-site-logo-widget-container">
                         <span className="edublink-site-main-logo edublink-site-main-logo-type">
                           <Link to="" data-elementor-open-lightbox className="elementor-clickable">
-                            <img alt="logo-white" src={AllSettings?.logo} />
+                            <img width={123} height={50} alt="logo-white" src={`${ImagePath}logo/Logo.png`} className="h-auto object-contain" />
                           </Link>
                         </span>
                       </div>
@@ -253,8 +254,8 @@ const Footer = () => {
                     <div className="elementor-widget-container">
                       <div className="edublink-copyright-wrapper">
                         <span>
-                          © 2025 HK DigiSkill. All Rights Reserved. Designed & maintained by
-                          <Link to={HK_DigiVerse_Link} target="_blank"> HK DigiVerse LLP</Link>
+                          © 2025 Shining Sparrow. All Rights Reserved. Designed & maintained by
+                          <Link to={HK_DigiVerse_Link} target="_blank"> Shining Sparrow</Link>
                         </span>
                       </div>
                     </div>

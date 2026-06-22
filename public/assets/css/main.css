@@ -5248,7 +5248,7 @@ p.edublink-cart-shop-page-link {
   display: none;
 }
 .edublink-page-title-area.edublink-default-breadcrumb {
-  background-color: #f5f9fa;
+  background-color: #f3f4d0;
   padding: 95px 0 85px;
   position: relative;
   z-index: 1;
@@ -6222,7 +6222,7 @@ body.learnpress-checkout.learnpress-page .site-content,
 }
 .edublink-distant-learning-hero-online-support {
   border-radius: 50px 10px 50px 10px;
-  padding: 30px;
+  padding: 15px;
   min-width: 300px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
@@ -7820,7 +7820,7 @@ body.learnpress-checkout.learnpress-page .site-content,
   transition: var(--edublink-transition);
 }
 .edublink-single-course.course-style-2:hover:before {
-  background-color: rgba(255, 91, 92, 0.3);
+  background-color: rgb(224 122 34 / 57%);
 }
 .edublink-single-course.course-style-2:hover .thumbnail {
   margin-bottom: -75px;

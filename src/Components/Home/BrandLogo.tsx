@@ -29,6 +29,7 @@ const BrandLogo = ({ brandImages }: { brandImages?: TrustedPartner[] }) => {
                   decoding="async"
                   src={`${ImagePath}shapes/shape-7.png`}
                   alt="About-Shape-2"
+                  style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
                 />
               </span>
             </div>
@@ -66,7 +67,7 @@ const BrandLogo = ({ brandImages }: { brandImages?: TrustedPartner[] }) => {
           ))}
         </div>
         <div
-          className="elementor-element elementor-element-809c500 elementor-widget__width-auto elementor-absolute elementor-hidden-tablet_extra elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-edublink-animation"
+          className="elementor-element elementor-element-809c500 elementor-widget__width-auto elementor-absolute elementor-hidden-tablet_extra elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-edublink-animation z-50!"
           data-id="809c500"
           data-element_type="widget"
           data-settings='{"_position":"absolute"}'
@@ -74,11 +75,12 @@ const BrandLogo = ({ brandImages }: { brandImages?: TrustedPartner[] }) => {
           <div className="elementor-widget-container">
             <div className="edublink-animation-widget edublink-mouse-track-item">
               <span data-depth={-2}>
-                <img
-                  decoding="async"
-                  src={`${ImagePath}shapes/shape-14.png`}
-                  alt="shape-41"
-                />
+                  <img
+                    decoding="async"
+                    src="/assets/images/shapes/shape-14.png"
+                    alt="shape-14"
+                    style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
+                  />
               </span>
             </div>
           </div>

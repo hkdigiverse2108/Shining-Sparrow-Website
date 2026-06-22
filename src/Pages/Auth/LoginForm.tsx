@@ -59,11 +59,7 @@ const LoginForm = ({ onSwitchToRegister, onSwitchToForgot }: LoginFormProps) => 
     <div className="  w-full! ">
       <h2>Login</h2>
 
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleLoginSubmit}
-      >
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleLoginSubmit} >
         {() => (
           <Form className="woocommerce-form woocommerce-form-login login auth-form">
             <FormInput
@@ -102,7 +98,7 @@ const LoginForm = ({ onSwitchToRegister, onSwitchToForgot }: LoginFormProps) => 
               <span>
                 Don't have an account?{" "}
                 <a onClick={onSwitchToRegister} className="font-bold">Register here</a>
-              </span>
+              </span> 
             </div>
           </Form>
         )}

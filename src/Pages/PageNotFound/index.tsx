@@ -36,7 +36,7 @@ const PageNotFound = () => {
                         top: "0px",
                       }}
                     >
-                      <img src={`${ImagePath}shapes/shape-7.png`} alt="Shape" />
+                      <img src={`${ImagePath}shapes/shape-7.png`} alt="Shape" style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }} />
                     </span>
                   </li>
 
@@ -114,7 +114,7 @@ const PageNotFound = () => {
                         top: "0px",
                       }}
                     >
-                      <img src={`${ImagePath}shapes/shape-5.png`} alt="Shape" />
+                      <img src={`${ImagePath}shapes/shape-5.png`} alt="Shape" style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.4)" }} />
                     </span>
                   </li>
                 </ul>

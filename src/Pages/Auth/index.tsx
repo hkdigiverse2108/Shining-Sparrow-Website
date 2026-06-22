@@ -3,13 +3,19 @@ import { BreadCrumb } from "../../Components/Common";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import ForgotPassword from "./ForgotPassword";
+import VerifyOtpForm from "./VerifyOtpForm";
 
 const MyAccount = () => {
-  const [authMode, setAuthMode] = useState<'login' | 'register' | 'forgot'>('login');
+  const [authMode, setAuthMode] = useState<'login' | 'register' | 'forgot' | 'verify-otp'>('login');
+  const [registeredEmail, setRegisteredEmail] = useState('');
 
   const handleSwitchToRegister = () => setAuthMode('register');
   const handleSwitchToLogin = () => setAuthMode('login');
   const handleSwitchToForgot = () => setAuthMode('forgot');
+  const handleSwitchToVerifyOtp = (email: string) => {
+    setRegisteredEmail(email);
+    setAuthMode('verify-otp');
+  };
 
   return (
     <>
@@ -27,10 +33,13 @@ const MyAccount = () => {
                     <LoginForm onSwitchToRegister={handleSwitchToRegister} onSwitchToForgot={handleSwitchToForgot} />
                   )}
                   {authMode === 'register' && (
-                    <RegisterForm onSwitchToLogin={handleSwitchToLogin} />
+                    <RegisterForm onSwitchToLogin={handleSwitchToLogin} onSwitchToVerifyOtp={handleSwitchToVerifyOtp} />
                   )}
                   {authMode === 'forgot' && (
                     <ForgotPassword onSwitchToLogin={handleSwitchToLogin} />
+                  )}
+                  {authMode === 'verify-otp' && (
+                    <VerifyOtpForm email={registeredEmail} onSwitchToLogin={handleSwitchToLogin} />
                   )}
                 </div>
               </div>

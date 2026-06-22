@@ -7,9 +7,10 @@ import { notification } from "antd";
 
 interface RegisterFormProps {
   onSwitchToLogin: () => void;
+  onSwitchToVerifyOtp: (email: string) => void;
 }
 
-const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
+const RegisterForm = ({ onSwitchToLogin, onSwitchToVerifyOtp }: RegisterFormProps) => {
   const registerMutation = Mutation.useRegister();
 
   const initialValues = {
@@ -40,9 +41,10 @@ const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
         AntdNotification(
           notification,
           "success",
-          data?.message || "Registration successful! Please login."
+          data?.message || "Registration successful! Please verify your email."
         );
-        onSwitchToLogin();
+        // Redirect to OTP verification page with the registered email
+        onSwitchToVerifyOtp(values.email);
       },
       onError: (error: any) => {
         AntdNotification(

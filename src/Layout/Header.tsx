@@ -27,7 +27,6 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((state) => state.user);
-  const AllSettings = useAppSelector((state) => state.settings.settings);
 
   const { data } = Queries.useGetCourseCategory();
   const allCategory = data?.data?.course_category_data;
@@ -67,15 +66,15 @@ const Header = () => {
               <div className="site-branding site-logo-info overflow-hidden!">
                 <div className="logo-wrapper  ">
                   <Link
-                    to=""
+                    to="/"
                     className="navbar-brand site-main-logo"
                     rel="home"
                   >
                     <img
-                      width={158}
+                      width={123}
                       height={50}
-                      src={AllSettings?.logo}
-                      className="site-logo h-fit!"
+                      src={`${ImagePath}logo/Logo.png`}
+                      className="site-logo h-auto object-contain"
                       alt="logo"
                       decoding="async"
                     />
@@ -162,16 +161,17 @@ const Header = () => {
                     <ul className="category-menu edublink-navbar-nav  w-fit">
                       <li className="cat-menu-item dropdown  w-fit!">
                         <div className="w-fit! flex items-center justify-center gap-2 border border-gray-300 bg-white shadow rounded-md p-2! cursor-pointer ">
-                          <figure className="w-12 h-12 mb-0! flex">
-                            <img
-                              src={
-                                user?.profilePhoto ||
-                                `${ImagePath}/others/author.png`
-                              }
-                              alt="User"
-                              className="w-full! h-full! rounded-full object-cover!"
-                            />
-                          </figure>
+                          {user?.profilePhoto ? (
+                            <figure className="w-12 h-12 mb-0! flex">
+                              <img src={user.profilePhoto} alt="User" className="w-full! h-full! rounded-full object-cover!" />
+                            </figure>
+                          ) : (
+                            <div style={{ width: "35px", height: "35px", borderRadius: "50%", background: "linear-gradient(135deg, #F26522, #FFA726)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 2px 8px rgba(242,101,34,0.35)", }} >
+                              <span style={{ color: "#fff", fontWeight: "700", fontSize: "20px", lineHeight: 1, textTransform: "uppercase", }} >
+                                {(user?.fullName || "U").charAt(0)}
+                              </span>
+                            </div>
+                          )}
                           <section className="flex flex-col gap-0! max-sm:hidden! ">
                             <p className="text-xl font-bold my-0! capitalize! ">
                               {user?.fullName || "User"}
@@ -237,12 +237,12 @@ const Header = () => {
           <div className="responsive-header-top">
             <div className="responsive-header-logo">
               <div className="logo-wrapper">
-                <Link to="" className="navbar-brand site-main-logo" rel="home">
+                <Link to="/" className="navbar-brand site-main-logo" rel="home">
                   <img
-                    width={158}
+                    width={123}
                     height={50}
-                    src={`${ImagePath}/logo/logo-dark.png`}
-                    className="site-logo"
+                    src={`${ImagePath}logo/Logo.png`}
+                    className="site-logo h-auto object-contain"
                     alt="edublink"
                     decoding="async"
                   />

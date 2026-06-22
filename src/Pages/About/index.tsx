@@ -12,21 +12,21 @@ const features = [
     title: "High Quality Courses",
     description:
       "Lorem ipsum dolor sit amet conset ur elit sed eiusmod ex tempor inc labore dolore magna.",
-    color: "#1AB69D",
+    color: "#8B5E3C",
   },
   {
     icon: "edublink icon-46",
     title: "Life Time Access",
     description:
       "Lorem ipsum dolor sit amet conset ur elit sed eiusmod ex tempor inc labore dolore magna.",
-    color: "#EE4A62",
+    color: "#8A5F41",
   },
   {
     icon: "edublink icon-45",
     title: "Expert Instructors",
     description:
       "Lorem ipsum dolor sit amet conset ur elit sed eiusmod ex tempor inc labore dolore magna.",
-    color: "#4664E4",
+    color: "#A77F60",
   },
 ];
 
@@ -35,25 +35,25 @@ const stats = [
     value: "45.2",
     suffix: "K",
     label: "STUDENT ENROLLED",
-    color: "#1AB69D",
+    color: "#F26522",
   },
   {
     value: "32.4",
     suffix: "K",
     label: "CLASS COMPLETED",
-    color: "#F8577C",
+    color: "#FFA726",
   },
   {
     value: "354",
     suffix: "+",
     label: "TOP INSTRUCTORS",
-    color: "#FFA41B",
+    color: "#FFC107",
   },
   {
     value: "99.9",
     suffix: "%",
     label: "SATISFACTION RATE",
-    color: "#7C4BFF",
+    color: "#8D5A3B",
   },
 ];
 
@@ -279,6 +279,7 @@ const About = () => {
                             src={`${ImagePath}shapes/shape-5.png`}
                             alt="shape-02 "
                             className="rotate-slow"
+                            style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.4)" }}
                           />
                         </div>
                       </div>
@@ -309,6 +310,7 @@ const About = () => {
                             decoding="async"
                             src={`${ImagePath}shapes/shape-7.png`}
                             alt="shape-05"
+                            style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
                           />
                         </div>
                       </div>

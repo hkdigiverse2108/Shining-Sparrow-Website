@@ -22,7 +22,7 @@ const Loader = ({ loading = true, delay = 200 }: LoaderProps) => {
   
   return (
     <div
-      className={`fixed left-0 top-0 z-999999 flex h-screen w-screen items-center justify-center bg-white/90 backdrop-blur-sm transition-opacity duration-300 ease-in-out ${loading ? "opacity-100" : "opacity-0"}`}
+      className={`fixed left-0 top-0 z-999999 flex h-screen w-screen items-center justify-center bg-white/90 backdrop-blur-sm transition-opacity duration-300 ease-in-out ${loading ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
     >
       {/* <div className="flex justify-center items-center  ">
         <div className="container">
@@ -50,7 +50,7 @@ const Loader = ({ loading = true, delay = 200 }: LoaderProps) => {
           cy="64"
           r="52.5"
           fill="none"
-          stroke="#1ab69d"
+          stroke="#F26522"
           strokeWidth="12"
           transform="rotate(-90,64,64)"
           strokeLinecap="round"
@@ -64,7 +64,7 @@ const Loader = ({ loading = true, delay = 200 }: LoaderProps) => {
           cy="64"
           r="37.5"
           fill="none"
-          stroke="#1ab69d"
+          stroke="#FFA726"
           strokeWidth="9"
           transform="rotate(-90,64,64)"
           strokeLinecap="round"
@@ -78,7 +78,7 @@ const Loader = ({ loading = true, delay = 200 }: LoaderProps) => {
           cy="64"
           r="22.5"
           fill="none"
-          stroke="#1ab69d"
+          stroke="#FFC107"
           strokeWidth="9"
           transform="rotate(-90,64,64)"
           strokeLinecap="round"

@@ -7,10 +7,11 @@ export async function Post<TInput, TResponse>(url: string, data?: TInput, isToke
     const authToken = getToken();
     const isFormData = data instanceof FormData;
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const finalUrl = (BASE_URL?.endsWith("/") ? BASE_URL : `${BASE_URL}/`) + url;
 
     const config: AxiosRequestConfig = {
         method: "POST",
-        url: BASE_URL + url,
+        url: finalUrl,
         headers: {
             ...(isToken ? { Authorization: authToken } : {}),
             ...(isFormData ? {} : { "Content-Type": "application/json" }),

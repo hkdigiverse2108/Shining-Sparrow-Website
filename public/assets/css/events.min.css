@@ -114,7 +114,7 @@
 .form-row input[type="checkbox"],
 .form-row input[type="number"],
 .form-row input[type="password"] {
-  border: 1px solid #eee;
+  border: 1px solid #e9d3c6;
   background-color: transparent;
 }
 .form-row.has-error {

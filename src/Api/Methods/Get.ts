@@ -28,7 +28,8 @@ export async function Get<T>(
   };
 
   try {
-    const response = await axios.get<T>(BASE_URL + url, config);
+    const finalUrl = (BASE_URL?.endsWith("/") ? BASE_URL : `${BASE_URL}/`) + url;
+    const response = await axios.get<T>(finalUrl, config);
     return response.data;
   } catch (error) {
     const axiosError = error as AxiosError<{ status?: string }>;

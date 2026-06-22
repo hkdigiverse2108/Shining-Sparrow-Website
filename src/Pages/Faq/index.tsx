@@ -62,10 +62,10 @@ const Faq = () => {
                         <div className="eb-faq-wrapper eb-faq-style-2">
                           <div className="edublink-row">
                             {/* LEFT SIDE */}
-                            <div className="edublink-col-lg-4">
+                            <div className="edublink-col-lg-5">
                               <div className="eb-faq-left-side">
                                 <div className="edublink-section-heading">
-                                  <h3 className="heading">
+                                  <h3 className="heading" style={{ minWidth: "200px", wordBreak: "keep-all", overflowWrap: "normal" }}>
                                     Questions By This Category
                                   </h3>
                                 </div>
@@ -88,7 +88,7 @@ const Faq = () => {
                             </div>
 
                             {/* RIGHT SIDE */}
-                            <div className="edublink-col-lg-8">
+                            <div className="edublink-col-lg-7">
                               <div className="eb-faqs-content-wrapper">
                                 {categories.map((cat) => (
                                   <div

@@ -92,6 +92,7 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
                               decoding="async"
                               src={`${ImagePath}shapes/shape-13.png`}
                               alt="Hero Shape 5"
+                              style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
                             />
                           </span>
                         </div>{" "}
@@ -130,6 +131,7 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
                               decoding="async"
                               src={`${ImagePath}shapes/shape-15.png`}
                               alt="Shape-15"
+                              style={{ filter: "sepia(1) saturate(2) hue-rotate(340deg) brightness(1.1) opacity(0.7)" }}
                             />
                           </span>
                         </div>{" "}
@@ -163,6 +165,7 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
                               decoding="async"
                               src={`${ImagePath}shapes/shape-16.png`}
                               alt="Hero Shape 6"
+                              style={{ filter: "sepia(1) saturate(4) hue-rotate(340deg) brightness(0.9)" }}
                             />
                           </span>
                         </div>{" "}
@@ -176,6 +179,11 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
                               decoding="async"
                               src={`${ImagePath}shapes/shape-17.png`}
                               alt="Hero Shape 10"
+                              style={{
+                                filter: "brightness(0) saturate(100%) invert(47%) sepia(61%) saturate(2975%) hue-rotate(347deg) brightness(97%) contrast(92%)",
+                                mixBlendMode: "multiply",
+                                background: "transparent"
+                              }}
                             />
                           </span>
                         </div>{" "}

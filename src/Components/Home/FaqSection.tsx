@@ -91,6 +91,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                               decoding="async"
                               src={`${ImagePath}shapes/shape-10.png`}
                               alt="shape-02"
+                              style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
                             />
                           </span>
                         </div>
@@ -141,6 +142,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                               decoding="async"
                               src={`${ImagePath}shapes/shape-5.png`}
                               alt="Hero-Shape-18"
+                              style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.4)" }}
                             />
                           </span>
                         </div>
@@ -229,6 +231,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                       decoding="async"
                       src={`${ImagePath}shapes/shape-12.png`}
                       alt="About-Shape-3"
+                      style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
                     />
                   </span>
                 </div>

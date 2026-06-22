@@ -14,17 +14,17 @@ const App = () => {
     Aos.init({ once: false });
   }, []);
 
-  useEffect(() => {
-    const disableRightClick = (e: any) => {
-      e.preventDefault();
-    };
+  // useEffect(() => {
+  //   const disableRightClick = (e: any) => {
+  //     e.preventDefault();
+  //   };
 
-    document.addEventListener("contextmenu", disableRightClick);
+  //   document.addEventListener("contextmenu", disableRightClick);
 
-    return () => {
-      document.removeEventListener("contextmenu", disableRightClick);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", disableRightClick);
+  //   };
+  // }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

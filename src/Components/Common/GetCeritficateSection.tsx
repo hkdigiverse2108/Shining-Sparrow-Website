@@ -51,6 +51,7 @@ const GetCeritficateSection = () => {
               decoding="async"
               src={`${ImagePath}shapes/shape-5.png`}
               alt="shape-02"
+              style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.4)" }}
             />
           </span>
         </div>
