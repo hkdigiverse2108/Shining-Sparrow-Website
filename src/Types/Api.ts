@@ -36,7 +36,9 @@ export interface RegisterPayload {
   email: string;
   phoneNumber?: string;
   password?: string;
-  designation?: string;
+  district?: string;
+  std?: string;
+  reachFrom?: string;
   agreeTerms?: boolean;
 }
 
@@ -68,10 +70,13 @@ export interface User {
   email: string;
   fullName: string;
   phone?: string;
-  designation?: string;
+  district?: string;
+  std?: string;
+  reachFrom?: string;
   phoneNumber?: string;
   profilePhoto?: string;
 }
+
 
 export interface UserResponse {
   data: User;

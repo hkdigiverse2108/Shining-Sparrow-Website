@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useEffect } from "react";
 import type { Workshop } from "../../Types";
 import { ShareButtons, PaymentModal } from "../Common";
 import { ImagePath, PAYMENT_STATUS } from "../../Constants";
@@ -21,9 +21,22 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
     const { mutate: purchaseWorkshop, isPending: isPurchasing } =
         Mutation.usePurchaseWorkshop();
 
+    useEffect(() => {
+        if (user && workshop?._id && localStorage.getItem("trigger_payment_id") === workshop._id) {
+            localStorage.removeItem("trigger_payment_id");
+            setTimeout(() => {
+                const paymentBtn = document.querySelector(".trigger-payment-btn") as HTMLButtonElement;
+                if (paymentBtn) {
+                    paymentBtn.click();
+                }
+            }, 100);
+        }
+    }, [user, workshop?._id]);
+
     const handleBuyNowBtn = () => {
         if (!user) {
-            dispatch(setAuthModalOpen(true));
+            localStorage.setItem("trigger_payment_id", workshop._id || "");
+            dispatch(setAuthModalOpen({ open: true, context: { workshopId: workshop._id } }));
             return;
         }
     };
@@ -49,6 +62,9 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
                         queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_ONE, workshop._id] });
                         queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_CURRICULUM] });
                         if (onPurchaseSuccess) onPurchaseSuccess();
+                        setTimeout(() => {
+                            window.location.href = import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com";
+                        }, 3000);
                     },
                     onError: (err: any) => {
                         AntdNotification(
@@ -151,7 +167,7 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
                                             contact: user.phoneNumber || "",
                                         }}
                                         onPaymentComplete={handlePaymentComplete}
-                                        className="lp-button button button-purchase-course"
+                                        className="lp-button button button-purchase-course trigger-payment-btn"
                                     />
                                 ) : (
                                     <button

@@ -52,6 +52,7 @@ export const URL_KEYS = {
     ONE: "user/",
     SIGNUP: "user/signup",
     UPDATE: "user/update",
+    PURCHASE_INTENT: "user/purchase-intent",
   },
   UPLOAD: "upload",
 } as const;

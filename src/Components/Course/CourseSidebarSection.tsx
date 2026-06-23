@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useEffect } from "react";
 import type { Course } from "../../Types";
 import { ShareButtons, PaymentModal } from "../Common";
 import { ImagePath, PAYMENT_STATUS } from "../../Constants";
@@ -21,9 +21,22 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
   const { mutate: purchaseCourse, isPending: isPurchasing } =
     Mutation.usePurchaseCourse();
 
+  useEffect(() => {
+    if (user && course?._id && localStorage.getItem("trigger_payment_id") === course._id) {
+      localStorage.removeItem("trigger_payment_id");
+      setTimeout(() => {
+        const paymentBtn = document.querySelector(".trigger-payment-btn") as HTMLButtonElement;
+        if (paymentBtn) {
+          paymentBtn.click();
+        }
+      }, 100);
+    }
+  }, [user, course?._id]);
+
   const handleBuyNowBtn = () => {
     if (!user) {
-      dispatch(setAuthModalOpen(true));
+      localStorage.setItem("trigger_payment_id", course?._id || "");
+      dispatch(setAuthModalOpen({ open: true, context: { courseId: course?._id } }));
       return;
     }
   };
@@ -54,6 +67,9 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
                   queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_LESSON, course?._id] });
                   queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_CURRICULUM] });
                   if (onPurchaseSuccess) onPurchaseSuccess();
+                  setTimeout(() => {
+                    window.location.href = import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com";
+                  }, 3000);
                 },
                 onError: (err: any) => {
                   AntdNotification(
@@ -218,7 +234,7 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
                       contact: user.phoneNumber,
                     }}
                     onPaymentComplete={handlePaymentComplete}
-                    className="lp-button button button-purchase-course"
+                    className="lp-button button button-purchase-course trigger-payment-btn"
                   />
                 ) : (
                   <button
