@@ -37,7 +37,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         <div className="inner h-full! bg-white!">
           <div className="thumbnail">
             <div className="course-thumb">
-              <img className="w-100" src={image} alt={image} />
+              <img className="w-100" src={image} alt={image} style={{ width: "100%", aspectRatio: "1/1", objectFit: "contain", backgroundColor: "#fff" }} />
             </div>
 
             <div className="time-top">

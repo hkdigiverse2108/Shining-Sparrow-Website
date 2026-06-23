@@ -18,7 +18,7 @@ const MyWorkshopCard: React.FC<{ workshop: Workshop }> = ({ workshop }) => {
                 <div className="inner h-full! bg-white!">
                     <div className="thumbnail">
                         <Link to={`${ROUTES.WORKSHOP.DETAILS.replace(":id", _id)}`} className="course-thumb">
-                            <img className="w-100" src={image} alt={title} />
+                            <img className="w-100" src={image} alt={title} style={{ width: "100%", aspectRatio: "1/1", objectFit: "contain", backgroundColor: "#fff" }} />
                         </Link>
 
                         <div className="time-top">
