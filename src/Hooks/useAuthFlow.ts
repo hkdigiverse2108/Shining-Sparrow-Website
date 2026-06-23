@@ -14,15 +14,10 @@ export const useAuthFlow = () => {
   const signupMutation = Mutation.useUserSignup();
 
   const handleLoginSuccess = (data: any) => {
-    localStorage.setItem(STORAGE_KEYS.TOKEN, data?.data?.token);
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data?.data));
-    dispatch(setUser(data?.data));
-    AntdNotification(notification, "success", data?.message);
-
+    AntdNotification(notification, "success", data?.message || "Registration successful!");
     setTimeout(() => {
-      navigate(ROUTES.HOME);
-      window.location.reload();
-    }, 500);
+      window.location.href = import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com";
+    }, 1500);
   };
 
   const executeSignup = (
@@ -42,8 +37,8 @@ export const useAuthFlow = () => {
           notification,
           "error",
           error?.response?.data?.message ||
-            error?.message ||
-            "Authentication failed. Please try again.",
+          error?.message ||
+          "Authentication failed. Please try again.",
         );
         if (options?.onError) options.onError(error);
       },

@@ -30,6 +30,10 @@ export const Mutation = {
     useMutations<RegisterPayload, any>([KEYS.USER], (input) =>
       Post(URL_KEYS.USER.SIGNUP, input),
     ),
+  usePurchaseIntent: () =>
+    useMutations<any, any>([KEYS.USER, "PURCHASE_INTENT"], (input) =>
+      Post(URL_KEYS.USER.PURCHASE_INTENT, input),
+    ),
   useForgotPassword: () =>
     useMutations<ForgotPasswordPayload, any>([KEYS.FORGOT_PASSWORD], (input) =>
       Post(URL_KEYS.AUTH.FORGOT_PASSWORD, input),

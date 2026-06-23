@@ -4,6 +4,7 @@ const initialState = {
   isModalOpen: false,
   isLogoutModalOpen: false,
   isAuthModalOpen: false,
+  purchaseContext: null as { courseId?: string; workshopId?: string } | null,
 };
 
 const ModalSlice = createSlice({
@@ -17,7 +18,13 @@ const ModalSlice = createSlice({
       state.isLogoutModalOpen = action.payload;
     },
     setAuthModalOpen: (state, action) => {
-      state.isAuthModalOpen = action.payload;
+      if (action.payload && typeof action.payload === "object") {
+        state.isAuthModalOpen = action.payload.open;
+        state.purchaseContext = action.payload.context || null;
+      } else {
+        state.isAuthModalOpen = action.payload;
+        state.purchaseContext = null;
+      }
     },
   },
 });
