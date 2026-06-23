@@ -1,6 +1,5 @@
 import { ROUTES } from "../Constants";
 import About from "../Pages/About";
-import MyAccount from "../Pages/Auth";
 import Blog from "../Pages/Blog";
 import BlogDetails from "../Pages/Blog/BlogDetails";
 import Contact from "../Pages/Contact";
@@ -17,7 +16,6 @@ import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import ReturnPolicy from "../Pages/ReturnPolicy";
 import TermsCondition from "../Pages/TermsCondition";
 import Testimonial from "../Pages/Testimonial/Testimonial";
-import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
 export const PageRoutes = [
@@ -26,12 +24,6 @@ export const PageRoutes = [
   { path: ROUTES.COURSE.DETAILS, element: <CourseDetails /> },
   { path: ROUTES.WORKSHOP.BASE, element: <Workshop /> },
   { path: ROUTES.WORKSHOP.DETAILS, element: <WorkshopDetails /> },
-
-  // ======= Auth (Public Only) =======
-  {
-    element: <PublicRoutes />,
-    children: [{ path: ROUTES.AUTH.BASE, element: <MyAccount /> }],
-  },
 
   // ======= Protected Routes =======
   {

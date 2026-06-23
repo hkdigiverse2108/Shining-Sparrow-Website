@@ -178,7 +178,9 @@ const Header = () => {
                   </nav>
                 ) : (
                   <button
-                    onClick={() => navigate(ROUTES.AUTH.BASE)}
+                    onClick={() => {
+                      window.location.href = import.meta.env.VITE_LOGIN_URL;
+                    }}
                     className="main-header-btn edu-btn btn-medium"
                   >
                     Login <i className="icon-4" />
@@ -257,7 +259,12 @@ const Header = () => {
                 >
                   <NavLink
                     onClick={(e) => {
-                      if (hasFeaturedBlogs) {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      const clickX = e.clientX - rect.left;
+                      const linkWidth = rect.width;
+
+                      // If click is within the rightmost 55px (where the + icon is)
+                      if (hasFeaturedBlogs && linkWidth - clickX < 55) {
                         e.preventDefault();
                         e.stopPropagation();
                         setActiveSubMenu(
@@ -267,6 +274,7 @@ const Header = () => {
                         setMobileMenu(false);
                       }
                     }}
+                    aria-expanded={activeSubMenu === item.Title ? "true" : "false"}
                     to={item?.link || ""}
                     className="nav-link"
                   >

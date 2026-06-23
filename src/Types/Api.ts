@@ -28,6 +28,7 @@ export type AppQueryOptions<T> = Omit<
 export interface LoginPayload {
   email: string;
   password: string;
+  userType?: string;
 }
 
 export interface RegisterPayload {
