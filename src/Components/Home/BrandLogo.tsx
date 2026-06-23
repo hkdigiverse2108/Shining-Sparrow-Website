@@ -36,32 +36,21 @@ const BrandLogo = ({ brandImages }: { brandImages?: TrustedPartner[] }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2  sm:grid-cols-4  xl:grid-cols-8 gap-2  w-full! justify-center items-center divide-x divide-gray-200 ">
+        <div className="flex flex-wrap justify-evenly items-center gap-y-6 w-full py-4 divide-x divide-gray-200">
           {brandImages?.map((item) => (
             <div
               key={item?._id}
-              className={`elementor-column elementor-col-16 elementor-top-column elementor-element   w-full! flex! justify-center!`}
-              data-element_type="column"
+              className="flex-1 flex justify-center items-center px-4"
+              style={{ minWidth: "120px" }}
             >
-              <div className="elementor-widget-wrap elementor-element-populated">
-                <div
-                  className={`elementor-element elementor-element-${item._id} elementor-widget elementor-widget-image`}
-                  data-id={item?._id}
-                  data-element_type="widget"
-                  data-widget_type="image.default"
-                >
-                  <div className="elementor-widget-container">
-                    <img
-                      loading="lazy"
-                      decoding="async"
-                      src={item?.image}
-                      style={{ height: "50px", width: "auto", maxWidth: "120px", objectFit: "contain" }}
-                      className="mx-auto"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
+              <img
+                loading="lazy"
+                decoding="async"
+                src={item?.image}
+                style={{ height: "35px", width: "auto", maxWidth: "100px", objectFit: "contain" }}
+                className="mx-auto"
+                alt=""
+              />
             </div>
           ))}
         </div>

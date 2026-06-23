@@ -64,6 +64,9 @@ const About = () => {
   const { data: InstructorsApi } = Queries.useGetAllInstructor();
   const AllInstroctor = InstructorsApi?.data?.instructor_data;
 
+  const { data: testimonialData } = Queries.useGetTestimonials();
+  const testimonials = testimonialData?.data?.testimonial_data;
+
   return (
     <>
       <MouseParallax>
@@ -205,40 +208,28 @@ const About = () => {
             <section className="mt-[290px]!  elementor-section elementor-top-section elementor-element elementor-element-178ad6d  ">
               <div className="elementor-background-overlay" />
               <VideoAreaSection />
-              <div className="mt-12! grid grid-cols-2  sm:grid-cols-4  xl:grid-cols-8 gap-2  w-full! justify-center items-center divide-x divide-gray-200 ">
+              <div className="mt-12! flex flex-wrap justify-evenly items-center gap-y-6 w-full py-4 divide-x divide-gray-200">
                 {brandImages?.map((item) => (
                   <div
                     key={item?._id}
-                    className={`elementor-column elementor-col-16 elementor-top-column elementor-element   w-full! flex! justify-center!`}
-                    data-element_type="column"
+                    className="flex-1 flex justify-center items-center px-4"
+                    style={{ minWidth: "120px" }}
                   >
-                    <div className="elementor-widget-wrap elementor-element-populated">
-                      <div
-                        className={`elementor-element elementor-element-${item._id} elementor-widget elementor-widget-image`}
-                        data-id={item?._id}
-                        data-element_type="widget"
-                        data-widget_type="image.default"
-                      >
-                        <div className="elementor-widget-container">
-                          <img
-                            loading="lazy"
-                            decoding="async"
-                            width={120}
-                            height={120}
-                            src={item?.image}
-                            className={`attachment-full size-full max-w-40! `}
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={item?.image}
+                      style={{ height: "35px", width: "auto", maxWidth: "100px", objectFit: "contain" }}
+                      className="mx-auto"
+                      alt=""
+                    />
                   </div>
                 ))}
               </div>
             </section>
 
             <section className=" mt-30!">
-              <TestimonialSection />
+              <TestimonialSection testimonials={testimonials} />
             </section>
 
             <section className="px-6! elementor-element-178ad6d elementor-section elementor-top-section elementor-element overflow-hidden!  ">
