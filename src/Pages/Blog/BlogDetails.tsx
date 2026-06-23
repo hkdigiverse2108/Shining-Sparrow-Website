@@ -19,20 +19,7 @@ const BlogDetails = () => {
 
   const paginationBlog = Blogs?.filter((blog) => blog?._id !== id).slice(0, 2);
 
-  const allCategories = Blogs?.reduce((acc: any[], blog: any) => {
-    const category = blog?.category;
-    if (!category) return acc;
 
-    const existing = acc.find((item) => item.category === category);
-
-    if (existing) {
-      existing.total += 1;
-    } else {
-      acc.push({ category, total: 1 });
-    }
-
-    return acc;
-  }, []);
 
   const isLoading = isBlogLoading || isAllBlogLoading;
 
@@ -53,9 +40,7 @@ const BlogDetails = () => {
               <main id="main" className="site-main eb-post-details-page mx-0! ">
                 <article className="edublink-single-post edu-blog post-15416 post type-post status-publish format-standard has-post-thumbnail hentry category-technology tag-design tag-development">
                   <div className="blog-details-top">
-                    <span className="edublink-post-cat">
-                      <a>{SingleBlog?.category}</a>
-                    </span>
+
                     <h3 className="post-main-title">{SingleBlog?.title}</h3>
                     <ul className="blog-meta">
                       <li>
@@ -189,20 +174,7 @@ const BlogDetails = () => {
                   </div>
                 </section>
 
-                {/* Categories */}
-                <section
-                  id="categories-2"
-                  className="widget widget_categories px-0!"
-                >
-                  <h2 className="widget-title">Categories</h2>
-                  <ul>
-                    {allCategories?.map((item, index) => (
-                      <li key={index} className="cat-item cat-item-72">
-                        <a>{item?.category}</a> ({item?.total})
-                      </li>
-                    ))}
-                  </ul>
-                </section>
+
               </div>
             </aside>
           </div>

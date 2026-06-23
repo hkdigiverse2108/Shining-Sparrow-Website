@@ -27,9 +27,9 @@ const Testimonial = () => {
             <section className="my-10! container space-y-6! elementor-section elementor-section-boxed">
               {testimonials?.map((item) => (
                 <div className="eb-testimonial-item eb-testimonial">
-                  <div className="eb-testimonial-grid  py-20! pb-0! ">
-                    <div className="content flex justify-between">
-                      <div>
+                  <div className="eb-testimonial-grid py-20! pb-0!">
+                    <div className="content flex justify-between gap-6!">
+                      <div className="pe-6! sm:pe-16! md:pe-24!">
                         <div className="rating-icon space-x-2!">
                           {renderStars(item.rate)}
                         </div>
@@ -39,15 +39,15 @@ const Testimonial = () => {
                           <span className="subtitle">{item.designation}</span>
                         </div>
                       </div>
-                      <div className="thumbnail">
+                      <div className="thumbnail flex-shrink-0!">
                         <img
                           decoding="async"
                           src={
-                            // item.image ||
-
+                            item.image ||
                             `${ImagePath}testimonial/testimonial-01.png`
                           }
-                          className="testimonial-author-avatar sm:w-40! sm:h-full! "
+                          style={{ width: "90px", height: "90px", borderRadius: "50%", objectFit: "cover" }}
+                          className="testimonial-author-avatar"
                           alt={item.name}
                         />
                         <span className="qoute-icon">

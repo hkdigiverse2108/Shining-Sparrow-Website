@@ -42,7 +42,7 @@ const VerifyOtpForm = ({ email, onSwitchToLogin }: VerifyOtpFormProps) => {
           AntdNotification(
             notification,
             "success",
-            "Email verified successfully! Welcome to HK DigiSkill."
+            "Email verified successfully! Welcome to Shining Sparrow."
           );
           // Store token and user data (same as login flow)
           localStorage.setItem(STORAGE_KEYS.TOKEN, data?.data?.token);

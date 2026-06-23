@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import {
   AboutUsSection,
   BrandLogo,
-  CategoriesSection,
+  // CategoriesSection,
   CounterSection,
   CourseSection,
   FaqSection,
@@ -19,9 +19,7 @@ const Home = () => {
     Queries.useGetHeroBannerImage();
   const banner = bannerData?.data?.hero_banner_data[0];
 
-  const { data: categoryData, isLoading: isCategoryLoading } =
-    Queries.useGetCourseCategory();
-  const category = categoryData?.data?.course_category_data;
+
 
   const { data: courseData, isLoading: isCourseLoading } =
     Queries.useGetAllCourses();
@@ -45,7 +43,7 @@ const Home = () => {
 
   const isAppLoading =
     isHeroBannerLoading ||
-    isCategoryLoading ||
+
     isCourseLoading ||
     isTestimonialLoading ||
     isBrandLoading ||
@@ -56,7 +54,7 @@ const Home = () => {
     <Fragment>
       <Loader loading={isAppLoading} />
       <HeroBanner banner={banner} />
-      <CategoriesSection category={category} />
+
       <AboutUsSection />
       <CourseSection courses={Courses} />
       <VideoAreaSection />

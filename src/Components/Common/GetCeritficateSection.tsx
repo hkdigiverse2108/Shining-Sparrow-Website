@@ -9,7 +9,7 @@ const GetCeritficateSection = () => {
         <div className="hero-content">
           <h1 className="hero-title">
             Get Your Quality Skills <span>Certificate</span>
-            <br /> Through HK DigiSkill
+            <br /> Through Shining Sparrow
           </h1>
 
           <div className="button-container">

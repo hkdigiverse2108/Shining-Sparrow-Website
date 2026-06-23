@@ -72,6 +72,8 @@ const TestimonialSection = ({ testimonials }: { testimonials?: Testimonial[] }) 
           className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-1461db3"
           data-id="1461db3"
           data-element_type="column"
+          data-aos="fade-up"
+          data-aos-duration={1200}
         >
           <div className="elementor-widget-wrap elementor-element-populated">
             <div
@@ -95,6 +97,7 @@ const TestimonialSection = ({ testimonials }: { testimonials?: Testimonial[] }) 
                                   item.image ||
                                   `${ImagePath}testimonial/testimonial-01.png`
                                 }
+                                style={{ width: "90px", height: "90px", borderRadius: "50%", objectFit: "cover" }}
                                 className="testimonial-author-avatar"
                                 alt={item.name}
                               />

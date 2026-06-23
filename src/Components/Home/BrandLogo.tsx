@@ -54,10 +54,9 @@ const BrandLogo = ({ brandImages }: { brandImages?: TrustedPartner[] }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      width={120}
-                      height={120}
                       src={item?.image}
-                      className={`attachment-full size-full max-w-40! `}
+                      style={{ height: "50px", width: "auto", maxWidth: "120px", objectFit: "contain" }}
+                      className="mx-auto"
                       alt=""
                     />
                   </div>

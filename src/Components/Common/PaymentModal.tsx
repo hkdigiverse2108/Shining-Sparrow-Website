@@ -82,7 +82,7 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
       key: RazorPayKey,
       amount: amount * 100,
       currency: "INR",
-      name: "HK DigiVerse",
+      name: "Shining Sparrow",
       description: "Course Purchase",
       handler: (res) => safeComplete(PAYMENT_STATUS.COMPLETED, res),
       // prefill: {

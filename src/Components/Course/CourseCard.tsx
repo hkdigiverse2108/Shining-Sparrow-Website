@@ -16,7 +16,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
     // totalLesson,
     // classCompleted,
-    courseCategoryId,
+    // courseCategoryId,
     // courseCurriculumIds,
     description,
     // enrolledLearners,
@@ -49,8 +49,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </div>
 
           <div className="content ">
-            <span className="course-level text-danger!">{courseCategoryId?.name}</span>
-
             <h6 className="title">
               <span>{name}</span>
             </h6>

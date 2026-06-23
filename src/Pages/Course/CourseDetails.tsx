@@ -57,10 +57,6 @@ const CourseDetails = () => {
 
                           <div className="edublink-course-header-meta">
                             <ul className="eb-course-header-meta-items">
-                              <li className="category">
-                                <i className="icon-59"></i>
-                                <a>{singleCourse?.courseCategoryId?.name}</a>
-                              </li>
 
                               <li className="rating">
                                 <div className="edublink-course-review-wrapper">

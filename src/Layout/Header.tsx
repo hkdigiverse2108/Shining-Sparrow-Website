@@ -28,12 +28,10 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((state) => state.user);
 
-  const { data } = Queries.useGetCourseCategory();
-  const allCategory = data?.data?.course_category_data;
 
   const { data: blogData } = Queries.useGetAllBlogs({ limit: 100 });
   const allBlogs = blogData?.data?.blog_data;
-  const featuredBlogs = allBlogs?.filter((blog) => blog.isFeatured);
+  const latestThreeBlogs = allBlogs?.slice().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 3);
 
   const scroll = 300;
   useEffect(() => {
@@ -81,32 +79,7 @@ const Header = () => {
                   </Link>
                 </div>
               </div>
-              <div className="header-category">
-                <nav className="main-navigation">
-                  <ul className="category-menu edublink-navbar-nav">
-                    {allCategory?.length && (
-                      <li className="cat-menu-item dropdown">
-                        <a className="cat-menu-anchor-item">
-                          <i className="icon-1" />
-                          Category
-                        </a>
-                        <ul className="edublink-dropdown-menu">
-                          {allCategory?.map((item, index) => {
-                            return (
-                              <li key={index} className="cat-item">
-                                <Link to={ROUTES.COURSE.BASE} state={item?._id}>
-                                  {item?.name}
-                                </Link>
-                              </li>
-                            );
-                          })}
 
-                        </ul>
-                      </li>
-                    )}
-                  </ul>
-                </nav>
-              </div>
               <div className="  edublink-theme-header-nav edublink-d-none edublink-d-xl-block">
                 <nav
                   id="site-navigation"
@@ -123,7 +96,7 @@ const Header = () => {
                       >
                         {menuItems.map((item, index) => {
                           const isBlog = item.Title === "Blog";
-                          const hasFeaturedBlogs = isBlog && featuredBlogs && featuredBlogs.length > 0;
+                          const hasFeaturedBlogs = isBlog && latestThreeBlogs && latestThreeBlogs.length > 0;
 
                           return (
                             <li
@@ -137,7 +110,7 @@ const Header = () => {
                               </NavLink>
                               {hasFeaturedBlogs && (
                                 <ul className="edublink-dropdown-menu  ">
-                                  {featuredBlogs.map((blog, idx) => (
+                                  {latestThreeBlogs.map((blog, idx) => (
                                     <li key={idx} className="cat-item  ">
                                       <Link to={ROUTES.BLOG.DETAILS.replace(":id", blog._id)} className=" px-5!">
                                         {blog.title}
@@ -262,43 +235,12 @@ const Header = () => {
             id="edublink-mobile-menu-item"
             className="edublink-mobile-menu-item metismenu"
           >
-            {allCategory?.length && (
-              <li
-                className={`menu-item menu-item-type-custom menu-item-object-custom  menu-item-has-children nav-item menu-item-13616 dropdown menu-align-left ${activeSubMenu === "Category" ? "mm-active" : ""
-                  }`}
-                onClick={() => setActiveSubMenu(activeSubMenu === "Category" ? null : "Category")}
-              >
-                <a
-                  className="nav-link"
-                  aria-expanded={activeSubMenu === "Category" ? "true" : "false"}
-                >
-                  Category
-                </a>
-                <ul
-                  className={`edublink-dropdown-menu ${activeSubMenu === "Category" ? "block" : "hidden"
-                    }`}
-                >
-                  {allCategory?.map((item, index) => {
-                    return (
-                      <li key={index} className="cat-item">
-                        <Link
-                          onClick={() => setMobileMenu(!isMobileMenu)}
-                          to={ROUTES.COURSE.BASE}
-                          state={item?._id}
-                        >
-                          {item?.name}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </li>
-            )}
+
 
             {menuItems.map((item, index) => {
               const isBlog = item.Title === "Blog";
               const hasFeaturedBlogs =
-                isBlog && featuredBlogs && featuredBlogs.length > 0;
+                isBlog && latestThreeBlogs && latestThreeBlogs.length > 0;
 
               return (
                 <li
@@ -335,7 +277,7 @@ const Header = () => {
                       className={`edublink-dropdown-menu ${activeSubMenu === item.Title ? "block" : "hidden"
                         }`}
                     >
-                      {featuredBlogs.map((blog, idx) => (
+                      {latestThreeBlogs.map((blog, idx) => (
                         <li key={idx} className="cat-item">
                           <Link
                             onClick={(e) => {

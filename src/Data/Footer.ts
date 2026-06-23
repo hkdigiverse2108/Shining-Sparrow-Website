@@ -5,7 +5,7 @@ import { ImYoutube } from "react-icons/im";
 
 export const FooterAboutText = "Lorem ipsum dolor amet consecto adi pisicing elit sed eiusm tempor incidid unt labore dolore."
 export const FooterContactText = "Enter your email address to register to our newsletter subscription"
-export const CopyrightMessage = " 2025 HK edublink. All Rights Reserved. Designed & maintained by HK DigiVerse"
+export const CopyrightMessage = " 2025 Shining Sparrow. All Rights Reserved. Designed & maintained by Shining Sparrow"
 
 
 export const QuickLinks = [

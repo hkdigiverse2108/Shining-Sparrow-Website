@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../Constants";
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
-  blog.mainImage =
-    "https://demo.edublink.co/wp-content/uploads/2023/03/course-45-590x430.jpg";
-  blog.coverImage =
-    "https://demo.edublink.co/wp-content/uploads/2023/11/course-93-590x430.jpg";
   return (
     <Link
       to={`${ROUTES.BLOG.DETAILS.replace(":id", blog?._id)}`}
@@ -39,10 +35,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
               <p className="btn-icon-round">
                 <i className="icon-4" />
               </p>
-            </div>
-
-            <div className="category-wrap">
-              <span>{blog?.category}</span>
             </div>
 
             <h5 className="title mt-6!" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>

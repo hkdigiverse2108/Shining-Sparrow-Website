@@ -1,11 +1,22 @@
 import type { FC } from "react";
 
 const FaqCard: FC<{
-  question: string;
-  answer: string;
+  question: string | Record<string, string>;
+  answer: string | Record<string, string>;
   isOpen: boolean;
   onClick: () => void;
 }> = ({ question, answer, isOpen, onClick }) => {
+  const getVal = (val: any) => {
+    if (!val) return "";
+    if (typeof val === "object") {
+      return val.en || val.hi || val.gu || "";
+    }
+    return val;
+  };
+
+  const displayQuestion = getVal(question);
+  const displayAnswer = getVal(answer);
+
   return (
     <div
       className={`eb-accordion-item elementor-repeater-item-2add476 ${
@@ -18,7 +29,7 @@ const FaqCard: FC<{
           isOpen ? "active" : ""
         }`}
       >
-        {question}
+        {displayQuestion}
       </h5>
 
       <div
@@ -26,7 +37,7 @@ const FaqCard: FC<{
         style={{ display: isOpen ? "block" : "none" }}
       >
         <div className="eb-accordion-body default-active">
-          <p>{answer}</p>
+          <p>{displayAnswer}</p>
         </div>
       </div>
     </div>

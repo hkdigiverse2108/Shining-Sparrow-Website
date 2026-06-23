@@ -66,7 +66,7 @@ const Faq = () => {
                               <div className="eb-faq-left-side">
                                 <div className="edublink-section-heading">
                                   <h3 className="heading" style={{ minWidth: "200px", wordBreak: "keep-all", overflowWrap: "normal" }}>
-                                    Questions By This Category
+                                    Question Topics
                                   </h3>
                                 </div>
 

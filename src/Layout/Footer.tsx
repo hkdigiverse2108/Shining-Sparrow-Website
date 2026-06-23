@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ContactDetails, FooterContactText, HK_DigiVerse_Link, QuickLinks, SupportPolicy } from "../Data";
+import { ContactDetails, FooterContactText, Shining_Sparrow_Link, QuickLinks, SupportPolicy } from "../Data";
 import { Mutation } from "../Api";
 import { useAppSelector } from "../Store/Hook";
 import { Formik, Form } from "formik";
@@ -255,7 +255,7 @@ const Footer = () => {
                       <div className="edublink-copyright-wrapper">
                         <span>
                           © 2025 Shining Sparrow. All Rights Reserved. Designed & maintained by
-                          <Link to={HK_DigiVerse_Link} target="_blank"> Shining Sparrow</Link>
+                          <Link to={Shining_Sparrow_Link} target="_blank"> Shining Sparrow</Link>
                         </span>
                       </div>
                     </div>
