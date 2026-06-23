@@ -126,7 +126,7 @@ const CourseDetails = () => {
                         </li>
 
                         <li className="course-nav course-nav-tab-curriculum">
-                          <label htmlFor="tab-curriculum-input">Curriculum</label>
+                          <label htmlFor="tab-curriculum-input">Lessons</label>
                         </li>
 
                         <li className="course-nav course-nav-tab-faq">
