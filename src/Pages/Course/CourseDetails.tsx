@@ -25,7 +25,9 @@ const CourseDetails = () => {
   // const { data: courseCurriculum } = Queries.useGetCourseCurriculum(id);
   const { data: courseLessons } = Queries.useGetCourseLessons(id);
 
-  const AllCourses = allCourseData?.data?.course_data || [];
+  const AllCourses = (allCourseData?.data?.course_data || []).filter(
+    (course: any) => course._id !== id && course._id !== singleCourse?._id
+  );
   // const AllCourseCurriculum =
   //   courseCurriculum?.data?.course_curriculum_data || [];
   const AllCourseLessons = courseLessons?.data?.course_lesson_data || [];

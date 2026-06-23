@@ -18,7 +18,9 @@ const WorkshopDetails = () => {
 
     const { data: workshopCurriculum } = Queries.useGetWorkshopCurriculum(id);
 
-    const AllWorkshops = allWorkshopData?.data?.workshop_data || [];
+    const AllWorkshops = (allWorkshopData?.data?.workshop_data || []).filter(
+        (workshop: any) => workshop._id !== id && workshop._id !== singleWorkshop?._id
+    );
     const AllWorkshopCurriculum = workshopCurriculum?.data?.workshop_curriculum_data || [];
 
     const isLoading = AllWorkshopLoading || WorkshopLoading;

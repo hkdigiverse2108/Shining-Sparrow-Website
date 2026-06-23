@@ -1,16 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../Constants";
-import { useAppDispatch } from "../Store/Hook";
-import { setUser } from "../Store/Slices/UserSlice";
-import { STORAGE_KEYS } from "../Constants/StorageKeys";
 import { AntdNotification } from "../Utils/AntNotification";
 import { notification } from "antd";
 import { Mutation } from "../Api";
 import type { RegisterPayload } from "../Types";
 
 export const useAuthFlow = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const signupMutation = Mutation.useUserSignup();
 
   const handleLoginSuccess = (data: any) => {

@@ -75,6 +75,7 @@ export interface User {
   reachFrom?: string;
   phoneNumber?: string;
   profilePhoto?: string;
+  designation?: string;
 }
 
 

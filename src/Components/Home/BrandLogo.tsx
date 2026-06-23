@@ -11,6 +11,7 @@ const BrandLogo = ({ brandImages }: { brandImages?: TrustedPartner[] }) => {
       data-id="94388e3"
       data-element_type="section"
       data-settings='{"background_background":"classic"}'
+      style={{ paddingTop: "20px", paddingBottom: "20px" }}
     >
       <MouseParallax className="elementor-container elementor-column-gap-extended ">
         {/* BRAND  */}
