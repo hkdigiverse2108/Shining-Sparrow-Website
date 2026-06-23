@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ImagePath, ROUTES } from "../Constants";
 import { GetHeaderMenuItems } from "../Utils/GetHeaderMenuItems";
 import type { MenuItem } from "../Types";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Queries } from "../Api";
 import { useAppDispatch, useAppSelector } from "../Store/Hook";
 import { setLogoutModalOpen } from "../Store/Slices/ModalSlice";
@@ -24,7 +24,6 @@ const Header = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [fix, setFix] = useState(false);
 
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((state) => state.user);
 
