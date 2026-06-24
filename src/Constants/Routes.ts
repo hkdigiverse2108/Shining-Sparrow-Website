@@ -8,6 +8,7 @@ export const ROUTES = {
   RETURN_POLICY: "/return-cancellation-policy",
   TERMS_CONDITION: "/terms-condition-policy",
   PRIVACY_POLICY: "/privacy-policy",
+  FRANCHISE: "/franchise",
 
   AUTH: {
     BASE: "/my-account",

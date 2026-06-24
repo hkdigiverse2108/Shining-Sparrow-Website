@@ -32,9 +32,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   // const { name, description } = courseCategoryId;
 
   return (
-    <Link to={`${ROUTES.COURSE.DETAILS.replace(":id", _id)}`} className="h-full! mb-0!" data-aos="fade-up" data-aos-duration={1200}>
-      <div className="edublink-single-course course-style-2 ">
-        <div className="inner h-full! bg-white!">
+    <Link to={`${ROUTES.COURSE.DETAILS.replace(":id", _id)}`} className="h-full! mb-0! group" data-aos="fade-up" data-aos-duration={1200}>
+      <div className="edublink-single-course course-style-2 h-full!">
+        <div className="inner h-full! bg-white! flex flex-col">
           <div className="thumbnail">
             <div className="course-thumb">
               <img className="w-100" src={image} alt={image} style={{ width: "100%", aspectRatio: "1/1", objectFit: "contain", backgroundColor: "#fff" }} />
@@ -48,12 +48,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             </div>
           </div>
 
-          <div className="content ">
-            <h6 className="title">
-              <span>{name}</span>
-            </h6>
+          <div className="content flex-1 flex flex-col justify-between">
+            <div>
+              <h6 className="title">
+                <span>{name}</span>
+              </h6>
 
-            <p className="line-clamp-3">{description}</p>
+              <p className="line-clamp-3 mb-4!">{description ? description.replace(/<[^>]*>/g, "") : ""}</p>
+            </div>
 
             {/* Rating Stars */}
             {/* <div className="course-rating">

@@ -308,7 +308,8 @@ const AuthModal = () => {
                 <FormCheckbox
                   label="I agree to the terms and conditions"
                   name="agreeTerms"
-                  containerClassName="mb-0 flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer"
+                  containerClassName="mb-0 cursor-pointer"
+                  labelClassName="text-lg! text-gray-800! font-medium! cursor-pointer flex items-center gap-2.5!"
                 />
 
                 <button

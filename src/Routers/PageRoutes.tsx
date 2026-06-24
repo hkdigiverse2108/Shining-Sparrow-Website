@@ -3,6 +3,7 @@ import About from "../Pages/About";
 import Blog from "../Pages/Blog";
 import BlogDetails from "../Pages/Blog/BlogDetails";
 import Contact from "../Pages/Contact";
+import Franchise from "../Pages/Franchise";
 import Course from "../Pages/Course";
 import CourseDetails from "../Pages/Course/CourseDetails";
 import Workshop from "../Pages/Workshop";
@@ -35,6 +36,7 @@ export const PageRoutes = [
   { path: ROUTES.ABOUT, element: <About /> },
   { path: ROUTES.GALLERY, element: <Gallery /> },
   { path: ROUTES.CONTACT, element: <Contact /> },
+  { path: ROUTES.FRANCHISE, element: <Franchise /> },
   { path: ROUTES.BLOG.BASE, element: <Blog /> },
   { path: ROUTES.BLOG.DETAILS, element: <BlogDetails /> },
 

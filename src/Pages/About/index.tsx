@@ -301,7 +301,7 @@ const About = () => {
                             decoding="async"
                             src={`${ImagePath}shapes/shape-7.png`}
                             alt="shape-05"
-                            style={{ filter: "sepia(1) saturate(3) hue-rotate(340deg) brightness(0.9)" }}
+                            style={{ filter: "brightness(0) saturate(100%) invert(98%) sepia(5%) saturate(1637%) hue-rotate(313deg) brightness(101%) contrast(99%)" }}
                           />
                         </div>
                       </div>

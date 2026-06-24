@@ -5248,7 +5248,7 @@ p.edublink-cart-shop-page-link {
   display: none;
 }
 .edublink-page-title-area.edublink-default-breadcrumb {
-  background-color: #f3f4d0;
+  background-color: #FDE7D6;
   padding: 95px 0 85px;
   position: relative;
   z-index: 1;
@@ -7191,7 +7191,7 @@ body.learnpress-checkout.learnpress-page .site-content,
   right: 10px;
 }
 .edublink-single-course .thumbnail .duration {
-  background-color: var(--edublink-color-tertiary);
+  background-color: #b57a3f;
   border-radius: 3px;
   padding: 4px 8px;
   font-weight: 500;

@@ -18,6 +18,8 @@
     "aos": "^2.3.4",
     "axios": "^1.13.2",
     "formik": "^2.4.9",
+    "hex-to-css-filter": "^6.0.0",
+    "image-size": "^2.0.2",
     "razorpay": "^2.9.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

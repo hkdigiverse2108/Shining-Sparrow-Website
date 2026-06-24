@@ -11,7 +11,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormInput, FormTextArea } from "../../Components/FormFields";
 
-const Contact = () => {
+const Franchise = () => {
   const AllSettings = useAppSelector((state) => state.settings.settings);
   const { facebook = "", instagram = "", linkedin = "", twitter = "" } = AllSettings?.socialMediaLinks || {};
 
@@ -33,18 +33,21 @@ const Contact = () => {
     phoneNumber: Yup.string()
       .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
       .required("Phone number is required"),
-    subject: Yup.string().required("Subject is required"),
-    message: Yup.string().required("Message is required"),
+    subject: Yup.string().required("City & State is required"),
+    message: Yup.string().required("Details are required"),
   });
 
   const handleSubmit = (values: typeof initialValues, { resetForm }: { resetForm: () => void }) => {
-    addContact(values, {
+    addContact({
+      ...values,
+      subject: `[Franchise Inquiry] City: ${values.subject}`
+    }, {
       onSuccess: () => {
-        AntdNotification(notification, "success", "Message sent successfully!");
+        AntdNotification(notification, "success", "Franchise inquiry sent successfully!");
         resetForm();
       },
       onError: () => {
-        AntdNotification(notification, "error", "Failed to send message. Please try again.");
+        AntdNotification(notification, "error", "Failed to send franchise inquiry. Please try again.");
       },
     });
   };
@@ -52,7 +55,7 @@ const Contact = () => {
   return (
     <div>
       <section>
-        <BreadCrumb title="Contact Us" />
+        <BreadCrumb title="Franchise Opportunity" />
       </section>
       <section>
         <div
@@ -83,10 +86,27 @@ const Contact = () => {
                   >
                     <div className="elementor-widget-container">
                       <h3 className="elementor-heading-title elementor-size-default  space-y-5! ">
-                        <p> We're Always Eager to </p>
-                        <span>Hear From You! </span>
+                        <p>Partner With Us</p>
+                        <span>Start Your Franchise</span>
                       </h3>
                     </div>
+                  </div>
+
+                  {/* Info */}
+                  <div
+                    className="space-y-3! mt-6! elementor-element elementor-element-614944a elementor-widget-heading"
+                    data-id="614944a"
+                    data-element_type="widget"
+                    data-widget_type="heading.default"
+                  >
+                    <div className="elementor-widget-container">
+                      <h5 className="elementor-heading-title elementor-size-default">
+                        Why Franchise with Shining Sparrow?
+                      </h5>
+                    </div>
+                    <p>
+                      Join our growing network of educational centers and help empower the next generation with advanced learning skills. We offer comprehensive support, curriculum guidelines, and marketing materials.
+                    </p>
                   </div>
 
                   {/* Address */}
@@ -119,11 +139,6 @@ const Contact = () => {
                     <p>
                       <Link to={`mailto:${ContactDetails?.EmailSales}`}>
                         {ContactDetails?.EmailSales}
-                      </Link>
-                    </p>
-                    <p>
-                      <Link to={`mailto:${ContactDetails?.EmailInfo}`}>
-                        {ContactDetails?.EmailInfo}
                       </Link>
                     </p>
                   </div>
@@ -278,7 +293,7 @@ const Contact = () => {
                       >
                         <div className="elementor-widget-container">
                           <h5 className="elementor-heading-title elementor-size-default">
-                            Get In Touch
+                            Franchise Inquiry Form
                           </h5>
                         </div>
                       </div>
@@ -291,13 +306,12 @@ const Contact = () => {
                       >
                         <div className="elementor-widget-container">
                           <p>
-                            Fill out this form for booking a consultant advising
-                            session.
+                            Please fill out the form below to register your interest in opening a Shining Sparrow franchise.
                           </p>
                         </div>
                       </div>
 
-                      {/* CONTACT FORM (STATIC) */}
+                      {/* INQUIRY FORM */}
                       <div
                         className="elementor-element elementor-element-43b0ae4 elementor-widget elementor-widget-edublink-contact-form-seven"
                         data-id="43b0ae4"
@@ -335,13 +349,13 @@ const Contact = () => {
 
                                     <FormInput
                                       name="subject"
-                                      placeholder="Subject *"
+                                      placeholder="Target City & State *"
                                       type="text"
                                     />
 
                                     <FormTextArea
                                       name="message"
-                                      placeholder="Your Message *"
+                                      placeholder="Franchise Details & Background Info *"
                                     />
 
                                     {/* Submit */}
@@ -356,10 +370,10 @@ const Contact = () => {
                                             {isPending ? (
                                               <>
                                                 <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
-                                                Sending...
+                                                Submitting...
                                               </>
                                             ) : (
-                                              "Submit Message"
+                                              "Submit Inquiry"
                                             )}
                                           </button>
                                         </p>
@@ -370,63 +384,12 @@ const Contact = () => {
                               )}
                             </Formik>
                             {/* FORM END */}
-                            {/* FORM END */}
                           </div>
                         </div>
                       </div>
                     </div>
-                    {/* End FORM SECTION */}
                   </div>
                 </MouseParallax>
-              </div>
-            </div>
-          </section>
-
-          {/* ================= MAP SECTION ================= */}
-          <section
-            className="elementor-section elementor-top-section elementor-element elementor-element-a7d265d elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-            data-id="a7d265d"
-            data-element_type="section"
-          >
-            <div className="elementor-container elementor-column-gap-no">
-              <div
-                className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-102888e"
-                data-id="102888e"
-                data-element_type="column"
-              >
-                <div className="elementor-widget-wrap elementor-element-populated">
-                  <div
-                    className="elementor-element elementor-element-3ac55f1 elementor-widget elementor-widget-google_maps"
-                    data-id="3ac55f1"
-                    data-element_type="widget"
-                    data-widget_type="google_maps.default"
-                  >
-                    <div className="elementor-widget-container">
-                      <div className="elementor-custom-embed">
-                        {/* <iframe
-                          loading="lazy"
-                          src="https://maps.google.com/maps?q=London%20Eye%2C%20London%2C%20United%20Kingdom&t=m&z=10&output=embed&iwloc=near"
-                          title="London Eye, London, United Kingdom"
-                          aria-label="London Eye, London, United Kingdom"
-                          style={{
-                            height: "600px",
-                            width: "100%",
-                            border: "0",
-                          }}
-                        /> */}
-                        <iframe
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.9378723872605!2d72.8687078753715!3d21.234312080466818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x23edd1e9a5188c01%3A0xf02c11f43f5a7caa!2sHK%20DigiVerse%20LLP!5e0!3m2!1sen!2sin!4v1769517970618!5m2!1sen!2sin"
-                          width="600"
-                          height="450"
-                          // style="border:0;"
-                          // allowfullscreen=""
-                          loading="lazy"
-                        // referrerpolicy="no-referrer-when-downgrade"
-                        ></iframe>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
@@ -436,4 +399,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Franchise;

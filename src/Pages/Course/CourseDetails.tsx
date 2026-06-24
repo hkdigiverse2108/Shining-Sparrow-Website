@@ -112,16 +112,10 @@ const CourseDetails = () => {
                         id="tab-faq-input"
                         value="faq"
                       />
-                      <input
-                        type="radio"
-                        name="learn-press-course-tab-radio"
-                        id="tab-reviews-input"
-                        value="reviews"
-                      />
 
                       <ul
                         className="learn-press-nav-tabs course-nav-tabs"
-                        data-tabs="4"
+                        data-tabs="3"
                       >
                         <li className="course-nav course-nav-tab-overview active">
                           <label htmlFor="tab-overview-input">Overview</label>
@@ -134,17 +128,12 @@ const CourseDetails = () => {
                         <li className="course-nav course-nav-tab-faq">
                           <label htmlFor="tab-faq-input">FAQ</label>
                         </li>
-
-                        <li className="course-nav course-nav-tab-reviews">
-                          <label htmlFor="tab-reviews-input">Reviews</label>
-                        </li>
                       </ul>
 
                       <div className="course-tab-panels">
                         <CourseOverviewSection desc={singleCourse?.description} title="Course Description" />
                         <CourseCurriculumSection lessons={AllCourseLessons} isUnlocked={singleCourse?.isUnlocked} />
                         <CourseFaqSection type="course" />
-                        <CourseReviewSection courseId={singleCourse?._id} />
                       </div>
                     </div>
                   </div>

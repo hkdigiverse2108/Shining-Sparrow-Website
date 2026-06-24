@@ -46,7 +46,7 @@ const MyCourseCard: React.FC<MyCourseCardProps> = ({ course }) => {
               </Link>
             </h6>
 
-            <p>{description}</p>
+            <p>{description ? description.replace(/<[^>]*>/g, "") : ""}</p>
 
             <div className="course-rating">
               <div className="edublink-course-review-wrapper">

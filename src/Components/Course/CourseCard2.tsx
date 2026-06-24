@@ -176,7 +176,7 @@ const CourseCard2: React.FC<CourseCardProps> = ({ course }) => {
               </span>
             </div>
 
-            <p>{description}</p>
+            <p>{description ? description.replace(/<[^>]*>/g, "") : ""}</p>
 
             <ul className="course-meta">
               <li>

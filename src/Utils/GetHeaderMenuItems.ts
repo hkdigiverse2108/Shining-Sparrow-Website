@@ -28,6 +28,10 @@ export const GetHeaderMenuItems = (): MenuItem[] => {
       Title: "Contact",
       link: ROUTES.CONTACT,
     },
+    {
+      Title: "Franchise",
+      link: ROUTES.FRANCHISE,
+    },
     // {
     //   Title: "Download Now",
     //   child: [
