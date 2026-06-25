@@ -6,7 +6,6 @@ import {
   CourseOverviewSection,
   CourseCurriculumSection,
   CourseSidebarSection,
-  CourseReviewSection,
   CourseFaqSection,
   CourseCard,
 } from "../../Components/Course";

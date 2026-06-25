@@ -18,6 +18,14 @@ export type AddNewsletterPayload = {
   email: string;
 };
 
+export type AddContactPayload = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  subject: string;
+  message: string;
+};
+
 export interface UploadResponse extends MessageStatus {
   data: string[];
 }

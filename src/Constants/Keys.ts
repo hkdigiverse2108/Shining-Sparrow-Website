@@ -19,6 +19,7 @@ export const KEYS = {
   INSTRUCTOR: "instructor",
   LEGALITY: "ligality",
   CONTACT: "contact",
+  CONTACT_US: "contact-us",
   BLOG: "blog",
   BLOG_ONE: "blog-one",
   SETTINGS: "settings",

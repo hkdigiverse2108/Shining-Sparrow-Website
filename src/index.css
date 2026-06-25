@@ -52,3 +52,25 @@
 /* @import "../public/assets/css/woocommerce-smallscreen.css"; */
 /* @import "../public/assets/css/woocommerce.css"; */
 /* @import "../public/assets/css/yith-quick-view.css"; */
+
+/* FAQ First Image Custom Alignment and Shape */
+.elementor-1233 .elementor-element.elementor-element-2535bbc img {
+  border-radius: 60px 60px 0px 30px !important;
+  margin-top: 0px !important;
+  height: auto !important;
+  width: 100% !important;
+  object-fit: contain !important;
+}
+@media (min-width: 1025px) {
+  .elementor-1233 .elementor-element.elementor-element-2535bbc img {
+    border-radius: 120px 120px 0px 50px !important;
+    margin-top: 22% !important;
+  }
+}
+
+/* FAQ Inner Row Spacing for Tablet/Mobile */
+@media (max-width: 1024px) {
+  .elementor-1233 .elementor-element.elementor-element-df17705 > .elementor-element-populated {
+    margin-top: -60px !important;
+  }
+}

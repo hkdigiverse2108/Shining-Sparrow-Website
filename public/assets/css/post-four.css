@@ -887,9 +887,17 @@ body.rtl .elementor-1233 .elementor-element.elementor-element-809c500 {
 .elementor-1233 .elementor-element.elementor-element-2535bbc {
   text-align: right;
 }
+
 .elementor-1233 .elementor-element.elementor-element-2535bbc img {
-  border-radius: 120px 120px 0px 120px;
+  border-radius: 120px 120px 0px 50px;
+  margin-top: 70px;
 }
+@media (min-width: 1025px) {
+  .elementor-1233 .elementor-element.elementor-element-2535bbc img {
+    margin-top: 85px;
+  }
+}
+
 .elementor-1233 .elementor-element.elementor-element-b67e6a2 > .elementor-element-populated {
   margin: 70px 0px 0px 0px;
   --e-column-margin-right: 0px;

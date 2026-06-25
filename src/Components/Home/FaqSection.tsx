@@ -48,7 +48,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                           decoding="async"
                           width={220}
                           height={280}
-                          src={`${ImagePath}faq/faq-01.jpg`}
+                          src={`${ImagePath}faq/faq-01.png`}
                           className="attachment-full size-full wp-image-4921"
                           alt=""
                         />

@@ -37,7 +37,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         <div className="inner h-full! bg-white! flex flex-col">
           <div className="thumbnail">
             <div className="course-thumb">
-              <img className="w-100" src={image} alt={image} style={{ width: "100%", aspectRatio: "1/1", objectFit: "contain", backgroundColor: "#fff" }} />
+              <img className="w-100" src={image} alt={image} style={{ width: "100%", aspectRatio: "3/2", objectFit: "cover", backgroundColor: "#fff" }} />
             </div>
 
             <div className="time-top">
@@ -89,7 +89,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             </div> */}
 
             <div className="read-more-btn">
-              <button className="edu-btn btn-small btn-secondary">
+              <button className="edu-btn btn-small btn-secondary" style={{ backgroundColor: "#b57a3f", borderColor: "#b57a3f" }}>
                 Enroll Now<i className="icon-4"></i>
               </button>
             </div>

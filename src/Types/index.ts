@@ -16,3 +16,4 @@ export * from "./CoreComponents";
 export * from "./Razorpay";
 export * from "./AntD";
 export * from "./Workshop";
+export * from "./ContactUs";

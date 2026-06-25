@@ -10,7 +10,7 @@ const LatestBlogsSection = ({ blogs }: { blogs?: Blog[] }) => {
 
   return (
     <section className="elementor-section elementor-top-section elementor-element elementor-element-178ad6d elementor-section-boxed elementor-section-height-default elementor-section-height-default">
-      <div className="elementor-background-overlay" />
+      <div className="elementor-background-overlay" style={{ backgroundImage: `url(${ImagePath}Blog-BG-1-custom.svg)` }} />
       <div className="elementor-container elementor-column-gap-extended">
         <div
           className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5e12c72"

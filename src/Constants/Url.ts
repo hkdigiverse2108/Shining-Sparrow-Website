@@ -16,6 +16,9 @@ export const URL_KEYS = {
   CONTACT: {
     ADD: "get-in-touch/add",
   },
+  CONTACT_US: {
+    ALL: "contact-us/all",
+  },
   BLOG: {
     ALL: "blog/all",
     ONE: "blog/",

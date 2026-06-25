@@ -2,6 +2,7 @@ import { KEYS } from "../Constants/Keys";
 import { URL_KEYS } from "../Constants/Url";
 import type {
   AddNewsletterPayload,
+  AddContactPayload,
   ForgotPasswordPayload,
   LoginPayload,
   PurchaseCoursePayload,
@@ -57,7 +58,7 @@ export const Mutation = {
     ),
   // ============= contact =============
   useAddContact: () =>
-    useMutations<AddNewsletterPayload, any>([KEYS.CONTACT], (input) =>
+    useMutations<AddContactPayload, any>([KEYS.CONTACT], (input) =>
       Post(URL_KEYS.CONTACT.ADD, input),
     ),
   // ============= course =============

@@ -24,6 +24,7 @@ import type {
   AllWorkshopApiResponse,
   WorkshopApiResponse,
   WorkshopCurriculumApiResponse,
+  ContactUsApiResponse,
 } from "../Types";
 import { Get } from "./Methods";
 import { useQueries } from "./ReactQuery";
@@ -180,6 +181,14 @@ export const Queries = {
     useQueries<SettingsApiResponse>(
       [KEYS.SETTINGS],
       () => Get(URL_KEYS.SETTINGS),
+      options,
+    ),
+
+  // ******************* Contact Us (Backend Details) *******************
+  useGetContactUs: (options?: AppQueryOptions<ContactUsApiResponse>) =>
+    useQueries<ContactUsApiResponse>(
+      [KEYS.CONTACT_US],
+      () => Get(URL_KEYS.CONTACT_US.ALL),
       options,
     ),
 
