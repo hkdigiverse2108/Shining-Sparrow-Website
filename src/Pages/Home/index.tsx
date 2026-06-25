@@ -10,6 +10,7 @@ import {
   LatestBlogsSection,
   TestimonialSection,
   VideoAreaSection,
+  BranchSection,
 } from "../../Components/Home";
 import { Queries } from "../../Api";
 import Loader from "../../Components/Common/Loader";
@@ -62,6 +63,7 @@ const Home = () => {
       <TestimonialSection testimonials={testimonials} />
       <BrandLogo brandImages={brandImages} />
       <FaqSection faq={faq} />
+      <BranchSection />
       <LatestBlogsSection blogs={Blogs} />
     </Fragment>
   );

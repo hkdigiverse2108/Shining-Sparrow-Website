@@ -8,5 +8,6 @@ import HeroBanner from "./HeroBanner";
 import LatestBlogsSection from "./LatestBlogsSection";
 import TestimonialSection from "./TestimonialSection";
 import VideoAreaSection from "./VideoArea";
+import BranchSection from "./BranchSection";
 
-export { AboutUsSection, BrandLogo, CategoriesSection, CounterSection, CourseSection, FaqSection, HeroBanner, LatestBlogsSection, TestimonialSection, VideoAreaSection };
+export { AboutUsSection, BrandLogo, CategoriesSection, CounterSection, CourseSection, FaqSection, HeroBanner, LatestBlogsSection, TestimonialSection, VideoAreaSection, BranchSection };
