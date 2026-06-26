@@ -109,7 +109,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                           decoding="async"
                           width={200}
                           height={240}
-                          src={`${ImagePath}faq/faq-02.jpg`}
+                          src={`${ImagePath}faq/faq-2.png`}
                           className="attachment-full size-full wp-image-4922"
                           alt=""
                         />
@@ -123,6 +123,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
               className="elementor-section elementor-inner-section elementor-element elementor-element-c9c330e elementor-section-boxed elementor-section-height-default elementor-section-height-default"
               data-id="c9c330e"
               data-element_type="section"
+              style={{ marginTop: "15px" }}
             >
               <div className="elementor-container elementor-column-gap-no">
                 <div
