@@ -114,6 +114,9 @@ export interface PurchaseCoursePayload {
   courseId: string;
   razorpayOrderId: string;
   razorpayPaymentId: string;
+  couponCodeId?: string;
+  discountAmount?: number;
+  finalAmount?: number;
 }
 
 export interface VerifyCoursePayload {

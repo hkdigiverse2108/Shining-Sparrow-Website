@@ -67,4 +67,6 @@ export interface PurchaseWorkshopPayload {
   paymentId: string;
   paymentMethod: string;
   finalAmount: number;
+  couponCodeId?: string;
+  discountAmount?: number;
 }

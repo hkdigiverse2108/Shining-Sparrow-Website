@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../Store/Hook";
 import { setAuthModalOpen } from "../../Store/Slices/ModalSlice";
+import { setUser } from "../../Store/Slices/UserSlice";
+import { STORAGE_KEYS } from "../../Constants/StorageKeys";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { FormCheckbox } from "../FormFields";
@@ -331,7 +333,14 @@ const AuthModal = () => {
         workshopId: purchaseContext.workshopId,
       };
       purchaseIntentMutation.mutate(payload, {
-        onSuccess: () => {
+        onSuccess: (res: any) => {
+          const userData = res?.data;
+          const token = userData?.token;
+          if (userData && token) {
+            localStorage.setItem(STORAGE_KEYS.TOKEN, token);
+            localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userData));
+            dispatch(setUser(userData));
+          }
           localStorage.setItem("trigger_payment_id", purchaseContext.courseId || purchaseContext.workshopId || "");
           localStorage.setItem("guest_user_info", JSON.stringify({
             name: values.fullName,
@@ -339,7 +348,7 @@ const AuthModal = () => {
             contact: values.phoneNumber,
           }));
           AntdNotification(notification, "success", "Details registered! Opening payment...");
-          handleClose();
+          dispatch(setAuthModalOpen(false));
         },
         onError: (error: any) => {
           AntdNotification(
@@ -347,7 +356,7 @@ const AuthModal = () => {
             "error",
             error?.response?.data?.message ||
               error?.message ||
-              "Something went wrong. Please try again.",
+              "Something went wrong. Please try again.",  
           );
         },
       });

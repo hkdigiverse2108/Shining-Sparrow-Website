@@ -57,13 +57,53 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
                 return;
             }
 
+            // Handle free coupon purchases
+            if (paymentId.startsWith("FREE_COUPON_")) {
+                purchaseWorkshop(
+                    {
+                        workshopId: workshop._id || "",
+                        amount: workshop.price || 0,
+                        paymentId: paymentId,
+                        paymentMethod: "coupon",
+                        finalAmount: 0,
+                        couponCodeId: response?.couponCodeId || "",
+                        discountAmount: response?.discountAmount || 0,
+                    },
+                    {
+                        onSuccess: (res) => {
+                            AntdNotification(
+                                notification,
+                                "success",
+                                res?.message || "Payment Successful! Workshop Purchased.",
+                            );
+                            queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_ONE, workshop._id] });
+                            queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_CURRICULUM] });
+                            if (onPurchaseSuccess) onPurchaseSuccess();
+                            setTimeout(() => {
+                                window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&workshop_id=${workshop?._id}`;
+                            }, 2000);
+                        },
+                        onError: (err: any) => {
+                            AntdNotification(
+                                notification,
+                                "error",
+                                err?.message || "Payment successful but workshop activation failed. Please contact support.",
+                            );
+                        },
+                    }
+                );
+                return;
+            }
+
             purchaseWorkshop(
                 {
                     workshopId: workshop._id || "",
                     amount: workshop.price || 0,
                     paymentId: paymentId,
                     paymentMethod: "razorpay",
-                    finalAmount: workshop.price || 0,
+                    finalAmount: response?.finalAmount ?? (workshop.price || 0),
+                    couponCodeId: response?.couponCodeId || "",
+                    discountAmount: response?.discountAmount || 0,
                 },
                 {
                     onSuccess: (res) => {
@@ -176,6 +216,7 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
                                     btnText="Enroll Now"
                                     isLoading={isPurchasing}
                                     amount={Math.round(workshop?.price || 0)}
+                                    workshopId={workshop?._id}
                                     userData={
                                         user
                                             ? {

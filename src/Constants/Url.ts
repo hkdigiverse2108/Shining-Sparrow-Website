@@ -61,4 +61,7 @@ export const URL_KEYS = {
     PURCHASE_INTENT: "user/purchase-intent",
   },
   UPLOAD: "upload",
+  COUPON: {
+    VALIDATE: "coupon-code/validate",
+  },
 } as const;

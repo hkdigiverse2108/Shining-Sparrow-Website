@@ -57,6 +57,45 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
         return;
       }
 
+      // Bypass verification for 100% discount coupons
+      if (paymentId.startsWith("FREE_COUPON_")) {
+        purchaseCourse(
+          {
+            courseId: course?._id || "",
+            razorpayOrderId: "FREE_ORDER_" + Math.random().toString(36).substring(2, 9),
+            razorpayPaymentId: paymentId,
+            couponCodeId: response?.couponCodeId || "",
+            discountAmount: response?.discountAmount || 0,
+            finalAmount: response?.finalAmount || 0,
+          },
+          {
+            onSuccess: (res) => {
+              AntdNotification(
+                notification,
+                "success",
+                res?.message || "Payment Successful! Course Purchased.",
+              );
+              queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_ONE, course?._id] });
+              queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_LESSON, course?._id] });
+              queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_CURRICULUM] });
+              if (onPurchaseSuccess) onPurchaseSuccess();
+              setTimeout(() => {
+                window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
+              }, 2000);
+            },
+            onError: (err: any) => {
+              AntdNotification(
+                notification,
+                "error",
+                err?.message ||
+                "Payment successful but course activation failed. Please contact support.",
+              );
+            },
+          },
+        );
+        return;
+      }
+
       verifyCourse(
         {
           payment_id: paymentId,
@@ -69,6 +108,9 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
                 courseId: course?._id || "",
                 razorpayOrderId: razorPayOrderId,
                 razorpayPaymentId: paymentId,
+                couponCodeId: response?.couponCodeId || "",
+                discountAmount: response?.discountAmount || 0,
+                finalAmount: response?.finalAmount || 0,
               },
               {
                 onSuccess: (res) => {
@@ -243,6 +285,7 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
                   btnText="Buy Now"
                   isLoading={isPurchasing || isVerifying}
                   amount={Math.round(course?.price || 0)}
+                  courseId={course?._id}
                   userData={
                     user
                       ? {

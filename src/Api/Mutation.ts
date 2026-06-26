@@ -90,4 +90,8 @@ export const Mutation = {
     useMutations<FormData, any>([KEYS.UPLOAD], (input) =>
       Post(URL_KEYS.UPLOAD, input),
     ),
+  useValidateCoupon: () =>
+    useMutations<any, any>(["VALIDATE_COUPON"], (input) =>
+      Post(URL_KEYS.COUPON.VALIDATE, input),
+    ),
 };
