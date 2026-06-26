@@ -7,8 +7,6 @@ import { FormCheckbox } from "../FormFields";
 
 import { useAuthFlow } from "../../Hooks/useAuthFlow";
 import { Mutation } from "../../Api";
-import { STORAGE_KEYS } from "../../Constants/StorageKeys";
-import { setUser } from "../../Store/Slices/UserSlice";
 import { AntdNotification } from "../../Utils/AntNotification";
 import { notification } from "antd";
 
@@ -53,16 +51,28 @@ const FormSelect = ({
   label,
   name,
   options,
-  ...props
+  openUpwards = false,
 }: {
   label: string;
   name: string;
   options: { label: string; value: string }[];
-  [key: string]: any;
+  openUpwards?: boolean;
 }) => {
-  const [field, meta] = useField(name);
+  const [field, meta, helpers] = useField(name);
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClose = () => setIsOpen(false);
+    window.addEventListener("click", handleClose);
+    return () => window.removeEventListener("click", handleClose);
+  }, [isOpen]);
+
+  const selectedOption = options.find((opt) => opt.value === field.value);
+
   return (
-    <div className="flex flex-col w-full" style={{ marginBottom: "16px" }}>
+    <div className="flex flex-col w-full" style={{ marginBottom: "16px" }} onClick={(e) => e.stopPropagation()}>
       <label
         htmlFor={name}
         className="block text-sm font-semibold text-gray-700"
@@ -77,51 +87,111 @@ const FormSelect = ({
         {label}
       </label>
       <div style={{ position: "relative" }}>
-        <select
-          {...field}
-          {...props}
-          id={name}
-          className="w-full focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all appearance-none"
+        <div
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full transition-all cursor-pointer flex items-center justify-between"
           style={{
             width: "100%",
             height: "48px",
             paddingLeft: "16px",
-            paddingRight: "40px",
+            paddingRight: "16px",
             fontSize: "15px",
-            color: "#1f2937",
+            color: field.value ? "#1f2937" : "#9ca3af",
             backgroundColor: "#ffffff",
-            border: meta.touched && meta.error ? "1px solid #ef4444" : "1px solid #d1d5db",
+            border: meta.touched && meta.error ? "1px solid #ef4444" : (isOpen ? "1px solid #f97316" : "1px solid #d1d5db"),
             borderRadius: "10px",
             boxSizing: "border-box",
-            display: "block",
-            appearance: "none",
-            WebkitAppearance: "none",
-            cursor: "pointer"
-          }}
-        >
-          <option value="">Select {label}</option>
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-        <div
-          style={{
-            position: "absolute",
-            right: "16px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            pointerEvents: "none",
-            color: "#9ca3af",
             display: "flex",
             alignItems: "center"
           }}
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "16px", height: "16px" }}>
+          <span>{selectedOption ? selectedOption.label : `Select ${label}`}</span>
+          <svg
+            className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            style={{ width: "16px", height: "16px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
+          >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
+
+        {isOpen && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: openUpwards ? "100%" : undefined,
+              top: openUpwards ? undefined : "100%",
+              left: 0,
+              right: 0,
+              marginBottom: openUpwards ? "4px" : undefined,
+              marginTop: openUpwards ? undefined : "4px",
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5e7eb",
+              borderRadius: "10px",
+              boxShadow: openUpwards
+                ? "0 -10px 15px -3px rgba(0, 0, 0, 0.1), 0 -4px 6px -2px rgba(0, 0, 0, 0.05)"
+                : "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+              zIndex: 9999,
+              maxHeight: "220px",
+              overflowY: "auto"
+            }}
+          >
+            <div
+              onClick={() => {
+                helpers.setValue("");
+                helpers.setTouched(true);
+                setIsOpen(false);
+              }}
+              style={{
+                padding: "10px 16px",
+                fontSize: "14px",
+                color: "#9ca3af",
+                cursor: "pointer",
+                backgroundColor: field.value === "" ? "#ffedd5" : "transparent"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#ffedd5";
+                e.currentTarget.style.color = "#ea580c";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = field.value === "" ? "#ffedd5" : "transparent";
+                e.currentTarget.style.color = field.value === "" ? "#ea580c" : "#9ca3af";
+              }}
+            >
+              Select {label}
+            </div>
+            {options.map((opt) => (
+              <div
+                key={opt.value}
+                onClick={() => {
+                  helpers.setValue(opt.value);
+                  helpers.setTouched(true);
+                  setIsOpen(false);
+                }}
+                style={{
+                  padding: "10px 16px",
+                  fontSize: "14px",
+                  color: field.value === opt.value ? "#ea580c" : "#374151",
+                  cursor: "pointer",
+                  backgroundColor: field.value === opt.value ? "#ffedd5" : "transparent",
+                  transition: "background-color 0.2s, color 0.2s"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#ffedd5";
+                  e.currentTarget.style.color = "#ea580c";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = field.value === opt.value ? "#ffedd5" : "transparent";
+                  e.currentTarget.style.color = field.value === opt.value ? "#ea580c" : "#374151";
+                }}
+              >
+                {opt.label}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       {meta.touched && meta.error ? (
         <span
@@ -217,6 +287,8 @@ const AuthModal = () => {
   }, []);
 
   const handleClose = () => {
+    localStorage.removeItem("trigger_payment_id");
+    localStorage.removeItem("guest_user_info");
     dispatch(setAuthModalOpen(false));
   };
 
@@ -259,11 +331,14 @@ const AuthModal = () => {
         workshopId: purchaseContext.workshopId,
       };
       purchaseIntentMutation.mutate(payload, {
-        onSuccess: (response) => {
-          localStorage.setItem(STORAGE_KEYS.TOKEN, response?.data?.token);
-          localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(response?.data));
-          dispatch(setUser(response?.data));
-          AntdNotification(notification, "success", response?.message || "Success");
+        onSuccess: () => {
+          localStorage.setItem("trigger_payment_id", purchaseContext.courseId || purchaseContext.workshopId || "");
+          localStorage.setItem("guest_user_info", JSON.stringify({
+            name: values.fullName,
+            email: values.email,
+            contact: values.phoneNumber,
+          }));
+          AntdNotification(notification, "success", "Details registered! Opening payment...");
           handleClose();
         },
         onError: (error: any) => {
@@ -347,7 +422,8 @@ const AuthModal = () => {
             cursor: "pointer",
             border: "none",
             backgroundColor: "transparent",
-            borderRadius: "50%"
+            borderRadius: "50%",
+            zIndex: 50
           }}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "20px", height: "20px" }}>
@@ -418,12 +494,14 @@ const AuthModal = () => {
                   label="Standard"
                   name="std"
                   options={STD_OPTIONS}
+                  openUpwards={true}
                 />
 
                 <FormSelect
                   label="How did you reach us?"
                   name="reachFrom"
                   options={REACH_OPTIONS}
+                  openUpwards={true}
                 />
 
                 {!purchaseContext && (
@@ -482,7 +560,7 @@ const AuthModal = () => {
                   {isPendingSubmit ? (
                     <span>Processing...</span>
                   ) : (
-                    <span>Submit & Continue</span>
+                    <span>Save & Continue</span>
                   )}
                 </button>
               </div>

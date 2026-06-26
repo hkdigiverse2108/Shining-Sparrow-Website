@@ -20,6 +20,7 @@ export const KEYS = {
   LEGALITY: "ligality",
   CONTACT: "contact",
   CONTACT_US: "contact-us",
+  FRANCHISE: "franchise",
   BLOG: "blog",
   BLOG_ONE: "blog-one",
   SETTINGS: "settings",

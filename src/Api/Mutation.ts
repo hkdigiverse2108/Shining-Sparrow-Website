@@ -61,6 +61,11 @@ export const Mutation = {
     useMutations<AddContactPayload, any>([KEYS.CONTACT], (input) =>
       Post(URL_KEYS.CONTACT.ADD, input),
     ),
+  // ============= franchise =============
+  useAddFranchiseInquiry: () =>
+    useMutations<any, any>([KEYS.FRANCHISE], (input) =>
+      Post(URL_KEYS.FRANCHISE.ADD, input),
+    ),
   // ============= course =============
   usePurchaseCourse: () =>
     useMutations<PurchaseCoursePayload, any>([KEYS.PURCHASE_COURSE], (input) =>

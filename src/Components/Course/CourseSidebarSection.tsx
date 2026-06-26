@@ -13,6 +13,7 @@ import { KEYS } from "../../Constants/Keys";
 
 const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void }> = ({ course = {}, onPurchaseSuccess }) => {
   const user = useAppSelector((state) => state.user.user);
+  const { isAuthModalOpen } = useAppSelector((state) => state.Modal);
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
 
@@ -22,7 +23,12 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
     Mutation.usePurchaseCourse();
 
   useEffect(() => {
-    if (user && course?._id && localStorage.getItem("trigger_payment_id") === course._id) {
+    localStorage.removeItem("guest_user_info");
+    localStorage.removeItem("trigger_payment_id");
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthModalOpen && course?._id && localStorage.getItem("trigger_payment_id") === course._id) {
       localStorage.removeItem("trigger_payment_id");
       setTimeout(() => {
         const paymentBtn = document.querySelector(".trigger-payment-btn") as HTMLButtonElement;
@@ -31,20 +37,25 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
         }
       }, 100);
     }
-  }, [user, course?._id]);
-
-  const handleBuyNowBtn = () => {
-    if (!user) {
-      localStorage.setItem("trigger_payment_id", course?._id || "");
-      dispatch(setAuthModalOpen({ open: true, context: { courseId: course?._id } }));
-      return;
-    }
-  };
+  }, [course?._id, isAuthModalOpen]);
 
   const handlePaymentComplete = (status: any, response: any) => {
     if (status === PAYMENT_STATUS.COMPLETED) {
       const paymentId = response?.razorpay_payment_id || "";
       const baseLoginUrl = import.meta.env.VITE_LOGIN_URL || "http://192.168.29.26:5173";
+
+      if (!user) {
+        localStorage.removeItem("guest_user_info");
+        AntdNotification(
+          notification,
+          "success",
+          "Payment Successful! Redirecting to login...",
+        );
+        setTimeout(() => {
+          window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
+        }, 2000);
+        return;
+      }
 
       verifyCourse(
         {
@@ -71,7 +82,7 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
                   queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_CURRICULUM] });
                   if (onPurchaseSuccess) onPurchaseSuccess();
                   setTimeout(() => {
-                    window.location.href = baseLoginUrl;
+                    window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
                   }, 2000);
                 },
                 onError: (err: any) => {
@@ -97,6 +108,8 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
         },
       );
     } else {
+      localStorage.removeItem("guest_user_info");
+      localStorage.removeItem("trigger_payment_id");
       AntdNotification(
         notification,
         "error",
@@ -226,27 +239,37 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
 
             <div className="edublink-course-details-sidebar-buttons">
               <div className="lp-course-buttons">
-                {user ? (
-                  <PaymentModal
-                    btnText="Buy Now"
-                    isLoading={isPurchasing || isVerifying}
-                    amount={Math.round(course?.price || 0)}
-                    userData={{
-                      name: user.fullName,
-                      email: user.email,
-                      contact: user.phoneNumber,
-                    }}
-                    onPaymentComplete={handlePaymentComplete}
-                    className="lp-button button button-purchase-course trigger-payment-btn"
-                  />
-                ) : (
-                  <button
-                    onClick={handleBuyNowBtn}
-                    className="lp-button button button-purchase-course"
-                  >
-                    Buy Now
-                  </button>
-                )}
+                <PaymentModal
+                  btnText="Buy Now"
+                  isLoading={isPurchasing || isVerifying}
+                  amount={Math.round(course?.price || 0)}
+                  userData={
+                    user
+                      ? {
+                          name: user.fullName,
+                          email: user.email,
+                          contact: user.phoneNumber,
+                        }
+                      : (() => {
+                          try {
+                            const info = localStorage.getItem("guest_user_info");
+                            return info ? JSON.parse(info) : undefined;
+                          } catch {
+                            return undefined;
+                          }
+                        })()
+                  }
+                  onPaymentComplete={handlePaymentComplete}
+                  onClickOverride={() => {
+                    if (!user && !localStorage.getItem("guest_user_info")) {
+                      localStorage.setItem("trigger_payment_id", course?._id || "");
+                      dispatch(setAuthModalOpen({ open: true, context: { courseId: course?._id } }));
+                      return true; // block payment start to show form
+                    }
+                    return false; // let payment proceed
+                  }}
+                  className="lp-button button button-purchase-course trigger-payment-btn"
+                />
               </div>
             </div>
 

@@ -16,6 +16,9 @@ export const URL_KEYS = {
   CONTACT: {
     ADD: "get-in-touch/add",
   },
+  FRANCHISE: {
+    ADD: "franchise-inquiry/add",
+  },
   CONTACT_US: {
     ALL: "contact-us/all",
   },

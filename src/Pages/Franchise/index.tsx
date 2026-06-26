@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useField } from "formik";
 import { BreadCrumb } from "../../Components/Common";
 import { ImagePath } from "../../Constants";
 import { MouseParallax } from "../../CoreComponents";
@@ -11,17 +13,140 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormInput, FormTextArea } from "../../Components/FormFields";
 
+const BUDGET_OPTIONS = [
+  { label: "Under 5 Lakhs", value: "Under 5 Lakhs" },
+  { label: "5 to 10 Lakhs", value: "5 to 10 Lakhs" },
+  { label: "10 to 15 Lakhs", value: "10 to 15 Lakhs" },
+  { label: "15 to 20 Lakhs", value: "15 to 20 Lakhs" },
+  { label: "Above 20 Lakhs", value: "Above 20 Lakhs" }
+];
+
+const OCCUPATION_OPTIONS = [
+  { label: "Business Owner", value: "Business Owner" },
+  { label: "Salaried Professional", value: "Salaried Professional" },
+  { label: "Teacher / Educator", value: "Teacher / Educator" },
+  { label: "Home Maker", value: "Home Maker" },
+  { label: "Retired", value: "Retired" },
+  { label: "Others", value: "Others" }
+];
+
+const FormSelect = ({
+  label,
+  name,
+  options,
+  placeholder = "Select option",
+}: {
+  label?: string;
+  name: string;
+  options: { label: string; value: string }[];
+  placeholder?: string;
+}) => {
+  const [field, meta, helpers] = useField(name);
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClose = () => setIsOpen(false);
+    window.addEventListener("click", handleClose);
+    return () => window.removeEventListener("click", handleClose);
+  }, [isOpen]);
+
+  const selectedOption = options.find((opt) => opt.value === field.value);
+
+  return (
+    <div className="edublink-contact-form-single-item" onClick={(e) => e.stopPropagation()}>
+      <div className="edublink-contact-form-single-item-content" style={{ position: "relative" }}>
+        {label && (
+          <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
+            {label}
+          </label>
+        )}
+        <div
+          onClick={() => setIsOpen(!isOpen)}
+          className={`wpcf7-form-control edublink-contact-form-field flex items-center justify-between cursor-pointer transition-all duration-200`}
+          style={{
+            height: "55px",
+            padding: "0 20px",
+            border: meta.touched && meta.error ? "1.5px solid #ef4444" : (isOpen ? "1.5px solid #f97316" : "1.5px solid #e9e9e9"),
+            borderRadius: "5px",
+            backgroundColor: "#fff",
+            color: field.value ? "#1f2937" : "#9ca3af",
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <span>{selectedOption ? selectedOption.label : placeholder}</span>
+          <svg
+            className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            style={{ width: "16px", height: "16px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+        {isOpen && (
+          <div
+            className="absolute left-0 w-full bg-white rounded-lg shadow-xl border border-gray-100 py-1.5 transition-all duration-200"
+            style={{
+              position: "absolute",
+              top: "60px",
+              left: 0,
+              zIndex: 1000,
+              maxHeight: "220px",
+              overflowY: "auto",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+              border: "1px solid #f3f4f6",
+              borderRadius: "8px",
+              backgroundColor: "#ffffff",
+              width: "100%"
+            }}
+          >
+            {options.map((opt) => (
+              <div
+                key={opt.value}
+                onClick={() => {
+                  helpers.setValue(opt.value);
+                  setIsOpen(false);
+                }}
+                className={`px-5 py-3 cursor-pointer text-gray-700 hover:bg-orange-50 hover:text-orange-500 font-medium transition-colors duration-150`}
+                style={{
+                  fontSize: "14px",
+                  backgroundColor: field.value === opt.value ? "#fff7ed" : "transparent",
+                  color: field.value === opt.value ? "#f97316" : "#374151"
+                }}
+              >
+                {opt.label}
+              </div>
+            ))}
+          </div>
+        )}
+        {meta.touched && meta.error ? (
+          <span className="text-red-500 text-sm mt-1 block">
+            {meta.error}
+          </span>
+        ) : null}
+      </div>
+    </div>
+  );
+};
+
 const Franchise = () => {
   const AllSettings = useAppSelector((state) => state.settings.settings);
   const { facebook = "", instagram = "", linkedin = "", twitter = "" } = AllSettings?.socialMediaLinks || {};
 
-  const { mutate: addContact, isPending } = Mutation.useAddContact();
+  const { mutate: addFranchiseInquiry, isPending } = Mutation.useAddFranchiseInquiry();
 
   const initialValues = {
     name: "",
     email: "",
     phoneNumber: "",
-    subject: "",
+    city: "",
+    state: "",
+    investmentBudget: "",
+    occupation: "",
     message: "",
   };
 
@@ -33,14 +158,23 @@ const Franchise = () => {
     phoneNumber: Yup.string()
       .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
       .required("Phone number is required"),
-    subject: Yup.string().required("City & State is required"),
+    city: Yup.string().required("City is required"),
+    state: Yup.string().required("State is required"),
+    investmentBudget: Yup.string().required("Investment Budget is required"),
+    occupation: Yup.string().required("Occupation is required"),
     message: Yup.string().required("Details are required"),
   });
 
   const handleSubmit = (values: typeof initialValues, { resetForm }: { resetForm: () => void }) => {
-    addContact({
-      ...values,
-      subject: `[Franchise Inquiry] City: ${values.subject}`
+    addFranchiseInquiry({
+      name: values.name,
+      email: values.email,
+      phoneNumber: values.phoneNumber,
+      city: values.city,
+      state: values.state,
+      investmentBudget: values.investmentBudget,
+      occupation: values.occupation,
+      message: values.message,
     }, {
       onSuccess: () => {
         AntdNotification(notification, "success", "Franchise inquiry sent successfully!");
@@ -348,9 +482,27 @@ const Franchise = () => {
                                     />
 
                                     <FormInput
-                                      name="subject"
-                                      placeholder="Target City & State *"
+                                      name="city"
+                                      placeholder="Target City *"
                                       type="text"
+                                    />
+
+                                    <FormInput
+                                      name="state"
+                                      placeholder="Target State *"
+                                      type="text"
+                                    />
+
+                                    <FormSelect
+                                      name="occupation"
+                                      placeholder="Your Occupation *"
+                                      options={OCCUPATION_OPTIONS}
+                                    />
+
+                                    <FormSelect
+                                      name="investmentBudget"
+                                      placeholder="Investment Budget *"
+                                      options={BUDGET_OPTIONS}
                                     />
 
                                     <FormTextArea

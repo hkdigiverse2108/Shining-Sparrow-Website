@@ -23,6 +23,7 @@ declare global {
 interface ExtendedPaymentModalProps extends PaymentModalProps {
   className?: string;
   disabled?: boolean;
+  onClickOverride?: () => boolean;
 }
 
 const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
@@ -33,6 +34,7 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
   onPaymentComplete,
   className,
   disabled,
+  onClickOverride,
 }) => {
   const hasHandledPayment = useRef<string | null>(null);
 
@@ -51,6 +53,10 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
   }, []);
 
   const startPayment = async () => {
+    if (onClickOverride && onClickOverride()) {
+      return;
+    }
+
     if (amount <= 0) {
       return onPaymentComplete(
         PAYMENT_STATUS.COMPLETED,
