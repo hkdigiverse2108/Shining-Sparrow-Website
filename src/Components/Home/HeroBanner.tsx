@@ -25,10 +25,9 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
             >
               <div className="elementor-widget-container">
                 <h1 className="elementor-heading-title elementor-size-default">
-                  The Best <br />
-                  Program to{" "}
-                  <span className="edublink-color-secondary">Enroll</span> for
-                  Exchange
+                  Shining Sparrow – <br />
+                  Where Every Mind <br />
+                  <span className="edublink-color-secondary">Learns</span> to Fly.
                 </h1>{" "}
               </div>
             </div>
@@ -47,8 +46,7 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
               data-widget_type="text-editor.default"
             >
               <div className="elementor-widget-container">
-                Excepteur sint occaecat cupidatat non proident sunt in culpa qui
-                officia deserunt mollit.{" "}
+                I am focused. I am confident. I learn faster every day. I can achieve anything with my sharp mind.{" "}
               </div>
             </div>
             <div
@@ -114,8 +112,8 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
                                 Online Support
                               </span>
                               <h4 className="title edublink-p-medium edublink-color-secondary">
-                                <Link to={`tel:${AllSettings?.phoneNumber}`}>
-                                  {AllSettings?.phoneNumber}
+                                <Link to={`tel:${(AllSettings?.phoneNumber || "+91 8140655943").replace(/\s+/g, '')}`}>
+                                  {AllSettings?.phoneNumber || "+91 8140655943"}
                                 </Link>
                               </h4>
                             </div>

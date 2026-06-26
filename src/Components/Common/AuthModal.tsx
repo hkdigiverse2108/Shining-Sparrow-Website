@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../Store/Hook";
 import { setAuthModalOpen } from "../../Store/Slices/ModalSlice";
 import { setUser } from "../../Store/Slices/UserSlice";
@@ -62,19 +62,25 @@ const FormSelect = ({
 }) => {
   const [field, meta, helpers] = useField(name);
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on click outside
   useEffect(() => {
-    if (!isOpen) return;
-    const handleClose = () => setIsOpen(false);
-    window.addEventListener("click", handleClose);
-    return () => window.removeEventListener("click", handleClose);
-  }, [isOpen]);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const selectedOption = options.find((opt) => opt.value === field.value);
 
   return (
-    <div className="flex flex-col w-full" style={{ marginBottom: "16px" }} onClick={(e) => e.stopPropagation()}>
+    <div className="flex flex-col w-full" style={{ marginBottom: "16px" }} ref={containerRef}>
       <label
         htmlFor={name}
         className="block text-sm font-semibold text-gray-700"
@@ -104,19 +110,48 @@ const FormSelect = ({
             borderRadius: "10px",
             boxSizing: "border-box",
             display: "flex",
-            alignItems: "center"
+            alignItems: "center",
+            justifyContent: "space-between"
           }}
         >
           <span>{selectedOption ? selectedOption.label : `Select ${label}`}</span>
-          <svg
-            className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            style={{ width: "16px", height: "16px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-          </svg>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            {field.value && (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  helpers.setValue("");
+                }}
+                className="hover:text-red-500 transition-colors duration-150 p-1"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  color: "#9ca3af",
+                }}
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  style={{ width: "16px", height: "16px", strokeWidth: "2.5" }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+            )}
+            <svg
+              className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              style={{ width: "16px", height: "16px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
 
         {isOpen && (

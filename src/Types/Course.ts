@@ -48,6 +48,7 @@ export interface Course extends BaseType {
   purchasedCoursesShow: boolean;
   satisfactionRate: number; // e.g. percentage or rating
   trailerUrl?: string;
+  priority?: number;
 }
 
 export interface CourseApiData {

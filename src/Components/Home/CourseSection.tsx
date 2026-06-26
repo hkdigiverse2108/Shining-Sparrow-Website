@@ -32,10 +32,14 @@ const CourseSection = ({ courses }: { courses?: Course[] }) => {
             <div className="elementor-element elementor-element-6bce914 distant-learning-course elementor-widget elementor-widget-edublink-lp-courses">
               <div className="elementor-widget-container">
                 <div className="edublink-course-widget-wrapper flex justify-center">
-                  <div className="edublink-archive-lp-courses grid! grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6! w-full edublink-course-archive edublink-lms-courses-grid active-white-bg edublink-row eb-masonry-grid-wrapper">
-                    {courses?.slice(0, 3)?.map((course) => (
-                      <CourseCard key={course._id} course={course} />
-                    ))}
+                  <div className="edublink-archive-lp-courses grid! grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6! w-full edublink-course-archive edublink-lms-courses-grid active-white-bg edublink-row eb-masonry-grid-wrapper">
+                    {(courses || [])
+                      .filter((course) => course.priority !== undefined && course.priority >= 1 && course.priority <= 4)
+                      .sort((a, b) => (a.priority || 0) - (b.priority || 0))
+                      .slice(0, 4)
+                      .map((course) => (
+                        <CourseCard key={course._id} course={course} />
+                      ))}
                   </div>
                 </div>
               </div>

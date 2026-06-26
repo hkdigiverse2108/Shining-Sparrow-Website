@@ -65,72 +65,44 @@ const Gallery = () => {
                                       <div
                                         key={index}
                                         onClick={() => setSelectedFolder(folder)}
-                                        className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 flex flex-col h-full"
+                                        className="h-full! mb-0! group cursor-pointer"
                                       >
-                                          {/* Image Cover container */}
-                                          <div className="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
-                                            {firstImage ? (
-                                              <img
-                                                src={firstImage}
-                                                alt={folder.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                              />
-                                            ) : (
-                                              <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                                                <svg fill="currentColor" viewBox="0 0 20 20" style={{ color: "#a0aec0", width: "48px", height: "48px" }}>
-                                                  <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                                                </svg>
+                                        <div className="edublink-single-course course-style-2 h-full!">
+                                          <div className="inner h-full! bg-white! flex flex-col">
+                                            <div className="thumbnail">
+                                              <div className="course-thumb">
+                                                {firstImage ? (
+                                                  <img
+                                                    className="w-100"
+                                                    src={firstImage}
+                                                    alt={folder.title}
+                                                    style={{ width: "100%", aspectRatio: "3/2", objectFit: "cover", backgroundColor: "#fff" }}
+                                                  />
+                                                ) : (
+                                                  <div className="w-100 flex items-center justify-center bg-gray-200" style={{ width: "100%", aspectRatio: "3/2" }}>
+                                                    <svg fill="currentColor" viewBox="0 0 20 20" style={{ color: "#a0aec0", width: "48px", height: "48px" }}>
+                                                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                                                    </svg>
+                                                  </div>
+                                                )}
                                               </div>
-                                            )}
-                                          </div>
+                                            </div>
 
-                                        {/* Folder content details */}
-                                        <div className="p-6 flex flex-col flex-grow items-center text-center">
-                                          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", width: "100%", marginBottom: "8px" }}>
-                                            <svg className="flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={{ color: "var(--edublink-color-primary, #f97316)", width: "22px", height: "22px" }}>
-                                              <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                                            </svg>
-                                            <span 
-                                              className="group-hover:text-orange-500 transition-colors duration-200"
-                                              style={{
-                                                fontFamily: "var(--edublink-font-secondary)",
-                                                fontSize: "22px",
-                                                fontWeight: 700,
-                                                color: "var(--edublink-color-secondary, #1b223c)",
-                                                lineHeight: "1.2"
-                                              }}
-                                            >
-                                              {folder.title}
-                                            </span>
-                                          </div>
-                                          
-                                          <p 
-                                            className="line-clamp-2 leading-relaxed flex-grow m-0"
-                                            style={{
-                                              fontFamily: "var(--edublink-font-primary)",
-                                              fontSize: "15px",
-                                              color: "#5b616c",
-                                              lineHeight: "1.6",
-                                              marginTop: "6px"
-                                            }}
-                                          >
-                                            {folder.description || "View photos in this album"}
-                                          </p>
-                                          
-                                          {/* Footer link */}
-                                          <div 
-                                            className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-center gap-2 text-orange-500 font-semibold w-full"
-                                            style={{
-                                              fontFamily: "var(--edublink-font-secondary)",
-                                              fontSize: "14px",
-                                              fontWeight: 600,
-                                              color: "var(--edublink-color-primary, #f97316)"
-                                            }}
-                                          >
-                                            <span>Open Folder</span>
-                                            <svg className="transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "16px", height: "16px", strokeWidth: "2.5" }}>
-                                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                            </svg>
+                                            <div className="content flex-1 flex flex-col justify-between">
+                                              <div>
+                                                <h6 className="title">
+                                                  <span>{folder.title}</span>
+                                                </h6>
+
+                                                <p className="line-clamp-3 mb-4!">{folder.description || "View photos in this album"}</p>
+                                              </div>
+
+                                              <div className="read-more-btn">
+                                                <button className="edu-btn btn-small btn-secondary" style={{ backgroundColor: "#b57a3f", borderColor: "#b57a3f" }}>
+                                                  Open Folder<i className="icon-4"></i>
+                                                </button>
+                                              </div>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>

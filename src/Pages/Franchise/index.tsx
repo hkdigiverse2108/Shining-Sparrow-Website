@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useField } from "formik";
 import { BreadCrumb } from "../../Components/Common";
 import { ImagePath } from "../../Constants";
@@ -43,19 +43,25 @@ const FormSelect = ({
 }) => {
   const [field, meta, helpers] = useField(name);
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on click outside
   useEffect(() => {
-    if (!isOpen) return;
-    const handleClose = () => setIsOpen(false);
-    window.addEventListener("click", handleClose);
-    return () => window.removeEventListener("click", handleClose);
-  }, [isOpen]);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const selectedOption = options.find((opt) => opt.value === field.value);
 
   return (
-    <div className="edublink-contact-form-single-item" onClick={(e) => e.stopPropagation()}>
+    <div className="edublink-contact-form-single-item" ref={containerRef}>
       <div className="edublink-contact-form-single-item-content" style={{ position: "relative" }}>
         {label && (
           <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
@@ -73,19 +79,48 @@ const FormSelect = ({
             backgroundColor: "#fff",
             color: field.value ? "#1f2937" : "#9ca3af",
             display: "flex",
-            alignItems: "center"
+            alignItems: "center",
+            justifyContent: "space-between"
           }}
         >
           <span>{selectedOption ? selectedOption.label : placeholder}</span>
-          <svg
-            className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            style={{ width: "16px", height: "16px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-          </svg>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            {field.value && (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  helpers.setValue("");
+                }}
+                className="hover:text-red-500 transition-colors duration-150 p-1"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  color: "#9ca3af",
+                }}
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  style={{ width: "16px", height: "16px", strokeWidth: "2.5" }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+            )}
+            <svg
+              className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              style={{ width: "16px", height: "16px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
         {isOpen && (
           <div
@@ -414,7 +449,7 @@ const Franchise = () => {
 
                     {/* FORM SECTION */}
                     <div
-                      className=" bg-white! p-25! lg:-mb-70! mb-0! shadow-2xl! z-10! rounded-lg! elementor-element elementor-element-5690efc e-con-full e-flex e-con e-child"
+                      className=" bg-white! p-25! lg:mb-0! mb-0! shadow-2xl! z-10! rounded-lg! elementor-element elementor-element-5690efc e-con-full e-flex e-con e-child"
                       data-id="5690efc"
                       data-element_type="container"
                       data-settings='{"content_width":"full"}'
@@ -515,7 +550,7 @@ const Franchise = () => {
                                       <div className="eb-contact-button-wrapper">
                                         <p>
                                           <button
-                                            className="wpcf7-form-control wpcf7-submit has-spinner edublink-button-with-icon  gap-2"
+                                            className="wpcf7-form-control wpcf7-submit has-spinner edublink-button-with-icon  gap-2 pt-[10px]!"
                                             type="submit"
                                             disabled={isPending}
                                           >
