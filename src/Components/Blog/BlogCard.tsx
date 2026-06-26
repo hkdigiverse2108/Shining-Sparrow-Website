@@ -29,14 +29,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
               })}
             </span>
           </div>
-
           <div className="content position-top" style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-            <div className="read-more-btn">
-              <p className="btn-icon-round">
-                <i className="icon-4" />
-              </p>
-            </div>
-
             <h5 className="title mt-6!" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
               <span>{blog?.title}</span>
             </h5>

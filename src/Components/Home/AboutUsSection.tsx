@@ -180,7 +180,7 @@ const AboutUsSection = () => {
                       <i aria-hidden="true" className="edublink icon-20" />
                     </span>
                     <span className="elementor-icon-list-text">
-                      Expert Trainers
+                      Speed
                     </span>
                   </li>
                   <li className="elementor-icon-list-item">
@@ -188,7 +188,7 @@ const AboutUsSection = () => {
                       <i aria-hidden="true" className="edublink icon-20" />
                     </span>
                     <span className="elementor-icon-list-text">
-                      Online Remote Learning
+                      Accuracy
                     </span>
                   </li>
                   <li className="elementor-icon-list-item">
@@ -196,7 +196,15 @@ const AboutUsSection = () => {
                       <i aria-hidden="true" className="edublink icon-20" />
                     </span>
                     <span className="elementor-icon-list-text">
-                      Lifetime Access
+                      Concentration
+                    </span>
+                  </li>
+                  <li className="elementor-icon-list-item">
+                    <span className="elementor-icon-list-icon">
+                      <i aria-hidden="true" className="edublink icon-20" />
+                    </span>
+                    <span className="elementor-icon-list-text">
+                      Memory Power
                     </span>
                   </li>
                 </ul>

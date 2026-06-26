@@ -1,16 +1,17 @@
-// import { useState } from "react";
 import { MouseParallax } from "../../CoreComponents";
-import { ImagePath } from "../../Constants";
+import { ImagePath, ROUTES } from "../../Constants";
 import FaqCard from "../../Components/Faq/FaqCard";
 import { useState } from "react";
 import type { FaqItem } from "../../Types";
+import { Link } from "react-router-dom";
 
 const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
   const [activeIndex, setActiveIndex] = useState(0); // first open by default
 
-  const featuedFaq = faq
-    ?.filter((item) => item?.isFeatured === true)
-    ?.slice(0, 5);
+  const latestFourFaqs = faq
+    ?.slice()
+    ?.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    ?.slice(0, 4) || [];
 
   return (
     <section
@@ -274,7 +275,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
             >
               <div className="elementor-widget-container">
                 <div className="eb-accordion header-default border-default style-default">
-                  {featuedFaq?.map((item, index) => {
+                  {latestFourFaqs?.map((item, index) => {
                     return (
                       <FaqCard
                         key={index}
@@ -289,6 +290,25 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                   })}
                 </div>
               </div>
+            </div>
+
+            {/* View All Button */}
+            <div className="text-left mt-8" data-aos="fade-up" data-aos-duration={1200}>
+              <Link
+                to={ROUTES.FAQ}
+                className="edu-btn btn-medium"
+                style={{
+                  backgroundColor: "#ee8e4a",
+                  borderColor: "#ee8e4a",
+                  color: "#fff",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  borderRadius: "5px",
+                }}
+              >
+                View All <i className="icon-4" />
+              </Link>
             </div>
           </div>
         </div>

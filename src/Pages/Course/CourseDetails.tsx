@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { BreadCrumb } from "../../Components/Common";
 import { Queries } from "../../Api";
 import { Rate } from "antd";
@@ -13,6 +14,18 @@ import Loader from "../../Components/Common/Loader";
 
 const CourseDetails = () => {
   const { id } = useParams();
+  const [isTrailerPlaying, setIsTrailerPlaying] = useState(false);
+
+  useEffect(() => {
+    setIsTrailerPlaying(false);
+  }, [id]);
+
+  const getYoutubeId = (url?: string) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
 
   const { data: allCourseData, isLoading: AllCourseLoading } = Queries.useGetAllCourses();
   const { data: Course, isLoading: CourseLoading } = Queries.useGetSingleCourse(id);
@@ -79,14 +92,48 @@ const CourseDetails = () => {
                     </div>
                   </div>
 
-                  <div className="eb-course-single-4-preview">
-                    <div
-                      className=" edublink-course-details-card-preview after:bg-transparent! after:pointer-events-none"
-                      style={{
-                        backgroundImage: `url(${singleCourse?.image})`,
-                      }}
-                    ></div>
-                  </div>
+                  {(() => {
+                    const youtubeId = getYoutubeId(singleCourse?.trailerUrl);
+                    const thumbnail = youtubeId 
+                      ? `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` 
+                      : singleCourse?.image;
+
+                    return (
+                      <div className="eb-course-single-4-preview">
+                        {youtubeId && isTrailerPlaying ? (
+                          <div className="w-full relative overflow-hidden rounded-[5px]" style={{ height: "420px" }}>
+                            <iframe
+                              width="100%"
+                              height="100%"
+                              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                              title="Course Trailer"
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="w-full h-full"
+                            ></iframe>
+                          </div>
+                        ) : (
+                          <div
+                            className="edublink-course-details-card-preview after:bg-transparent! after:pointer-events-none"
+                            style={{
+                              backgroundImage: `url(${thumbnail})`,
+                              cursor: youtubeId ? "pointer" : "default"
+                            }}
+                            onClick={() => youtubeId && setIsTrailerPlaying(true)}
+                          >
+                            {youtubeId && (
+                              <div className="edublink-course-video-preview-area">
+                                <span className="edublink-course-video-popup">
+                                  <i className="icon-18"></i>
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
 
                   {/* ========================= Tabs Section ========================= */}
 

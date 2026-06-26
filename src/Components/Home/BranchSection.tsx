@@ -29,7 +29,7 @@ const BranchSection = () => {
       <div className="edublink-container max-w-7xl mx-auto px-6">
         {/* Centered Heading */}
         <div className="edublink-section-heading text-center mb-16 pt-[20px]!" data-aos="fade-up" data-aos-duration={1000}>
-          <span className="pre-heading">OUR BRANCH</span>
+          <span className="pre-heading">Get In Touch</span>
           <h3 className="heading">
             Visit Our <mark className="bg-transparent" style={{ color: "var(--edublink-color-primary)" }}>Learning Center</mark>
           </h3>

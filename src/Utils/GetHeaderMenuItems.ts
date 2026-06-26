@@ -29,6 +29,10 @@ export const GetHeaderMenuItems = (): MenuItem[] => {
       link: ROUTES.CONTACT,
     },
     {
+      Title: "Gallery",
+      link: ROUTES.GALLERY,
+    },
+    {
       Title: "Franchise",
       link: ROUTES.FRANCHISE,
     },
