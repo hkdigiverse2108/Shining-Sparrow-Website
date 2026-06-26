@@ -22,7 +22,7 @@ export interface FaqItem {
   answer: string;
   type: "course" | "workshop"; // safe union
   isFeatured: boolean;
-
+  createdAt?: string;
 }
 
 
