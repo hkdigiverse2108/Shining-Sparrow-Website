@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Queries } from "../../Api";
 import { BreadCrumb, GetCeritficateSection } from "../../Components/Common";
 import { ImagePath } from "../../Constants";
@@ -6,6 +7,7 @@ import Loader from "../../Components/Common/Loader";
 
 const Testimonial = () => {
   const { data, isLoading } = Queries.useGetTestimonials();
+  const [visibleCount, setVisibleCount] = useState(5);
 
   const testimonials = data?.data?.testimonial_data;
 
@@ -25,7 +27,7 @@ const Testimonial = () => {
         <MouseParallax>
           <section className="">
             <section className="my-10! container space-y-6! elementor-section elementor-section-boxed">
-              {testimonials?.map((item) => (
+              {testimonials?.slice(0, visibleCount).map((item) => (
                 <div className="eb-testimonial-item eb-testimonial">
                   <div className="eb-testimonial-grid py-20! pb-0!">
                     <div className="content flex justify-between gap-6!">
@@ -58,6 +60,17 @@ const Testimonial = () => {
                   </div>
                 </div>
               ))}
+
+              {testimonials && testimonials.length > visibleCount && (
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "40px" }}>
+                  <button
+                    className="edu-btn btn-medium"
+                    onClick={() => setVisibleCount((prev) => prev + 5)}
+                  >
+                    Load More <i className="icon-4" />
+                  </button>
+                </div>
+              )}
             </section>
 
             <GetCeritficateSection />

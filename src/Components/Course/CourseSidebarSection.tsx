@@ -43,9 +43,12 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
 
   const handlePaymentComplete = (status: any, response: any) => {
     if (status === PAYMENT_STATUS.COMPLETED) {
+      const paymentId = response?.razorpay_payment_id || "";
+      const baseLoginUrl = import.meta.env.VITE_LOGIN_URL || "http://192.168.29.26:5173";
+
       verifyCourse(
         {
-          payment_id: response?.razorpay_payment_id || "",
+          payment_id: paymentId,
         },
         {
           onSuccess: (verifyRes) => {
@@ -54,7 +57,7 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
               {
                 courseId: course?._id || "",
                 razorpayOrderId: razorPayOrderId,
-                razorpayPaymentId: response?.razorpay_payment_id || "",
+                razorpayPaymentId: paymentId,
               },
               {
                 onSuccess: (res) => {
@@ -68,8 +71,8 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
                   queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_CURRICULUM] });
                   if (onPurchaseSuccess) onPurchaseSuccess();
                   setTimeout(() => {
-                    window.location.href = import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com";
-                  }, 3000);
+                    window.location.href = baseLoginUrl;
+                  }, 2000);
                 },
                 onError: (err: any) => {
                   AntdNotification(

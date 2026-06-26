@@ -43,11 +43,14 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
 
     const handlePaymentComplete = (status: any, response: any) => {
         if (status === PAYMENT_STATUS.COMPLETED) {
+            const paymentId = response?.razorpay_payment_id || "";
+            const baseLoginUrl = import.meta.env.VITE_LOGIN_URL || "http://192.168.29.26:5173";
+
             purchaseWorkshop(
                 {
                     workshopId: workshop._id || "",
                     amount: workshop.price || 0,
-                    paymentId: response?.razorpay_payment_id || "",
+                    paymentId: paymentId,
                     paymentMethod: "razorpay",
                     finalAmount: workshop.price || 0,
                 },
@@ -63,8 +66,8 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
                         queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_CURRICULUM] });
                         if (onPurchaseSuccess) onPurchaseSuccess();
                         setTimeout(() => {
-                            window.location.href = import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com";
-                        }, 3000);
+                            window.location.href = baseLoginUrl;
+                        }, 2000);
                     },
                     onError: (err: any) => {
                         AntdNotification(
