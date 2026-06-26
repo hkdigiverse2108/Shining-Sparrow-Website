@@ -11432,8 +11432,11 @@ body .tpd-size-medium .tpd-content {
   }
 }
 @media only screen and (max-width: 618px) {
+  .edublink-course-details-page .course-nav-tabs {
+    flex-wrap: nowrap !important;
+  }
   .edublink-course-details-page .course-nav-tabs .course-nav label {
-    padding: 15px 0;
+    padding: 15px 8px;
     font-size: 16px;
     line-height: 22px;
   }

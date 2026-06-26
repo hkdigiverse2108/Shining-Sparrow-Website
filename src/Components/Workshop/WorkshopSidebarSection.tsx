@@ -1,6 +1,7 @@
-import { type FC, useEffect } from "react";
+import { type FC, useEffect, useState } from "react";
 import type { Workshop } from "../../Types";
 import { ShareButtons, PaymentModal } from "../Common";
+import Loader from "../Common/Loader";
 import { ImagePath, PAYMENT_STATUS } from "../../Constants";
 import { useAppSelector, useAppDispatch } from "../../Store/Hook";
 import { Mutation } from "../../Api";
@@ -18,6 +19,7 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
     const { isAuthModalOpen } = useAppSelector((state) => state.Modal);
     const dispatch = useAppDispatch();
     const queryClient = useQueryClient();
+    const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
     const { mutate: purchaseWorkshop, isPending: isPurchasing } =
         Mutation.usePurchaseWorkshop();
@@ -41,19 +43,13 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
 
     const handlePaymentComplete = (status: any, response: any) => {
         if (status === PAYMENT_STATUS.COMPLETED) {
+            setIsProcessingPayment(true);
             const paymentId = response?.razorpay_payment_id || "";
             const baseLoginUrl = import.meta.env.VITE_LOGIN_URL || "http://192.168.29.26:5173";
 
             if (!user) {
                 localStorage.removeItem("guest_user_info");
-                AntdNotification(
-                    notification,
-                    "success",
-                    "Payment Successful! Redirecting to login...",
-                );
-                setTimeout(() => {
-                    window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&workshop_id=${workshop?._id}`;
-                }, 2000);
+                window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&workshop_id=${workshop?._id}`;
                 return;
             }
 
@@ -70,20 +66,14 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
                         discountAmount: response?.discountAmount || 0,
                     },
                     {
-                        onSuccess: (res) => {
-                            AntdNotification(
-                                notification,
-                                "success",
-                                res?.message || "Payment Successful! Workshop Purchased.",
-                            );
+                        onSuccess: () => {
                             queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_ONE, workshop._id] });
                             queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_CURRICULUM] });
                             if (onPurchaseSuccess) onPurchaseSuccess();
-                            setTimeout(() => {
-                                window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&workshop_id=${workshop?._id}`;
-                            }, 2000);
+                            window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&workshop_id=${workshop?._id}`;
                         },
                         onError: (err: any) => {
+                            setIsProcessingPayment(false);
                             AntdNotification(
                                 notification,
                                 "error",
@@ -106,21 +96,15 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
                     discountAmount: response?.discountAmount || 0,
                 },
                 {
-                    onSuccess: (res) => {
-                        AntdNotification(
-                            notification,
-                            "success",
-                            res?.message || "Payment Successful! Workshop Purchased.",
-                        );
+                    onSuccess: () => {
                         // Invalidate queries to refresh UI
                         queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_ONE, workshop._id] });
                         queryClient.invalidateQueries({ queryKey: [KEYS.WORKSHOP_CURRICULUM] });
                         if (onPurchaseSuccess) onPurchaseSuccess();
-                        setTimeout(() => {
-                            window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&workshop_id=${workshop?._id}`;
-                        }, 2000);
+                        window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&workshop_id=${workshop?._id}`;
                     },
                     onError: (err: any) => {
+                        setIsProcessingPayment(false);
                         AntdNotification(
                             notification,
                             "error",
@@ -144,6 +128,7 @@ const WorkshopSidebarSection: FC<{ workshop: Workshop; onPurchaseSuccess?: () =>
 
     return (
         <div className="ed-course-sidebar edublink-col-lg-4 ">
+            <Loader loading={isProcessingPayment || isPurchasing} />
             <div className="edublink-course-details-sidebar eb-course-single-4 sidebar-enable max-w-full!">
                 <div className="edublink-course-details-sidebar-inner">
                     <div className="edublink-course-details-sidebar-content">

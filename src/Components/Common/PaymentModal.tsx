@@ -1,13 +1,25 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type {
   PaymentModalProps,
   PaymentStatusType,
   RazorpayOptions,
-  RazorpayResponse,
 } from "../../Types";
 import { PAYMENT_STATUS } from "../../Constants";
 import { useAppSelector } from "../../Store/Hook";
 import { Mutation } from "../../Api";
+
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => {
+      open: () => void;
+      on: (
+        event: string,
+        callback: (response: any) => void,
+      ) => void;
+    };
+  }
+}
 
 interface ExtendedPaymentModalProps extends PaymentModalProps {
   className?: string;
@@ -178,7 +190,7 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
       </button>
 
       {/* Checkout and Coupon Details Modal */}
-      {showCheckout && (
+      {showCheckout && createPortal(
         <div 
           style={{
             position: "fixed",
@@ -411,7 +423,8 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

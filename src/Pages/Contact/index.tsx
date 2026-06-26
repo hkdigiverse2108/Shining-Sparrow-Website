@@ -62,6 +62,7 @@ const Contact = () => {
         >
           {/* ================= SECTION 1 ================= */}
           <section
+            style={{ position: "relative", zIndex: 10 }}
             className="mt-10! mb-10! lg:mb-40! elementor-section elementor-top-section elementor-element elementor-element-7ed12df elementor-section-boxed elementor-section-height-default elementor-section-height-default"
             data-id="7ed12df"
             data-element_type="section"
@@ -384,6 +385,7 @@ const Contact = () => {
 
           {/* ================= MAP SECTION ================= */}
           <section
+            style={{ position: "relative", zIndex: 1 }}
             className="elementor-section elementor-top-section elementor-element elementor-element-a7d265d elementor-section-full_width elementor-section-height-default elementor-section-height-default"
             data-id="a7d265d"
             data-element_type="section"

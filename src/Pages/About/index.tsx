@@ -1,5 +1,5 @@
 import { Queries } from "../../Api";
-import { InstructorCard } from "../../Components/About";
+// import { InstructorCard } from "../../Components/About";
 import { BreadCrumb } from "../../Components/Common";
 import GetCeritficateSection from "../../Components/Common/GetCeritficateSection";
 import { TestimonialSection, VideoAreaSection } from "../../Components/Home";
@@ -8,45 +8,61 @@ import { MouseParallax } from "../../CoreComponents";
 
 const features = [
   {
+    icon: "edublink icon-59",
+    title: "Finger Arithmetic",
+    description: "Innovative finger calculation techniques that make mental math lightning-fast, engaging, and fun.",
+    color: "#E27B36"
+  },
+  {
+    icon: "edublink icon-62",
+    title: "Memory & Brain Techniques",
+    description: "Advanced cognitive methods to enhance focus, retention capacity, and overall brain power.",
+    color: "#4A7C59"
+  },
+  {
     icon: "edublink icon-45",
-    title: "High Quality Courses",
-    description:
-      "Lorem ipsum dolor sit amet conset ur elit sed eiusmod ex tempor inc labore dolore magna.",
-    color: "#8B5E3C",
+    title: "Rubik's Cube Solving",
+    description: "Boost spatial thinking, pattern recognition, and problem-solving speed through algorithms.",
+    color: "#A77F60"
   },
   {
     icon: "edublink icon-46",
-    title: "Life Time Access",
-    description:
-      "Lorem ipsum dolor sit amet conset ur elit sed eiusmod ex tempor inc labore dolore magna.",
-    color: "#8A5F41",
+    title: "Future-Ready AI",
+    description: "Empower kids with basic concepts of artificial intelligence, technology, and coding fundamentals.",
+    color: "#3D5A80"
   },
   {
-    icon: "edublink icon-45",
-    title: "Expert Instructors",
-    description:
-      "Lorem ipsum dolor sit amet conset ur elit sed eiusmod ex tempor inc labore dolore magna.",
-    color: "#A77F60",
+    icon: "edublink icon-60",
+    title: "Personality Development",
+    description: "Build self-confidence, communication skills, daily discipline, and leadership qualities.",
+    color: "#984043"
   },
+  {
+    icon: "edublink icon-64",
+    title: "Science & Magic",
+    description: "Fostering interactive learning and deep scientific curiosity through fun hands-on experiments.",
+    color: "#5C3D80"
+  }
 ];
+
 
 const stats = [
   {
-    value: "45.2",
-    suffix: "K",
-    label: "STUDENT ENROLLED",
+    value: "20",
+    suffix: "K+",
+    label: "STUDENTS ENROLLED",
     color: "#F26522",
   },
   {
-    value: "32.4",
-    suffix: "K",
-    label: "CLASS COMPLETED",
+    value: "10",
+    suffix: "+",
+    label: "YEARS OF EXPERIENCE",
     color: "#FFA726",
   },
   {
-    value: "354",
-    suffix: "+",
-    label: "TOP INSTRUCTORS",
+    value: "100",
+    suffix: "%",
+    label: "LEARNING SUCCESS",
     color: "#FFC107",
   },
   {
@@ -61,8 +77,8 @@ const About = () => {
   const { data: brandApi } = Queries.useGetTrutedPartner();
   const brandImages = brandApi?.data?.trusted_partner_data;
 
-  const { data: InstructorsApi } = Queries.useGetAllInstructor();
-  const AllInstroctor = InstructorsApi?.data?.instructor_data;
+  // const { data: InstructorsApi } = Queries.useGetAllInstructor();
+  // const AllInstroctor = InstructorsApi?.data?.instructor_data;
 
   const { data: testimonialData } = Queries.useGetTestimonials();
   const testimonials = testimonialData?.data?.testimonial_data;
@@ -113,8 +129,8 @@ const About = () => {
                               <div className="elementor-widget-container">
                                 <div className="edublink-section-heading">
                                   <h3 className="heading">
-                                    We Providing The <br />
-                                    Best <mark>Quality Online</mark> Courses
+                                    Empowering the Next <br />
+                                    Generation of <mark>Thinkers</mark>
                                   </h3>
                                   <div className="title-shape">
                                     <i className="icon-19" />
@@ -145,10 +161,7 @@ const About = () => {
                                 font-size: 50px;
                               }
                             `}</style>
-                                Lorem ipsum dolor sit amet cons etur adipisicing
-                                elit sed do eiusm aut tempor incididunt labore
-                                dolore magna aliqua quis nostrud ex ertation
-                                lamcolab oris aliquip.
+                                At Shining Sparrow, we go beyond traditional academics. We combine mental arithmetic, science exploration, Rubik's cube, memory training, and AI concepts to foster curiosity, concentration, and future-ready expertise in every student.
                               </div>
                             </div>
                           </div>
@@ -166,44 +179,47 @@ const About = () => {
               data-element_type="section"
             >
               <div className="elementor-container elementor-column-gap-extended">
-                {features.map((item, index) => (
-                  <div
-                    key={index}
-                    className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-ea809cd"
-                    data-id="ea809cd"
-                    data-element_type="column"
-                  >
-                    <div className="elementor-widget-wrap elementor-element-populated">
-                      <div
-                        className="elementor-element elementor-element-7e193de elementor-widget elementor-widget-edublink-features animated edublink--slide-up"
-                        data-id="7e193de"
-                        data-element_type="widget"
-                        data-settings='{"_animation":"edublink--slide-up","_animation_delay":50}'
-                      >
-                        <div className="elementor-widget-container">
-                          <div className="edublink-feature-5-widget">
-                            <div className="edublink-feature-item">
-                              <div
-                                className="icon"
-                                style={{ backgroundColor: item?.color }}
-                              >
-                                <i aria-hidden="true" className={item?.icon} />
-                              </div>
-                              <div className="content">
-                                <h4 className="title">{item?.title}</h4>
-                                <p className="description">
-                                  {item?.description}
-                                </p>
+                <div className="elementor-container elementor-column-gap-extended flex flex-wrap justify-between gap-y-8">
+                  {features.map((item, index) => (
+                    <div
+                      key={index}
+                      className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-ea809cd w-[31%]! min-w-[280px]"
+                      data-id="ea809cd"
+                      data-element_type="column"
+                    >
+                      <div className="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          className="elementor-element elementor-element-7e193de elementor-widget elementor-widget-edublink-features animated edublink--slide-up"
+                          data-id="7e193de"
+                          data-element_type="widget"
+                          data-settings='{"_animation":"edublink--slide-up","_animation_delay":50}'
+                        >
+                          <div className="elementor-widget-container">
+                            <div className="edublink-feature-5-widget">
+                              <div className="edublink-feature-item">
+                                <div
+                                  className="icon"
+                                  style={{ backgroundColor: item?.color }}
+                                >
+                                  <i aria-hidden="true" className={item?.icon} />
+                                </div>
+                                <div className="content">
+                                  <h4 className="title">{item?.title}</h4>
+                                  <p className="description">
+                                    {item?.description}
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </section>
+
 
             <section className="mt-[290px]!  elementor-section elementor-top-section elementor-element elementor-element-178ad6d  ">
               <div className="elementor-background-overlay" />
@@ -245,15 +261,13 @@ const About = () => {
                       <div className="edublink-section-heading">
                         <span className="pre-heading">FUN FACTS</span>
                         <h3 className="heading">
-                          The Learge <mark>Number</mark> of Counting
+                          Shining Sparrow by <mark>the Numbers</mark>
                         </h3>
                         <div className="title-shape">
                           <i className="icon-19"></i>
                         </div>
                         <div className="sub-heading">
-                          Lorem ipsum dolor sit amet consectur adipiscing elit
-                          sed eiusmod tempor incididunt labore dolore magna
-                          aliquaenim ad minim.
+                          We measure our success by the growth, confidence, and academic achievements of our students. Through consistent practice, our learners develop strong mental arithmetic skills.
                         </div>
                       </div>
                     </div>
@@ -344,7 +358,7 @@ const About = () => {
               </div>
             </section>
 
-            <section className=" my-30!">
+            {/* <section className=" my-30!">
               <section className="">
                 <div className="absolute -mt-42! grid grid-cols-2  w-full justify-between! -z-10">
                   <img
@@ -416,8 +430,8 @@ const About = () => {
                   </div>
                 </div>
               </section>
-            </section>
-            <GetCeritficateSection />
+            </section> */}
+            <GetCeritficateSection backgroundColor="#ffffff" />
           </div>
         </div>
       </MouseParallax>

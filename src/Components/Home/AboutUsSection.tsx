@@ -95,11 +95,11 @@ const AboutUsSection = () => {
                     />
                   </div>
                   <div className="edublink-icon-box-content">
-                    <h4 className="edublink-icon-box-title">Ray Sanchez</h4>
+                    <h4 className="edublink-icon-box-title">My Mindset</h4>
                     <div className="edublink-icon-box-details">
                       <p>
-                        Minim veniam nostrud <br />
-                        exer citation.
+                        My mind is powerful. <br />
+                        My efforts create my success.
                       </p>
                     </div>
                   </div>
@@ -154,16 +154,18 @@ const AboutUsSection = () => {
                 <div className="edublink-section-heading">
                   <span className="pre-heading">ABOUT US</span>
                   <h3 className="heading">
-                    Over 10 Years in <mark>Distant learning</mark> for Skill
-                    Development
+                    Over 10 Years of <mark>Empowering</mark> Young Minds
                   </h3>
                   <div className="title-shape">
                     <i className="icon-19" />
                   </div>
                   <div className="sub-heading">
-                    Lorem ipsum dolor sit amet consectur adipiscing elit sed
-                    eiusmod ex tempor incididunt labore dolore magna aliquaenim
-                    ad minim.
+                    <p className="mb-4">
+                      For over 10 years, Shining Sparrow has been helping children unlock their true learning potential through innovative Finger Math techniques. Our programs are designed to enhance Speed, Accuracy, Concentration, Memory, and Self-Confidence, making learning enjoyable and effective.
+                    </p>
+                    <p>
+                      Every child learns differently, and we believe that with the right guidance and consistent practice, every student can develop stronger thinking skills and achieve academic success.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -180,7 +182,7 @@ const AboutUsSection = () => {
                       <i aria-hidden="true" className="edublink icon-20" />
                     </span>
                     <span className="elementor-icon-list-text">
-                      Speed
+                      Speed Calculation
                     </span>
                   </li>
                   <li className="elementor-icon-list-item">
@@ -188,7 +190,7 @@ const AboutUsSection = () => {
                       <i aria-hidden="true" className="edublink icon-20" />
                     </span>
                     <span className="elementor-icon-list-text">
-                      Accuracy
+                      Improved Accuracy
                     </span>
                   </li>
                   <li className="elementor-icon-list-item">
@@ -196,7 +198,7 @@ const AboutUsSection = () => {
                       <i aria-hidden="true" className="edublink icon-20" />
                     </span>
                     <span className="elementor-icon-list-text">
-                      Concentration
+                      Better Concentration
                     </span>
                   </li>
                   <li className="elementor-icon-list-item">
@@ -204,7 +206,7 @@ const AboutUsSection = () => {
                       <i aria-hidden="true" className="edublink icon-20" />
                     </span>
                     <span className="elementor-icon-list-text">
-                      Memory Power
+                      Strong Memory Power
                     </span>
                   </li>
                 </ul>

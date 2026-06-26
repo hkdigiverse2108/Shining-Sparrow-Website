@@ -1,6 +1,7 @@
-import { type FC, useEffect } from "react";
+import { type FC, useEffect, useState } from "react";
 import type { Course } from "../../Types";
 import { ShareButtons, PaymentModal } from "../Common";
+import Loader from "../Common/Loader";
 import { ImagePath, PAYMENT_STATUS } from "../../Constants";
 import { useAppSelector, useAppDispatch } from "../../Store/Hook";
 import { Mutation } from "../../Api";
@@ -16,6 +17,7 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
   const { isAuthModalOpen } = useAppSelector((state) => state.Modal);
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const { mutate: verifyCourse, isPending: isVerifying } =
     Mutation.useVerifyCourse();
@@ -41,19 +43,13 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
 
   const handlePaymentComplete = (status: any, response: any) => {
     if (status === PAYMENT_STATUS.COMPLETED) {
+      setIsProcessingPayment(true);
       const paymentId = response?.razorpay_payment_id || "";
       const baseLoginUrl = import.meta.env.VITE_LOGIN_URL || "http://192.168.29.26:5173";
 
       if (!user) {
         localStorage.removeItem("guest_user_info");
-        AntdNotification(
-          notification,
-          "success",
-          "Payment Successful! Redirecting to login...",
-        );
-        setTimeout(() => {
-          window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
-        }, 2000);
+        window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
         return;
       }
 
@@ -69,21 +65,15 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
             finalAmount: response?.finalAmount || 0,
           },
           {
-            onSuccess: (res) => {
-              AntdNotification(
-                notification,
-                "success",
-                res?.message || "Payment Successful! Course Purchased.",
-              );
+            onSuccess: () => {
               queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_ONE, course?._id] });
               queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_LESSON, course?._id] });
               queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_CURRICULUM] });
               if (onPurchaseSuccess) onPurchaseSuccess();
-              setTimeout(() => {
-                window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
-              }, 2000);
+              window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
             },
             onError: (err: any) => {
+              setIsProcessingPayment(false);
               AntdNotification(
                 notification,
                 "error",
@@ -113,21 +103,15 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
                 finalAmount: response?.finalAmount || 0,
               },
               {
-                onSuccess: (res) => {
-                  AntdNotification(
-                    notification,
-                    "success",
-                    res?.message || "Payment Successful! Course Purchased.",
-                  );
+                onSuccess: () => {
                   queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_ONE, course?._id] });
                   queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_LESSON, course?._id] });
                   queryClient.invalidateQueries({ queryKey: [KEYS.COURSE_CURRICULUM] });
                   if (onPurchaseSuccess) onPurchaseSuccess();
-                  setTimeout(() => {
-                    window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
-                  }, 2000);
+                  window.location.href = `${baseLoginUrl}/login?payment_id=${paymentId}&course_id=${course?._id}`;
                 },
                 onError: (err: any) => {
+                  setIsProcessingPayment(false);
                   AntdNotification(
                     notification,
                     "error",
@@ -139,6 +123,7 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
             );
           },
           onError: (err: any) => {
+            setIsProcessingPayment(false);
             console.error("Verification error:", err);
             AntdNotification(
               notification,
@@ -164,7 +149,8 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
 
   return (
     <div className="ed-course-sidebar edublink-col-lg-4 ">
-      <div className="edublink-course-details-sidebar eb-course-single-4 sidebar-enable max-w-full!">
+      <Loader loading={isProcessingPayment || isVerifying || isPurchasing} />
+      <div className="edublink-course-details-sidebar eb-course-single-4 sidebar-enable max-w-full! ">
         <div className="edublink-course-details-sidebar-inner">
           <div className="edublink-course-details-sidebar-content">
             <h4 className="widget-title">Course Includes:</h4>

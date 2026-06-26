@@ -101,7 +101,7 @@ const CourseDetails = () => {
                     return (
                       <div className="eb-course-single-4-preview">
                         {youtubeId && isTrailerPlaying ? (
-                          <div className="w-full relative overflow-hidden rounded-[5px]" style={{ height: "420px" }}>
+                          <div className="w-full relative overflow-hidden rounded-[5px] aspect-video">
                             <iframe
                               width="100%"
                               height="100%"
@@ -112,10 +112,14 @@ const CourseDetails = () => {
                               allowFullScreen
                               className="w-full h-full"
                             ></iframe>
+                            <div
+                              onContextMenu={(e) => e.preventDefault()}
+                              className="absolute inset-x-0 z-10 bottom-20 top-25"
+                            />
                           </div>
                         ) : (
                           <div
-                            className="edublink-course-details-card-preview after:bg-transparent! after:pointer-events-none"
+                            className="edublink-course-details-card-preview h-auto! aspect-video! after:bg-transparent! after:pointer-events-none"
                             style={{
                               backgroundImage: `url(${thumbnail})`,
                               cursor: youtubeId ? "pointer" : "default"

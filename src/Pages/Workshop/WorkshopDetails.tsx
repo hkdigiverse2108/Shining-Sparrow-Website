@@ -62,7 +62,7 @@ const WorkshopDetails = () => {
 
                                     <div className="eb-course-single-4-preview">
                                         <div
-                                            className=" edublink-course-details-card-preview after:bg-transparent! after:pointer-events-none"
+                                            className="edublink-course-details-card-preview h-auto! aspect-video! after:bg-transparent! after:pointer-events-none"
                                             style={{
                                                 backgroundImage: `url(${singleWorkshop?.image})`,
                                             }}

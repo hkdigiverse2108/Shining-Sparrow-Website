@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useAppDispatch, useAppSelector } from "../../Store/Hook";
 import { setAuthModalOpen } from "../../Store/Slices/ModalSlice";
 import { setUser } from "../../Store/Slices/UserSlice";
@@ -408,7 +409,7 @@ const AuthModal = () => {
 
   const isPendingSubmit = isPending || purchaseIntentMutation.isPending;
 
-  return (
+  return createPortal(
     <div
       onClick={handleClose}
       className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
@@ -612,7 +613,8 @@ const AuthModal = () => {
           )}
         </Formik>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

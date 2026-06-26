@@ -2,10 +2,15 @@ import { Link } from "react-router-dom";
 import { ImagePath, ROUTES } from "../../Constants";
 import { MouseParallax } from "../../CoreComponents";
 
-const GetCeritficateSection = () => {
+interface GetCeritficateSectionProps {
+  backgroundColor?: string;
+  className?: string;
+}
+
+const GetCeritficateSection = ({ backgroundColor, className = "" }: GetCeritficateSectionProps) => {
   return (
     <MouseParallax>
-      <div className="hero">
+      <div className={`hero ${className}`} style={backgroundColor ? { backgroundColor } : undefined}>
         <div className="hero-content">
           <h1 className="hero-title">
             Get Your Quality Skills <span>Certificate</span>
