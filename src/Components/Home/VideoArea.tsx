@@ -114,7 +114,7 @@ const VideoAreaSection = () => {
                       className="edublink-video-popup-content-inner w-full aspect-video"
                       style={{
                         backgroundImage:
-                          "url(public/assets/images/home/video.webp)",
+                          `url(${ImagePath}home/video.webp)`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         display: "flex",
