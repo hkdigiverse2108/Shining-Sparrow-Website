@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../Store/Hook";
 import { setAuthModalOpen } from "../../Store/Slices/ModalSlice";
 import { Formik, Form, useField } from "formik";
@@ -10,6 +11,134 @@ import { STORAGE_KEYS } from "../../Constants/StorageKeys";
 import { setUser } from "../../Store/Slices/UserSlice";
 import { AntdNotification } from "../../Utils/AntNotification";
 import { notification } from "antd";
+
+const GUJARAT_DISTRICTS = [
+  "Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha", "Bharuch", 
+  "Bhavnagar", "Botad", "Chhota Udepur", "Dahod", "Dang", "Devbhumi Dwarka", 
+  "Gandhinagar", "Gir Somnath", "Jamnagar", "Junagadh", "Kheda", "Kutch", 
+  "Mahisagar", "Mehsana", "Morbi", "Narmada", "Navsari", "Panchmahal", 
+  "Patan", "Porbandar", "Rajkot", "Sabarkantha", "Surat", "Surendranagar", 
+  "Tapi", "Vadodara", "Valsad"
+];
+
+const STD_OPTIONS = [
+  { label: "1st Std", value: "1st Std" },
+  { label: "2nd Std", value: "2nd Std" },
+  { label: "3rd Std", value: "3rd Std" },
+  { label: "4th Std", value: "4th Std" },
+  { label: "5th Std", value: "5th Std" },
+  { label: "6th Std", value: "6th Std" },
+  { label: "7th Std", value: "7th Std" },
+  { label: "8th Std", value: "8th Std" },
+  { label: "9th Std", value: "9th Std" },
+  { label: "10th Std", value: "10th Std" },
+  { label: "11th Std", value: "11th Std" },
+  { label: "12th Std", value: "12th Std" },
+  { label: "Adult Learner", value: "Adult Learner" }
+];
+
+const REACH_OPTIONS = [
+  { label: "Instagram", value: "Instagram" },
+  { label: "Facebook", value: "Facebook" },
+  { label: "LinkedIn", value: "LinkedIn" },
+  { label: "Friends/relatives", value: "Friends/relatives" },
+  { label: "Webinars", value: "Webinars" },
+  { label: "Offline branch visit", value: "Offline branch visit" },
+  { label: "Web search", value: "Web search" },
+  { label: "Schools", value: "Schools" },
+  { label: "Others", value: "Others" }
+];
+
+const FormSelect = ({
+  label,
+  name,
+  options,
+  ...props
+}: {
+  label: string;
+  name: string;
+  options: { label: string; value: string }[];
+  [key: string]: any;
+}) => {
+  const [field, meta] = useField(name);
+  return (
+    <div className="flex flex-col w-full" style={{ marginBottom: "16px" }}>
+      <label
+        htmlFor={name}
+        className="block text-sm font-semibold text-gray-700"
+        style={{
+          fontSize: "14px",
+          fontWeight: 600,
+          color: "#374151",
+          marginBottom: "8px",
+          display: "block"
+        }}
+      >
+        {label}
+      </label>
+      <div style={{ position: "relative" }}>
+        <select
+          {...field}
+          {...props}
+          id={name}
+          className="w-full focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all appearance-none"
+          style={{
+            width: "100%",
+            height: "48px",
+            paddingLeft: "16px",
+            paddingRight: "40px",
+            fontSize: "15px",
+            color: "#1f2937",
+            backgroundColor: "#ffffff",
+            border: meta.touched && meta.error ? "1px solid #ef4444" : "1px solid #d1d5db",
+            borderRadius: "10px",
+            boxSizing: "border-box",
+            display: "block",
+            appearance: "none",
+            WebkitAppearance: "none",
+            cursor: "pointer"
+          }}
+        >
+          <option value="">Select {label}</option>
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <div
+          style={{
+            position: "absolute",
+            right: "16px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            pointerEvents: "none",
+            color: "#9ca3af",
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "16px", height: "16px" }}>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+      {meta.touched && meta.error ? (
+        <span
+          className="text-red-500 text-xs font-medium block"
+          style={{
+            color: "#ef4444",
+            fontSize: "12px",
+            marginTop: "6px",
+            display: "block"
+          }}
+        >
+          {meta.error}
+        </span>
+      ) : null}
+    </div>
+  );
+};
 
 const FormField = ({ label, name, ...props }: { label: string; name: string; [key: string]: any }) => {
   const [field, meta] = useField(name);
@@ -70,6 +199,22 @@ const AuthModal = () => {
 
   const { executeSignup, isPending } = useAuthFlow();
   const purchaseIntentMutation = Mutation.usePurchaseIntent();
+
+  const [districts, setDistricts] = useState<string[]>(GUJARAT_DISTRICTS);
+
+  useEffect(() => {
+    fetch("https://raw.githubusercontent.com/somen-das/indian-states-and-districts-json/master/states-and-districts.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const gujState = data.states?.find((s: any) => s.state === "Gujarat");
+        if (gujState && Array.isArray(gujState.districts)) {
+          setDistricts(gujState.districts.sort());
+        }
+      })
+      .catch(() => {
+        // Fallback silently to static list on error
+      });
+  }, []);
 
   const handleClose = () => {
     dispatch(setAuthModalOpen(false));
@@ -263,22 +408,22 @@ const AuthModal = () => {
                   autoComplete="tel"
                 />
 
-                <FormField
+                <FormSelect
                   label="District"
                   name="district"
-                  placeholder="Enter district name"
+                  options={districts.map((d) => ({ label: d, value: d }))}
                 />
 
-                <FormField
+                <FormSelect
                   label="Standard"
                   name="std"
-                  placeholder="e.g. 10th, 12th"
+                  options={STD_OPTIONS}
                 />
 
-                <FormField
+                <FormSelect
                   label="How did you reach us?"
                   name="reachFrom"
-                  placeholder="e.g. Instagram, Friends"
+                  options={REACH_OPTIONS}
                 />
 
                 {!purchaseContext && (
