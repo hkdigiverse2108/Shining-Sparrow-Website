@@ -52,21 +52,13 @@ const Contact = () => {
   };
 
   return (
-    <div id="edublink-content">
-      <div className="edublink-content-inner">
-        <div data-elementor-type="wp-page" data-elementor-id={13488} className="elementor elementor-13488">
-          <section className="elementor-section elementor-top-section elementor-element elementor-element-be743bc elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="be743bc" data-element_type="section">
-            <div className="elementor-container elementor-column-gap-extended">
-              <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-d31e505" data-id="d31e505" data-element_type="column">
-                <div className="elementor-widget-wrap elementor-element-populated">
-                  <div className="elementor-element elementor-element-77884ec elementor-widget elementor-widget-edublink-breadcrumb" data-id="77884ec" data-element_type="widget" data-widget_type="edublink-breadcrumb.default">
-                    <BreadCrumb title="Contact Us" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
+    <>
+      <section>
+        <BreadCrumb title="Contact Us" />
+      </section>
+      <div id="edublink-content">
+        <div className="edublink-content-inner">
+          <div data-elementor-type="wp-page" data-elementor-id={13488} className="elementor elementor-13488">
           <section className="elementor-section elementor-top-section elementor-element elementor-element-ef4cc0f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ef4cc0f" data-element_type="section">
             <div className="elementor-container elementor-column-gap-extended">
               <div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d1fcda8" data-id="d1fcda8" data-element_type="column" data-settings='{"background_background":"classic"}'>
@@ -401,6 +393,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
