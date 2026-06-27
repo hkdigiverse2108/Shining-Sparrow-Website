@@ -45,7 +45,7 @@ const CourseSidebarSection: FC<{ course?: Course; onPurchaseSuccess?: () => void
     if (status === PAYMENT_STATUS.COMPLETED) {
       setIsProcessingPayment(true);
       const paymentId = response?.razorpay_payment_id || "";
-      const baseLoginUrl = import.meta.env.VITE_LOGIN_URL || "http://192.168.29.26:5173";
+      const baseLoginUrl = import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com";
 
       if (!user) {
         localStorage.removeItem("guest_user_info");

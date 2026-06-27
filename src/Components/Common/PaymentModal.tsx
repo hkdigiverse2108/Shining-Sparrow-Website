@@ -52,7 +52,8 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
   const validateCouponMutation = Mutation.useValidateCoupon();
 
   const settings = useAppSelector((state) => state.settings.settings);
-  const RazorPayKey = settings?.razorpayKey || "";
+  const RazorPayKey = settings?.razorpayKey || "rzp_test_T4wfLtVxXFfDi5";
+  console.log("PaymentModal settings:", settings, "RazorPayKey:", RazorPayKey);
 
   useEffect(() => {
     if (document.getElementById("razorpay-script")) return;
@@ -127,11 +128,13 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
     }
 
     if (!window.Razorpay) {
+      alert("Razorpay is not loaded! Please check your internet connection or disable adblockers.");
       console.error("Razorpay not loaded!");
       return;
     }
 
     if (!RazorPayKey) {
+      alert("Razorpay Key is missing from settings!");
       console.error("Razorpay Key is missing");
       return;
     }
@@ -183,7 +186,7 @@ const PaymentModal: React.FC<ExtendedPaymentModalProps> = ({
     <>
       <button
         onClick={handleOpenCheckout}
-        disabled={!RazorPayKey || isLoading || disabled}
+        disabled={isLoading || disabled}
         className={className || "btn primary_btn w-full !h-12 font-semibold mt-4"}
       >
         {btnText}

@@ -176,14 +176,12 @@ const Header = () => {
                     </ul>
                   </nav>
                 ) : (
-                  <button
-                    onClick={() => {
-                      window.location.href = import.meta.env.VITE_LOGIN_URL;
-                    }}
+                  <a
+                    href={import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com"}
                     className="main-header-btn edu-btn btn-medium"
                   >
                     Login <i className="icon-4" />
-                  </button>
+                  </a>
 
                 )}
                 <div className="quote-icon edublink-theme-nav-responsive hamburger-icon ms-3! p-0! ">
