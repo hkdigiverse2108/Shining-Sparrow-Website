@@ -65,3 +65,14 @@ export const URL_KEYS = {
     VALIDATE: "coupon-code/validate",
   },
 } as const;
+
+export const getImageUrl = (imagePath?: string | null): string => {
+  if (!imagePath) return "";
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://") || imagePath.startsWith("data:")) {
+    return imagePath;
+  }
+  const API_URL = BASE_URL || "";
+  const cleanApiUrl = API_URL.endsWith("/") ? API_URL.slice(0, -1) : API_URL;
+  const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+  return `${cleanApiUrl}${cleanPath}`;
+};

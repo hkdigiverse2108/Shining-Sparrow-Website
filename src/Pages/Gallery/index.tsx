@@ -5,6 +5,7 @@ import { Queries } from "../../Api";
 import { useAppDispatch } from "../../Store/Hook";
 import { setModalPhotoLink } from "../../Store/Slices/VideoModalSlice";
 import Loader from "../../Components/Common/Loader";
+import { getImageUrl } from "../../Constants";
 import type { Gallery as GalleryType } from "../../Types/Gallary";
 
 const Gallery = () => {
@@ -72,8 +73,9 @@ const Gallery = () => {
                                             <div className="thumbnail">
                                               <div className="course-thumb">
                                                 {firstImage ? (
-                                                  <LazyImage
-                                                    src={firstImage}
+                                                  <img
+                                                    className="w-100"
+                                                    src={getImageUrl(firstImage)}
                                                     alt={folder.title}
                                                     wrapperStyle={{ width: "100%", aspectRatio: "3/2" }}
                                                     style={{ width: "100%", aspectRatio: "3/2", objectFit: "cover" }}
@@ -232,9 +234,10 @@ const Gallery = () => {
                                           <a className="edu-gallery-grid-item">
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
-                                                  <div className="thumbnail" style={{ minHeight: "150px" }}>
-                                                  <LazyImage
-                                                    src={item}
+                                                <div className="thumbnail">
+                                                  <img
+                                                    className="w-full! h-auto! rounded-sm!"
+                                                    src={getImageUrl(item)}
                                                     alt=""
                                                     wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
                                                     style={{ borderRadius: "4px" }}
@@ -267,9 +270,10 @@ const Gallery = () => {
                                           <a className="edu-gallery-grid-item">
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
-                                                  <div className="thumbnail" style={{ minHeight: "150px" }}>
-                                                  <LazyImage
-                                                    src={item}
+                                                <div className="thumbnail">
+                                                  <img
+                                                    className="w-full! h-auto! rounded-sm!"
+                                                    src={getImageUrl(item)}
                                                     alt=""
                                                     wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
                                                     style={{ borderRadius: "4px" }}
@@ -302,9 +306,10 @@ const Gallery = () => {
                                           <a className="edu-gallery-grid-item">
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
-                                                  <div className="thumbnail" style={{ minHeight: "150px" }}>
-                                                  <LazyImage
-                                                    src={item}
+                                                <div className="thumbnail">
+                                                  <img
+                                                    className="w-full! h-auto! rounded-sm!"
+                                                    src={getImageUrl(item)}
                                                     alt=""
                                                     wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
                                                     style={{ borderRadius: "4px" }}
