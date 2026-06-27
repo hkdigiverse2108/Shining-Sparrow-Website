@@ -317,12 +317,13 @@ const AuthModal = () => {
   const [districts, setDistricts] = useState<string[]>(GUJARAT_DISTRICTS);
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/somen-das/indian-states-and-districts-json/master/states-and-districts.json")
+    fetch("https://raw.githubusercontent.com/sab99r/Indian-States-And-Districts/master/states-and-districts.json")
       .then((res) => res.json())
       .then((data) => {
-        const gujState = data.states?.find((s: any) => s.state === "Gujarat");
-        if (gujState && Array.isArray(gujState.districts)) {
-          setDistricts(gujState.districts.sort());
+        if (data && data.states) {
+          const allDistricts = data.states.flatMap((s: any) => s.districts);
+          const uniqueDistricts = Array.from(new Set(allDistricts)).sort() as string[];
+          setDistricts(uniqueDistricts);
         }
       })
       .catch(() => {
