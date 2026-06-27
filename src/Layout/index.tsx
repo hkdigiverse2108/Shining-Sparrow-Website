@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
@@ -29,7 +30,9 @@ const Layout = () => {
                       data-elementor-id={1233}
                       className="elementor elementor-1233"
                     >
-                      <Outlet />
+                      <Suspense fallback={<div style={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center" }}><div className="loader"></div></div>}>
+                        <Outlet />
+                      </Suspense>
                     </div>
                   </div>
                 </article>

@@ -13,47 +13,35 @@ import {
   BranchSection,
 } from "../../Components/Home";
 import { Queries } from "../../Api";
-import Loader from "../../Components/Common/Loader";
-
 const Home = () => {
-  const { data: bannerData, isLoading: isHeroBannerLoading } =
+  const { data: bannerData } =
     Queries.useGetHeroBannerImage();
   const banner = bannerData?.data?.hero_banner_data[0];
 
 
 
-  const { data: courseData, isLoading: isCourseLoading } =
+  const { data: courseData } =
     Queries.useGetAllCourses();
   const Courses = courseData?.data?.course_data || [];
 
-  const { data: testimonialData, isLoading: isTestimonialLoading } =
+  const { data: testimonialData } =
     Queries.useGetTestimonials();
 
   const testimonials = testimonialData?.data?.testimonial_data;
 
-  const { data: brandData, isLoading: isBrandLoading } = Queries.useGetTrutedPartner();
+  const { data: brandData } = Queries.useGetTrutedPartner();
   const brandImages = brandData?.data?.trusted_partner_data;
 
-  const { data: faqData, isLoading: isFaqLoading } = Queries.useGetFaq();
+  const { data: faqData } = Queries.useGetFaq();
 
   const faq = faqData?.data?.faq_data;
 
-  const { data: blogData, isLoading: isBlogLoading } = Queries.useGetAllBlogs();
+  const { data: blogData } = Queries.useGetAllBlogs();
 
   const Blogs = blogData?.data?.blog_data;
 
-  const isAppLoading =
-    isHeroBannerLoading ||
-
-    isCourseLoading ||
-    isTestimonialLoading ||
-    isBrandLoading ||
-    isFaqLoading ||
-    isBlogLoading;
-
   return (
     <Fragment>
-      <Loader loading={isAppLoading} />
       <HeroBanner banner={banner} />
 
       <AboutUsSection />

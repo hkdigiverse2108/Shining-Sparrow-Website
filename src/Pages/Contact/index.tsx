@@ -3,19 +3,28 @@ import { ImagePath } from "../../Constants";
 import { MouseParallax } from "../../CoreComponents";
 import { ContactDetails } from "../../Data";
 import { Link } from "react-router-dom";
-import { Mutation } from "../../Api";
+import { Mutation, Queries } from "../../Api";
 import { AntdNotification } from "../../Utils/AntNotification";
 import { notification } from "antd";
-import { useAppSelector } from "../../Store/Hook";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormInput, FormTextArea } from "../../Components/FormFields";
 
 const Contact = () => {
-  const AllSettings = useAppSelector((state) => state.settings.settings);
-  const { facebook = "", instagram = "", linkedin = "", twitter = "" } = AllSettings?.socialMediaLinks || {};
-
   const { mutate: addContact, isPending } = Mutation.useAddContact();
+  
+  const { data: contactUsData } = Queries.useGetContactUs();
+  const contactUs = contactUsData?.data;
+
+  const { facebook = "", instagram = "", linkedin = "", twitter = "" } = contactUs?.socialMediaLinks || {};
+
+  const address = contactUs?.address || ContactDetails?.Address;
+  const emails = contactUs?.email 
+    ? contactUs.email.split(',').map((e: string) => e.trim()) 
+    : [ContactDetails?.EmailSales, ContactDetails?.EmailInfo].filter(Boolean);
+  const phoneNumbers = contactUs?.phoneNumbers?.length 
+    ? contactUs.phoneNumbers.map((p: any) => p.number) 
+    : [ContactDetails?.Number].filter(Boolean);
 
   const initialValues = {
     name: "",
@@ -26,124 +35,91 @@ const Contact = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    phoneNumber: Yup.string()
-      .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
-      .required("Phone number is required"),
-    subject: Yup.string().required("Subject is required"),
-    message: Yup.string().required("Message is required"),
+    name: Yup.string().required("Please Enter Your Name"),
+    email: Yup.string().email("Invalid email").required("Please Enter Your Email Address"),
+    phoneNumber: Yup.string().required("Please Enter Your Phone Number"),
+    subject: Yup.string().required("Please Enter Subject"),
+    message: Yup.string().required("Please Enter Message"),
   });
 
-  const handleSubmit = (values: typeof initialValues, { resetForm }: { resetForm: () => void }) => {
+  const handleSubmit = (values: any, { resetForm }: any) => {
     addContact(values, {
       onSuccess: () => {
-        AntdNotification(notification, "success", "Message sent successfully!");
+        AntdNotification(notification, "success", "Message Sent Successfully");
         resetForm();
-      },
-      onError: () => {
-        AntdNotification(notification, "error", "Failed to send message. Please try again.");
       },
     });
   };
 
   return (
-    <div>
-      <section>
-        <BreadCrumb title="Contact Us" />
-      </section>
-      <section>
-        <div
-          data-elementor-type="wp-page"
-          data-elementor-id="17213"
-          className=" elementor elementor-17213"
-        >
-          {/* ================= SECTION 1 ================= */}
-          <section
-            style={{ position: "relative", zIndex: 10 }}
-            className="mt-10! mb-10! lg:mb-40! elementor-section elementor-top-section elementor-element elementor-element-7ed12df elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-            data-id="7ed12df"
-            data-element_type="section"
-          >
+    <div id="edublink-content">
+      <div className="edublink-content-inner">
+        <div data-elementor-type="wp-page" data-elementor-id={13488} className="elementor elementor-13488">
+          <section className="elementor-section elementor-top-section elementor-element elementor-element-be743bc elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="be743bc" data-element_type="section">
             <div className="elementor-container elementor-column-gap-extended">
-              {/* COLUMN LEFT */}
-              <div
-                className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-c8aa340"
-                data-id="c8aa340"
-                data-element_type="column"
-              >
+              <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-d31e505" data-id="d31e505" data-element_type="column">
                 <div className="elementor-widget-wrap elementor-element-populated">
-                  {/* Heading */}
-                  <div
-                    className="elementor-element elementor-element-bef7517 elementor-widget elementor-widget-heading"
-                    data-id="bef7517"
-                    data-element_type="widget"
-                    data-widget_type="heading.default"
-                  >
+                  <div className="elementor-element elementor-element-77884ec elementor-widget elementor-widget-edublink-breadcrumb" data-id="77884ec" data-element_type="widget" data-widget_type="edublink-breadcrumb.default">
+                    <BreadCrumb title="Contact Us" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="elementor-section elementor-top-section elementor-element elementor-element-ef4cc0f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ef4cc0f" data-element_type="section">
+            <div className="elementor-container elementor-column-gap-extended">
+              <div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d1fcda8" data-id="d1fcda8" data-element_type="column" data-settings='{"background_background":"classic"}'>
+                <div className="elementor-widget-wrap elementor-element-populated">
+                  <div className="elementor-element elementor-element-af75685 elementor-widget elementor-widget-heading" data-id="af75685" data-element_type="widget" data-widget_type="heading.default">
                     <div className="elementor-widget-container">
-                      <h3 className="elementor-heading-title elementor-size-default  space-y-5! ">
-                        <p> We're Always Eager to </p>
-                        <span>Hear From You! </span>
-                      </h3>
+                      <h4 className="elementor-heading-title elementor-size-default">
+                        Contact Info
+                      </h4>
                     </div>
                   </div>
 
-                  {/* Address */}
-                  <div
-                    className="space-y-3! mt-6! elementor-element elementor-element-614944a elementor-widget-heading"
-                    data-id="614944a"
-                    data-element_type="widget"
-                    data-widget_type="heading.default"
-                  >
+                  {/* Headquarters */}
+                  <div className="space-y-3! elementor-element elementor-element-4447477 elementor-widget-heading" data-id="4447477" data-element_type="widget" data-widget_type="heading.default">
                     <div className="elementor-widget-container">
                       <h5 className="elementor-heading-title elementor-size-default">
                         Headquarters
                       </h5>
                     </div>
-                    <p>{ContactDetails?.Address}</p>
+                    <p>{address}</p>
                   </div>
 
                   {/* Email */}
-                  <div
-                    className="space-y-3! elementor-element elementor-element-18d270e elementor-widget-heading"
-                    data-id="18d270e"
-                    data-element_type="widget"
-                    data-widget_type="heading.default"
-                  >
+                  <div className="space-y-3! elementor-element elementor-element-18d270e elementor-widget-heading" data-id="18d270e" data-element_type="widget" data-widget_type="heading.default">
                     <div className="elementor-widget-container">
                       <h5 className="elementor-heading-title elementor-size-default">
                         Email Support
                       </h5>
                     </div>
                     <p>
-                      <Link to={`mailto:${ContactDetails?.EmailSales}`}>
-                        {ContactDetails?.EmailSales}
+                      <Link to={`mailto:${emails[0]}`}>
+                        {emails[0]}
                       </Link>
                     </p>
-                    <p>
-                      <Link to={`mailto:${ContactDetails?.EmailInfo}`}>
-                        {ContactDetails?.EmailInfo}
-                      </Link>
-                    </p>
+                    {emails[1] && (
+                      <p>
+                        <Link to={`mailto:${emails[1]}`}>
+                          {emails[1]}
+                        </Link>
+                      </p>
+                    )}
                   </div>
 
                   {/* Phone */}
-                  <div
-                    className="space-y-3! elementor-element elementor-element-aa261c0 elementor-widget elementor-widget-heading"
-                    data-id="aa261c0"
-                    data-element_type="widget"
-                    data-widget_type="heading.default"
-                  >
+                  <div className="space-y-3! elementor-element elementor-element-aa261c0 elementor-widget-heading" data-id="aa261c0" data-element_type="widget" data-widget_type="heading.default">
                     <div className="elementor-widget-container">
                       <h5 className="elementor-heading-title elementor-size-default">
                         Contact Hotline
                       </h5>
                     </div>
                     <p>
-                      <Link to={`tel:${ContactDetails?.Number}`}>
-                        {ContactDetails?.Number}
+                      <Link to={`tel:${phoneNumbers[0]}`}>
+                        {phoneNumbers[0]}
                       </Link>
                     </p>
                   </div>
@@ -433,7 +409,7 @@ const Contact = () => {
             </div>
           </section>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

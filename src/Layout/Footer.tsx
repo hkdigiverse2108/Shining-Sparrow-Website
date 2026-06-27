@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ContactDetails, FooterContactText, Shining_Sparrow_Link, QuickLinks, SupportPolicy } from "../Data";
-import { Mutation } from "../Api";
-import { useAppSelector } from "../Store/Hook";
+import { Mutation, Queries } from "../Api";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormInput } from "../Components/FormFields";
@@ -10,10 +9,19 @@ import { notification } from "antd";
 import { ImagePath } from "../Constants";
 
 const Footer = () => {
-  const AllSettings = useAppSelector((state) => state.settings.settings);
-  const { facebook, instagram, linkedin, twitter } = AllSettings?.socialMediaLinks || {};
-
   const { mutate: useAddNewsLetterMutate } = Mutation.useAddNewsLetter();
+  const { data: contactUsData } = Queries.useGetContactUs();
+  const contactUs = contactUsData?.data;
+
+  const { facebook, instagram, linkedin, twitter } = contactUs?.socialMediaLinks || {};
+
+  const address = contactUs?.address || ContactDetails?.Address;
+  const emailInfo = contactUs?.email 
+    ? contactUs.email.split(',').map((e: string) => e.trim())[0] 
+    : ContactDetails?.EmailInfo;
+  const phoneNumber = contactUs?.phoneNumbers?.length 
+    ? contactUs.phoneNumbers[0].number 
+    : ContactDetails?.Number;
 
   const socialIcons = [
     {
@@ -40,13 +48,6 @@ const Footer = () => {
       iconClass: "icon-twitter",
       wrapperClass: "elementor-social-icon-icon-twitter elementor-repeater-item-83e3472",
     },
-    // {
-    //   name: "youtube",
-    //   link : ,
-    //   iconClass: "icon-youtube",
-    //   wrapperClass:
-    //     "elementor-social-icon-icon-youtube elementor-repeater-item-5779254",
-    // },
   ];
 
   return (
@@ -69,24 +70,19 @@ const Footer = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="elementor-element elementor-element-eacdb72 elementor-widget elementor-widget-text-editor" data-id="eacdb72" data-element_type="widget" data-widget_type="text-editor.default">
-                    <div className="elementor-widget-container">
-                      <p>{FooterAboutText}</p>
-                    </div>
-                  </div> */}
                   <div className="elementor-element elementor-element-68c25a6 elementor-widget elementor-widget-text-editor" data-id="68c25a6" data-element_type="widget" data-widget_type="text-editor.default">
                     <div className="elementor-widget-container">
                       <p>
-                        <span className="edublink-p-medium">Address:</span> {ContactDetails?.Address}
+                        <span className="edublink-p-medium">Address:</span> {address}
                         <br />
                         <span className="edublink-p-medium">Call:</span>
-                        <Link to={`tel:${ContactDetails?.Number}`} className="edublink-color-off-white">
-                          {ContactDetails?.Number}
+                        <Link to={`tel:${phoneNumber}`} className="edublink-color-off-white">
+                          {phoneNumber}
                         </Link>
                         <br />
                         <span className="edublink-p-medium">Email:</span>
-                        <Link to={`mailto:${ContactDetails?.EmailInfo}`} className="edublink-color-off-white">
-                          {ContactDetails?.EmailInfo}
+                        <Link to={`mailto:${emailInfo}`} className="edublink-color-off-white">
+                          {emailInfo}
                         </Link>
                       </p>
                     </div>

@@ -73,8 +73,7 @@ const Gallery = () => {
                                             <div className="thumbnail">
                                               <div className="course-thumb">
                                                 {firstImage ? (
-                                                  <img
-                                                    className="w-100"
+                                                  <LazyImage
                                                     src={getImageUrl(firstImage)}
                                                     alt={folder.title}
                                                     wrapperStyle={{ width: "100%", aspectRatio: "3/2" }}
@@ -173,7 +172,7 @@ const Gallery = () => {
                                       <span>Back to Folders</span>
                                     </button>
                                     
-                                    <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}>
+                                    <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%", flexWrap: "wrap" }}>
                                       <svg className="flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={{ color: "var(--edublink-color-primary, #f97316)", width: "26px", height: "26px" }}>
                                         <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                                       </svg>
@@ -189,6 +188,17 @@ const Gallery = () => {
                                       >
                                         {selectedFolder.title}
                                       </h3>
+                                      <div 
+                                        className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 mt-4 md:mt-0 md:ml-4"
+                                        style={{
+                                          fontFamily: "var(--edublink-font-primary)",
+                                          fontSize: "15px",
+                                          fontWeight: 600,
+                                          color: "#5b616c"
+                                        }}
+                                      >
+                                        {selectedFolder.images?.length || 0} {selectedFolder.images?.length === 1 ? "Photo" : "Photos"}
+                                      </div>
                                     </div>
                                     
                                     <p 
@@ -201,18 +211,6 @@ const Gallery = () => {
                                     >
                                       {selectedFolder.description || "View photos in this album"}
                                     </p>
-                                  </div>
-                                  
-                                  <div 
-                                    className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 self-start md:self-center"
-                                    style={{
-                                      fontFamily: "var(--edublink-font-primary)",
-                                      fontSize: "15px",
-                                      fontWeight: 600,
-                                      color: "#5b616c"
-                                    }}
-                                  >
-                                    {selectedFolder.images?.length || 0} {selectedFolder.images?.length === 1 ? "Photo" : "Photos"}
                                   </div>
                                 </div>
 
@@ -235,8 +233,7 @@ const Gallery = () => {
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
                                                 <div className="thumbnail">
-                                                  <img
-                                                    className="w-full! h-auto! rounded-sm!"
+                                                  <LazyImage
                                                     src={getImageUrl(item)}
                                                     alt=""
                                                     wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
@@ -271,8 +268,7 @@ const Gallery = () => {
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
                                                 <div className="thumbnail">
-                                                  <img
-                                                    className="w-full! h-auto! rounded-sm!"
+                                                  <LazyImage
                                                     src={getImageUrl(item)}
                                                     alt=""
                                                     wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
@@ -307,8 +303,7 @@ const Gallery = () => {
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
                                                 <div className="thumbnail">
-                                                  <img
-                                                    className="w-full! h-auto! rounded-sm!"
+                                                  <LazyImage
                                                     src={getImageUrl(item)}
                                                     alt=""
                                                     wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}

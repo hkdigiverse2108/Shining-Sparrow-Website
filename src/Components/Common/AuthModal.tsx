@@ -268,6 +268,12 @@ const FormField = ({ label, name, ...props }: { label: string; name: string; [ke
       <input
         {...field}
         {...props}
+        onChange={(e) => {
+          if (name === "email" || props.type === "email") {
+            e.target.value = e.target.value.toLowerCase();
+          }
+          field.onChange(e);
+        }}
         id={name}
         className="w-full focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
         style={{

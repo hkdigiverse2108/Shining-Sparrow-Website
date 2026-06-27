@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import { ImagePath, ROUTES } from "../../Constants";
 import { MouseParallax } from "../../CoreComponents";
-import { useAppSelector } from "../../Store/Hook";
 import type { HeroBannerData } from "../../Types";
+import { Queries } from "../../Api";
+import { ContactDetails } from "../../Data";
 
 const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
-  const settings = useAppSelector((state) => state.settings.settings);
-  const AllSettings = settings;
+
+  const { data: contactUsData } = Queries.useGetContactUs();
+  const contactUs = contactUsData?.data;
+  const phoneNumbers = contactUs?.phoneNumbers?.length 
+    ? contactUs.phoneNumbers.map((p) => p.number) 
+    : [ContactDetails?.Number].filter(Boolean);
 
   return (
     <section className="hero-banner hero-style-2 elementor-section elementor-top-section elementor-element elementor-element-843e85a elementor-section-height-min-height elementor-section-boxed elementor-section-height-default elementor-section-items-middle">
@@ -112,8 +117,8 @@ const HeroBanner = ({ banner }: { banner?: HeroBannerData }) => {
                                 Online Support
                               </span>
                               <h4 className="title edublink-p-medium edublink-color-secondary">
-                                <Link to={`tel:${(AllSettings?.phoneNumber || "+91 8140655943").replace(/\s+/g, '')}`}>
-                                  {AllSettings?.phoneNumber || "+91 8140655943"}
+                                <Link to={`tel:${(phoneNumbers[0] || "+91 8140655943").replace(/\s+/g, '')}`}>
+                                  {phoneNumbers[0] || "+91 8140655943"}
                                 </Link>
                               </h4>
                             </div>

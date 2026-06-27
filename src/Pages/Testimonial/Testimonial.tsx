@@ -29,31 +29,36 @@ const Testimonial = () => {
             <section className="my-10! container space-y-6! elementor-section elementor-section-boxed">
               {testimonials?.slice(0, visibleCount).map((item) => (
                 <div className="eb-testimonial-item eb-testimonial">
-                  <div className="eb-testimonial-grid py-20! pb-0!">
-                    <div className="content flex justify-between gap-6!">
-                      <div className="pe-6! sm:pe-16! md:pe-24!">
-                        <div className="rating-icon space-x-2!">
+                  <div className="eb-testimonial-grid py-10 md:py-20 pb-0!">
+                    <div className="content flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 items-center md:items-start text-center md:text-left">
+                      <div className="w-full md:flex-1 md:pe-16 text-center md:text-left!">
+                        <div className="rating-icon space-x-2! mb-4 flex justify-center md:justify-start">
                           {renderStars(item.rate)}
                         </div>
-                        <p className="description">{item.description}</p>
-                        <div className="flex  gap-4 space-x-4">
-                          <h5 className="title ">{item.name}</h5>
-                          <span className="subtitle">{item.designation}</span>
+                        <p className="description mb-6 md:text-left!">{item.description}</p>
+                        <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-1 sm:gap-4">
+                          <h5 className="title m-0! md:text-left!">{item.name}</h5>
+                          <span className="subtitle hidden sm:block">|</span>
+                          <span className="subtitle m-0! md:text-left!">{item.designation}</span>
                         </div>
                       </div>
-                      <div className="thumbnail flex-shrink-0!">
+                      <div className="thumbnail flex-shrink-0! relative mb-6 md:mb-0">
                         <img
                           decoding="async"
                           src={
                             item.image ||
-                            `${ImagePath}testimonial/testimonial-01.png`
+                            `${ImagePath}home/Profile.webp`
                           }
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = `${ImagePath}home/Profile.webp`;
+                          }}
                           style={{ width: "90px", height: "90px", borderRadius: "50%", objectFit: "cover" }}
-                          className="testimonial-author-avatar"
+                          className="testimonial-author-avatar shadow-sm border-4 border-white"
                           alt={item.name}
                         />
-                        <span className="qoute-icon">
-                          <i className="icon-26" />
+                        <span className="qoute-icon absolute -bottom-2 -right-2 bg-[#F26522] text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md border-[3px] border-white">
+                          <i className="icon-26" style={{ fontSize: "14px" }} />
                         </span>
                       </div>
                     </div>

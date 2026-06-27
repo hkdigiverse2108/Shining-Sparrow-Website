@@ -1,12 +1,8 @@
 import { ContactDetails } from "../../Data";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../Store/Hook";
 import { Queries } from "../../Api";
 
 const BranchSection = () => {
-  const AllSettings = useAppSelector((state) => state.settings.settings);
-  const { facebook = "", instagram = "", linkedin = "", twitter = "" } = AllSettings?.socialMediaLinks || {};
-
   const { data: contactUsData } = Queries.useGetContactUs();
   const contactUs = contactUsData?.data;
 
@@ -19,10 +15,10 @@ const BranchSection = () => {
     : [ContactDetails?.Number].filter(Boolean);
   const workingHours = contactUs?.workingHours || "Mon - Sat: 09:00 AM - 07:00 PM";
 
-  const fb = contactUs?.socialMediaLinks?.facebook || facebook;
-  const insta = contactUs?.socialMediaLinks?.instagram || instagram;
-  const tw = contactUs?.socialMediaLinks?.twitter || twitter;
-  const li = contactUs?.socialMediaLinks?.linkedin || linkedin;
+  const fb = contactUs?.socialMediaLinks?.facebook || "";
+  const insta = contactUs?.socialMediaLinks?.instagram || "";
+  const tw = contactUs?.socialMediaLinks?.twitter || "";
+  const li = contactUs?.socialMediaLinks?.linkedin || "";
 
   return (
     <section className="py-20 lg:py-24" style={{ backgroundColor: "#F8F7F4" }}>

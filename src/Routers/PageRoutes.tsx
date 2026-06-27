@@ -1,23 +1,25 @@
+import { lazy } from "react";
 import { ROUTES } from "../Constants";
-import About from "../Pages/About";
-import Blog from "../Pages/Blog";
-import BlogDetails from "../Pages/Blog/BlogDetails";
-import Contact from "../Pages/Contact";
-import Franchise from "../Pages/Franchise";
-import Course from "../Pages/Course";
-import CourseDetails from "../Pages/Course/CourseDetails";
-import Workshop from "../Pages/Workshop";
-import WorkshopDetails from "../Pages/Workshop/WorkshopDetails";
-import Faq from "../Pages/Faq";
-import Gallery from "../Pages/Gallery";
-import Home from "../Pages/Home";
-import UserProfile from "../Pages/User";
-import PageNotFound from "../Pages/PageNotFound";
-import PrivacyPolicy from "../Pages/PrivacyPolicy";
-import ReturnPolicy from "../Pages/ReturnPolicy";
-import TermsCondition from "../Pages/TermsCondition";
-import Testimonial from "../Pages/Testimonial/Testimonial";
-import PrivateRoutes from "./PrivateRoutes";
+
+const About = lazy(() => import("../Pages/About"));
+const Blog = lazy(() => import("../Pages/Blog"));
+const BlogDetails = lazy(() => import("../Pages/Blog/BlogDetails"));
+const Contact = lazy(() => import("../Pages/Contact"));
+const Franchise = lazy(() => import("../Pages/Franchise"));
+const Course = lazy(() => import("../Pages/Course"));
+const CourseDetails = lazy(() => import("../Pages/Course/CourseDetails"));
+const Workshop = lazy(() => import("../Pages/Workshop"));
+const WorkshopDetails = lazy(() => import("../Pages/Workshop/WorkshopDetails"));
+const Faq = lazy(() => import("../Pages/Faq"));
+const Gallery = lazy(() => import("../Pages/Gallery"));
+const Home = lazy(() => import("../Pages/Home"));
+const UserProfile = lazy(() => import("../Pages/User"));
+const PageNotFound = lazy(() => import("../Pages/PageNotFound"));
+const PrivacyPolicy = lazy(() => import("../Pages/PrivacyPolicy"));
+const ReturnPolicy = lazy(() => import("../Pages/ReturnPolicy"));
+const TermsCondition = lazy(() => import("../Pages/TermsCondition"));
+const Testimonial = lazy(() => import("../Pages/Testimonial/Testimonial"));
+const PrivateRoutes = lazy(() => import("./PrivateRoutes"));
 
 export const PageRoutes = [
   { path: "/", element: <Home /> },

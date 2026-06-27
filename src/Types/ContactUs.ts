@@ -1,5 +1,11 @@
 import type { BaseType } from "./common";
-import type { SocialMediaLinks } from "./Settings";
+
+export interface SocialMediaLinks {
+    facebook: string;
+    twitter: string;
+    instagram: string;
+    linkedin: string;
+}
 
 export interface PhoneNumber {
   number: string;

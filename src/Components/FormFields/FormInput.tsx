@@ -32,6 +32,12 @@ const FormInput: React.FC<FormInputProps> = ({
                 <input
                     {...field}
                     {...props}
+                    onChange={(e) => {
+                        if (props.name === "email" || props.type === "email") {
+                            e.target.value = e.target.value.toLowerCase();
+                        }
+                        field.onChange(e);
+                    }}
                     className={`${props.className ||
                         "wpcf7-form-control wpcf7-text edublink-contact-form-field"
                         } ${meta.touched && meta.error ? "border-red-500!" : ""}`}

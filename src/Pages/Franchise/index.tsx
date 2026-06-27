@@ -5,10 +5,9 @@ import { ImagePath } from "../../Constants";
 import { MouseParallax } from "../../CoreComponents";
 import { ContactDetails } from "../../Data";
 import { Link } from "react-router-dom";
-import { Mutation } from "../../Api";
+import { Mutation, Queries } from "../../Api";
 import { AntdNotification } from "../../Utils/AntNotification";
 import { notification } from "antd";
-import { useAppSelector } from "../../Store/Hook";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FormInput, FormTextArea } from "../../Components/FormFields";
@@ -34,79 +33,58 @@ const FormSelect = ({
   label,
   name,
   options,
-  placeholder = "Select option",
+  required = false
 }: {
-  label?: string;
+  label: string;
   name: string;
   options: { label: string; value: string }[];
-  placeholder?: string;
+  required?: boolean;
 }) => {
   const [field, meta, helpers] = useField(name);
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const selectedOption = options.find((opt) => opt.value === field.value);
 
   return (
-    <div className="edublink-contact-form-single-item" ref={containerRef}>
-      <div className="edublink-contact-form-single-item-content" style={{ position: "relative" }}>
-        {label && (
-          <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-2">
-            {label}
-          </label>
-        )}
+    <div className="form-group mb-6 relative">
+      {label && (
+        <label className="block text-gray-700 font-medium mb-2" style={{ fontFamily: "var(--edublink-font-secondary)" }}>
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
+      )}
+      <div className="relative" ref={dropdownRef}>
         <div
+          className={`w-full px-5 py-3.5 bg-white border rounded-lg cursor-pointer flex justify-between items-center transition-colors duration-200
+            ${meta.touched && meta.error ? 'border-red-500 bg-red-50' : 'border-gray-200 hover:border-gray-300'}
+            ${isOpen ? 'border-[#F26522] ring-2 ring-[#F26522]/20' : ''}
+          `}
+          style={{ height: "60px" }}
           onClick={() => setIsOpen(!isOpen)}
-          className={`wpcf7-form-control edublink-contact-form-field flex items-center justify-between cursor-pointer transition-all duration-200`}
-          style={{
-            height: "55px",
-            padding: "0 20px",
-            border: meta.touched && meta.error ? "1.5px solid #ef4444" : (isOpen ? "1.5px solid #f97316" : "1.5px solid #e9e9e9"),
-            borderRadius: "5px",
-            backgroundColor: "#fff",
-            color: field.value ? "#1f2937" : "#9ca3af",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between"
-          }}
         >
-          <span>{selectedOption ? selectedOption.label : placeholder}</span>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            {field.value && (
-              <div
+          <span className={`truncate ${!selectedOption ? "text-gray-400" : "text-gray-700"}`}>
+            {selectedOption ? selectedOption.label : `Select ${label}`}
+          </span>
+          <div className="flex items-center gap-2">
+            {selectedOption && (
+              <div 
+                className="text-gray-400 hover:text-gray-600 p-1"
                 onClick={(e) => {
                   e.stopPropagation();
                   helpers.setValue("");
                 }}
-                className="hover:text-red-500 transition-colors duration-150 p-1"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  color: "#9ca3af",
-                }}
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  style={{ width: "16px", height: "16px", strokeWidth: "2.5" }}
-                >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "16px", height: "16px" }}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </div>
@@ -116,7 +94,7 @@ const FormSelect = ({
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              style={{ width: "16px", height: "16px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
+              style={{ width: "16px", height: "16px" }}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
             </svg>
@@ -124,36 +102,34 @@ const FormSelect = ({
         </div>
         {isOpen && (
           <div
-            className="absolute left-0 w-full bg-white rounded-lg shadow-xl border border-gray-100 py-1.5 transition-all duration-200"
+            className="absolute left-0 w-full bg-white rounded-lg shadow-xl border border-gray-100 py-1.5 z-50 mt-1"
             style={{
-              position: "absolute",
-              top: "60px",
-              left: 0,
-              zIndex: 1000,
               maxHeight: "220px",
               overflowY: "auto",
-              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
               border: "1px solid #f3f4f6",
               borderRadius: "8px",
               backgroundColor: "#ffffff",
               width: "100%"
             }}
           >
-            {options.map((opt) => (
+            {options.map((option) => (
               <div
-                key={opt.value}
+                key={option.value}
+                className={`px-5 py-3 cursor-pointer transition-colors duration-150 flex items-center justify-between
+                  ${field.value === option.value ? 'bg-[#F26522]/10 text-[#F26522] font-medium' : 'text-gray-700 hover:bg-gray-50'}
+                `}
                 onClick={() => {
-                  helpers.setValue(opt.value);
+                  helpers.setValue(option.value);
                   setIsOpen(false);
                 }}
-                className={`px-5 py-3 cursor-pointer text-gray-700 hover:bg-orange-50 hover:text-orange-500 font-medium transition-colors duration-150`}
-                style={{
-                  fontSize: "14px",
-                  backgroundColor: field.value === opt.value ? "#fff7ed" : "transparent",
-                  color: field.value === opt.value ? "#f97316" : "#374151"
-                }}
               >
-                {opt.label}
+                {option.label}
+                {field.value === option.value && (
+                  <svg className="w-4 h-4 text-[#F26522]" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ width: "16px", height: "16px" }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
               </div>
             ))}
           </div>
@@ -169,10 +145,20 @@ const FormSelect = ({
 };
 
 const Franchise = () => {
-  const AllSettings = useAppSelector((state) => state.settings.settings);
-  const { facebook = "", instagram = "", linkedin = "", twitter = "" } = AllSettings?.socialMediaLinks || {};
-
   const { mutate: addFranchiseInquiry, isPending } = Mutation.useAddFranchiseInquiry();
+  
+  const { data: contactUsData } = Queries.useGetContactUs();
+  const contactUs = contactUsData?.data;
+
+  const { facebook = "", instagram = "", linkedin = "", twitter = "" } = contactUs?.socialMediaLinks || {};
+
+  const address = contactUs?.address || ContactDetails?.Address;
+  const emails = contactUs?.email 
+    ? contactUs.email.split(',').map((e: string) => e.trim()) 
+    : [ContactDetails?.EmailSales, ContactDetails?.EmailInfo].filter(Boolean);
+  const phoneNumbers = contactUs?.phoneNumbers?.length 
+    ? contactUs.phoneNumbers.map((p: any) => p.number) 
+    : [ContactDetails?.Number].filter(Boolean);
 
   const initialValues = {
     name: "",
@@ -195,28 +181,19 @@ const Franchise = () => {
       .required("Phone number is required"),
     city: Yup.string().required("City is required"),
     state: Yup.string().required("State is required"),
-    investmentBudget: Yup.string().required("Investment Budget is required"),
+    investmentBudget: Yup.string().required("Investment budget is required"),
     occupation: Yup.string().required("Occupation is required"),
-    message: Yup.string().required("Details are required"),
+    message: Yup.string(),
   });
 
   const handleSubmit = (values: typeof initialValues, { resetForm }: { resetForm: () => void }) => {
-    addFranchiseInquiry({
-      name: values.name,
-      email: values.email,
-      phoneNumber: values.phoneNumber,
-      city: values.city,
-      state: values.state,
-      investmentBudget: values.investmentBudget,
-      occupation: values.occupation,
-      message: values.message,
-    }, {
+    addFranchiseInquiry(values, {
       onSuccess: () => {
-        AntdNotification(notification, "success", "Franchise inquiry sent successfully!");
+        AntdNotification(notification, "success", "Inquiry sent successfully!");
         resetForm();
       },
       onError: () => {
-        AntdNotification(notification, "error", "Failed to send franchise inquiry. Please try again.");
+        AntdNotification(notification, "error", "Failed to send inquiry. Please try again.");
       },
     });
   };
@@ -234,6 +211,7 @@ const Franchise = () => {
         >
           {/* ================= SECTION 1 ================= */}
           <section
+            style={{ position: "relative", zIndex: 10 }}
             className="mt-10! mb-10! lg:mb-40! elementor-section elementor-top-section elementor-element elementor-element-7ed12df elementor-section-boxed elementor-section-height-default elementor-section-height-default"
             data-id="7ed12df"
             data-element_type="section"
@@ -255,8 +233,8 @@ const Franchise = () => {
                   >
                     <div className="elementor-widget-container">
                       <h3 className="elementor-heading-title elementor-size-default  space-y-5! ">
-                        <p>Partner With Us</p>
-                        <span>Start Your Franchise</span>
+                        <p> We're Always Eager to </p>
+                        <span>Hear From You! </span>
                       </h3>
                     </div>
                   </div>
@@ -290,7 +268,7 @@ const Franchise = () => {
                         Headquarters
                       </h5>
                     </div>
-                    <p>{ContactDetails?.Address}</p>
+                    <p>{address}</p>
                   </div>
 
                   {/* Email */}
@@ -306,8 +284,8 @@ const Franchise = () => {
                       </h5>
                     </div>
                     <p>
-                      <Link to={`mailto:${ContactDetails?.EmailSales}`}>
-                        {ContactDetails?.EmailSales}
+                      <Link to={`mailto:${emails[0]}`}>
+                        {emails[0]}
                       </Link>
                     </p>
                   </div>
@@ -325,8 +303,8 @@ const Franchise = () => {
                       </h5>
                     </div>
                     <p>
-                      <Link to={`tel:${ContactDetails?.Number}`}>
-                        {ContactDetails?.Number}
+                      <Link to={`tel:${phoneNumbers[0]}`}>
+                        {phoneNumbers[0]}
                       </Link>
                     </p>
                   </div>
@@ -530,13 +508,13 @@ const Franchise = () => {
 
                                     <FormSelect
                                       name="occupation"
-                                      placeholder="Your Occupation *"
+                                      label="Your Occupation *"
                                       options={OCCUPATION_OPTIONS}
                                     />
 
                                     <FormSelect
                                       name="investmentBudget"
-                                      placeholder="Investment Budget *"
+                                      label="Investment Budget *"
                                       options={BUDGET_OPTIONS}
                                     />
 
