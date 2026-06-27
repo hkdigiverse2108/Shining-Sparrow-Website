@@ -139,8 +139,8 @@ const BranchSection = () => {
           <div className="w-full flex items-center justify-center lg:justify-end" data-aos="fade-left" data-aos-duration={1200}>
             <div className="w-full aspect-square max-w-[460px] rounded-lg overflow-hidden border border-gray-200">
               <iframe
-                title="Shining Sparrow HK DigiVerse Location Map"
-                src="https://maps.google.com/maps?q=HK%20DigiVerse%20LLP%20Surat&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                title="Shining Sparrow Location Map"
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

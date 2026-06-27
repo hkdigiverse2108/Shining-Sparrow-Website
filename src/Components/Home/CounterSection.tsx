@@ -3,6 +3,17 @@ import { useAppSelector } from "../../Store/Hook";
 const CounterSection = () => {
   const AllSettings = useAppSelector((state) => state.settings.settings);
 
+  const formatNumber = (num: number) => {
+    if (!num) return "0";
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K+';
+    }
+    return num.toString() + '+';
+  };
+
   return (
     <section
       className="elementor-section elementor-top-section elementor-element elementor-element-ceab01c elementor-section-boxed elementor-section-height-default elementor-section-height-default"
@@ -29,7 +40,7 @@ const CounterSection = () => {
                 >
                   <span className="odometer" data-odometer-final="29.3" />
                   <span className="edublink-counter-suffix">
-                    {AllSettings?.enrolledLearners ?? 0}
+                    {formatNumber(AllSettings?.enrolledLearners ?? 0)}
                   </span>
                 </div>
               </div>
@@ -67,7 +78,7 @@ const CounterSection = () => {
                 >
                   <span className="odometer" data-odometer-final="32.4" />
                   <span className="edublink-counter-suffix">
-                    {AllSettings?.classCompleted ?? 0}
+                    {formatNumber(AllSettings?.classCompleted ?? 0)}
                   </span>
                 </div>
               </div>
@@ -105,8 +116,7 @@ const CounterSection = () => {
                 >
                   <span className="odometer" data-odometer-final={100} />
                   <span className="edublink-counter-suffix">
-                    {" "}
-                    {AllSettings?.satisfactionRate ?? 0}
+                    {AllSettings?.satisfactionRate ?? 0}%
                   </span>
                 </div>
               </div>
