@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../Store/Hook";
 import { setModalPhotoLink } from "../../Store/Slices/VideoModalSlice";
+import { getImageUrl } from "../../Constants";
 
 const ImageModal = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ const ImageModal = () => {
 
       <div className=" w-[80%] h-[70%]  aspect-video  flex items-center justify-center overflow-hidden shadow-xl">
         <figure className="w-300 h-full">
-          <img src={photoLink} alt="not Found" className="w-full h-full " />
+          <img src={getImageUrl(photoLink)} alt="not Found" className="w-full h-full " />
         </figure>
       </div>
     </div>

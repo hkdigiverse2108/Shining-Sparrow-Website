@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import StickyBar from "../Utils/StickyBar";
-import { ImagePath, ROUTES } from "../Constants";
+import { ImagePath, ROUTES, getImageUrl } from "../Constants";
 import { GetHeaderMenuItems } from "../Utils/GetHeaderMenuItems";
 import type { MenuItem } from "../Types";
 import { Link, NavLink } from "react-router-dom";
@@ -135,7 +135,7 @@ const Header = () => {
                         <div className="w-fit! flex items-center justify-center gap-2 border border-gray-300 bg-white shadow rounded-md p-2! cursor-pointer ">
                           {user?.profilePhoto ? (
                             <figure className="w-12 h-12 mb-0! flex">
-                              <img src={user.profilePhoto} alt="User" className="w-full! h-full! rounded-full object-cover!" />
+                              <img src={getImageUrl(user.profilePhoto)} alt="User" className="w-full! h-full! rounded-full object-cover!" />
                             </figure>
                           ) : (
                             <div style={{ width: "35px", height: "35px", borderRadius: "50%", background: "linear-gradient(135deg, #F26522, #FFA726)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 2px 8px rgba(242,101,34,0.35)", }} >

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BreadCrumb, ImageUpload } from "../../Components/Common";
 import { useAppSelector, useAppDispatch } from "../../Store/Hook";
-import { ImagePath } from "../../Constants";
+import { ImagePath, getImageUrl } from "../../Constants";
 import { Mutation } from "../../Api";
 import { setUser } from "../../Store/Slices/UserSlice";
 import { STORAGE_KEYS } from "../../Constants/StorageKeys";
@@ -38,7 +38,7 @@ const UserProfile = () => {
             uid: "-1",
             name: "profile-photo",
             status: "done",
-            url: user.profilePhoto,
+            url: getImageUrl(user.profilePhoto),
           },
         ]
       : [],
@@ -107,7 +107,7 @@ const UserProfile = () => {
               <div className="profile-overview pb-10 px-0! ">
                 <div className="profile-header flex max-sm:flex-col items-center gap-6 mb-8">
                   <div className="profile-img-wrapper w-32 h-32 rounded-full overflow-hidden border-2 border-primary flex">
-                    <img src={user?.profilePhoto || `${ImagePath}others/author.png`} alt="Profile" className="w-full h-full object-cover" />
+                    <img src={getImageUrl(user?.profilePhoto) || `${ImagePath}others/author.png`} alt="Profile" className="w-full h-full object-cover" />
                   </div>
                   <div className="profile-info flex-1 ">
                     <p className="text-3xl font-bold mb-1 my-0! text-black!">{user?.fullName || "User Name"}</p>

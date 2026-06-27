@@ -5,6 +5,7 @@ import { Queries } from "../../Api";
 import { useAppDispatch } from "../../Store/Hook";
 import { setModalPhotoLink } from "../../Store/Slices/VideoModalSlice";
 import Loader from "../../Components/Common/Loader";
+import { getImageUrl } from "../../Constants";
 import type { Gallery as GalleryType } from "../../Types/Gallary";
 
 const Gallery = () => {
@@ -74,7 +75,7 @@ const Gallery = () => {
                                                 {firstImage ? (
                                                   <img
                                                     className="w-100"
-                                                    src={firstImage}
+                                                    src={getImageUrl(firstImage)}
                                                     alt={folder.title}
                                                     style={{ width: "100%", aspectRatio: "3/2", objectFit: "cover", backgroundColor: "#fff" }}
                                                   />
@@ -235,7 +236,7 @@ const Gallery = () => {
                                                 <div className="thumbnail">
                                                   <img
                                                     className="w-full! h-auto! rounded-sm!"
-                                                    src={item}
+                                                    src={getImageUrl(item)}
                                                     alt=""
                                                   />
                                                 </div>
@@ -269,7 +270,7 @@ const Gallery = () => {
                                                 <div className="thumbnail">
                                                   <img
                                                     className="w-full! h-auto! rounded-sm!"
-                                                    src={item}
+                                                    src={getImageUrl(item)}
                                                     alt=""
                                                   />
                                                 </div>
@@ -303,7 +304,7 @@ const Gallery = () => {
                                                 <div className="thumbnail">
                                                   <img
                                                     className="w-full! h-auto! rounded-sm!"
-                                                    src={item}
+                                                    src={getImageUrl(item)}
                                                     alt=""
                                                   />
                                                 </div>
