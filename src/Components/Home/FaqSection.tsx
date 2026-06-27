@@ -49,7 +49,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                           decoding="async"
                           width={220}
                           height={280}
-                          src={`${ImagePath}faq/faq-01.png`}
+                          src={`${ImagePath}faq/faq-1.jpg`}
                           className="attachment-full size-full wp-image-4921"
                           alt=""
                         />
@@ -109,7 +109,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                           decoding="async"
                           width={200}
                           height={240}
-                          src={`${ImagePath}faq/faq-2.png`}
+                          src={`${ImagePath}faq/faq-2.jpg`}
                           className="attachment-full size-full wp-image-4922"
                           alt=""
                         />
@@ -178,7 +178,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                           decoding="async"
                           width={180}
                           height={270}
-                          src={`${ImagePath}faq/faq-03.jpg`}
+                          src={`${ImagePath}faq/faq-3.jpg`}
                           className="attachment-full size-full wp-image-4923"
                           alt=""
                         />
@@ -203,7 +203,7 @@ const FaqSection = ({ faq }: { faq?: FaqItem[] }) => {
                           decoding="async"
                           width={240}
                           height={290}
-                          src={`${ImagePath}faq/faq-04.webp`}
+                          src={`${ImagePath}faq/faq-4.jpg`}
                           className="attachment-full size-full wp-image-4924"
                           alt=""
                         />
