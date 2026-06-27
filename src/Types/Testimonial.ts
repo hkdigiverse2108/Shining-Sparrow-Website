@@ -9,6 +9,7 @@ export interface Testimonial {
     rate: number;
     isFeatured: Boolean;
     type: "course" | "instructor";
+    createdAt?: string;
 }
 
 

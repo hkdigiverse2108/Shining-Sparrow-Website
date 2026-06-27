@@ -5,9 +5,15 @@ import { Link } from "react-router-dom";
 import type { Testimonial } from "../../Types";
 
 const TestimonialSection = ({ testimonials }: { testimonials?: Testimonial[] }) => {
-  const featuredTestimonials = testimonials?.filter(
-    (item) => item.isFeatured === true,
-  );
+  // Show the latest 4 testimonials sorted by upload date
+  const latestTestimonials = testimonials
+    ?.slice()
+    ?.sort((a, b) => {
+      const timeA = a.createdAt ? new Date(a.createdAt).getTime() : parseInt(a._id.substring(0, 8), 16) * 1000;
+      const timeB = b.createdAt ? new Date(b.createdAt).getTime() : parseInt(b._id.substring(0, 8), 16) * 1000;
+      return timeB - timeA;
+    })
+    ?.slice(0, 4) ?? [];
 
   const renderStars = (rate: number) =>
     Array.from({ length: 5 }).map((_, index) => (
@@ -86,7 +92,7 @@ const TestimonialSection = ({ testimonials }: { testimonials?: Testimonial[] }) 
                     {...TestimonialSettings}
                     className="eb-testimonial eb-testimonial-style-2"
                   >
-                    {featuredTestimonials?.map((item) => (
+                    {latestTestimonials?.map((item) => (
                       <SwiperSlide key={item._id}>
                         <div className="eb-testimonial-item">
                           <div className="eb-testimonial-grid">
@@ -126,7 +132,7 @@ const TestimonialSection = ({ testimonials }: { testimonials?: Testimonial[] }) 
                     <div className="swiper-pagination" />
                   </Swiper>
 
-                  {!featuredTestimonials?.length && (
+                  {!latestTestimonials?.length && (
                     <p style={{ textAlign: "center" }}>
                       No testimonials available
                     </p>

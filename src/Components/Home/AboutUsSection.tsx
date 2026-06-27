@@ -118,7 +118,7 @@ const AboutUsSection = () => {
                   decoding="async"
                   width={520}
                   height={370}
-                  src={`${ImagePath}home/about-us-pic.png`}
+                  src={`${ImagePath}home/about-us-pic.webp`}
                   className="attachment-full size-full wp-image-1518"
                   alt=""
                 />

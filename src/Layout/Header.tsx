@@ -70,7 +70,7 @@ const Header = () => {
                     <img
                       width={123}
                       height={50}
-                      src={`${ImagePath}logo/Logo.png`}
+                      src={`${ImagePath}logo/Logo.webp`}
                       className="site-logo h-auto object-contain"
                       alt="logo"
                       decoding="async"
@@ -215,7 +215,7 @@ const Header = () => {
                   <img
                     width={123}
                     height={50}
-                    src={`${ImagePath}logo/Logo.png`}
+                    src={`${ImagePath}logo/Logo.webp`}
                     className="site-logo h-auto object-contain"
                     alt="edublink"
                     decoding="async"

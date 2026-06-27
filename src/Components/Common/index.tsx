@@ -7,6 +7,7 @@ import AuthModal from "./AuthModal";
 import LogoutModal from "./LogoutModal";
 import VideoModal from "./VideoModal";
 import ImageUpload from "./ImageUpload";
+import LazyImage from "./LazyImage";
 
 export {
   BreadCrumb,
@@ -18,4 +19,5 @@ export {
   LogoutModal,
   VideoModal,
   ImageUpload,
+  LazyImage,
 };

@@ -34,5 +34,17 @@ export default defineConfig(({ mode }) => {
     define: {
       "process.env.VITE_API_BASE_URL": JSON.stringify(API_BASE_URL),
     },
+    build: {
+      chunkSizeWarningLimit: 1500,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            "vendor-react": ["react", "react-dom", "react-router-dom"],
+            "vendor-state": ["@tanstack/react-query", "react-redux", "@reduxjs/toolkit"],
+            "vendor-ui": ["swiper", "aos"],
+          },
+        },
+      },
+    },
   };
 });

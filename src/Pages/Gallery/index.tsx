@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BreadCrumb } from "../../Components/Common";
+import { BreadCrumb, LazyImage } from "../../Components/Common";
 import GetCeritficateSection from "../../Components/Common/GetCeritficateSection";
 import { Queries } from "../../Api";
 import { useAppDispatch } from "../../Store/Hook";
@@ -72,11 +72,11 @@ const Gallery = () => {
                                             <div className="thumbnail">
                                               <div className="course-thumb">
                                                 {firstImage ? (
-                                                  <img
-                                                    className="w-100"
+                                                  <LazyImage
                                                     src={firstImage}
                                                     alt={folder.title}
-                                                    style={{ width: "100%", aspectRatio: "3/2", objectFit: "cover", backgroundColor: "#fff" }}
+                                                    wrapperStyle={{ width: "100%", aspectRatio: "3/2" }}
+                                                    style={{ width: "100%", aspectRatio: "3/2", objectFit: "cover" }}
                                                   />
                                                 ) : (
                                                   <div className="w-100 flex items-center justify-center bg-gray-200" style={{ width: "100%", aspectRatio: "3/2" }}>
@@ -232,11 +232,12 @@ const Gallery = () => {
                                           <a className="edu-gallery-grid-item">
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
-                                                <div className="thumbnail">
-                                                  <img
-                                                    className="w-full! h-auto! rounded-sm!"
+                                                  <div className="thumbnail" style={{ minHeight: "150px" }}>
+                                                  <LazyImage
                                                     src={item}
                                                     alt=""
+                                                    wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
+                                                    style={{ borderRadius: "4px" }}
                                                   />
                                                 </div>
                                               </div>
@@ -266,11 +267,12 @@ const Gallery = () => {
                                           <a className="edu-gallery-grid-item">
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
-                                                <div className="thumbnail">
-                                                  <img
-                                                    className="w-full! h-auto! rounded-sm!"
+                                                  <div className="thumbnail" style={{ minHeight: "150px" }}>
+                                                  <LazyImage
                                                     src={item}
                                                     alt=""
+                                                    wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
+                                                    style={{ borderRadius: "4px" }}
                                                   />
                                                 </div>
                                               </div>
@@ -300,11 +302,12 @@ const Gallery = () => {
                                           <a className="edu-gallery-grid-item">
                                             <div className="edu-gallery-grid">
                                               <div className="inner">
-                                                <div className="thumbnail">
-                                                  <img
-                                                    className="w-full! h-auto! rounded-sm!"
+                                                  <div className="thumbnail" style={{ minHeight: "150px" }}>
+                                                  <LazyImage
                                                     src={item}
                                                     alt=""
+                                                    wrapperStyle={{ borderRadius: "4px", minHeight: "150px" }}
+                                                    style={{ borderRadius: "4px" }}
                                                   />
                                                 </div>
                                               </div>

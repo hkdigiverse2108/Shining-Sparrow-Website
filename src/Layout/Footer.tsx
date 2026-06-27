@@ -63,7 +63,7 @@ const Footer = () => {
                       <div className="edublink-site-logo-widget-container">
                         <span className="edublink-site-main-logo edublink-site-main-logo-type">
                           <Link to="" data-elementor-open-lightbox className="elementor-clickable">
-                            <img width={123} height={50} alt="logo-white" src={`${ImagePath}logo/Logo.png`} className="h-auto object-contain" />
+                            <img width={123} height={50} alt="logo-white" src={`${ImagePath}logo/Logo.webp`} className="h-auto object-contain" />
                           </Link>
                         </span>
                       </div>
