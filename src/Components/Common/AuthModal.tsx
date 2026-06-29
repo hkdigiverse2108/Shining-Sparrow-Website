@@ -270,7 +270,9 @@ const FormField = ({ label, name, ...props }: { label: string; name: string; [ke
         {...props}
         onChange={(e) => {
           if (name === "email" || props.type === "email") {
-            e.target.value = e.target.value.toLowerCase();
+            e.target.value = e.target.value.toLowerCase().slice(0, 35);
+          } else if (name === "phoneNumber" || name === "phone" || props.type === "tel") {
+            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
           }
           field.onChange(e);
         }}
@@ -527,6 +529,7 @@ const AuthModal = () => {
                   name="email"
                   placeholder="john@example.com"
                   autoComplete="email"
+                  maxLength={35}
                 />
 
                 <FormField
@@ -534,6 +537,7 @@ const AuthModal = () => {
                   name="phoneNumber"
                   placeholder="9876543210"
                   autoComplete="tel"
+                  maxLength={10}
                 />
 
                 <FormSelect
