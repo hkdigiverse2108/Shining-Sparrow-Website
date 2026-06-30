@@ -23,18 +23,18 @@ const GUJARAT_DISTRICTS = [
 ];
 
 const STD_OPTIONS = [
-  { label: "1st Std", value: "1st Std" },
-  { label: "2nd Std", value: "2nd Std" },
-  { label: "3rd Std", value: "3rd Std" },
-  { label: "4th Std", value: "4th Std" },
-  { label: "5th Std", value: "5th Std" },
-  { label: "6th Std", value: "6th Std" },
-  { label: "7th Std", value: "7th Std" },
-  { label: "8th Std", value: "8th Std" },
-  { label: "9th Std", value: "9th Std" },
-  { label: "10th Std", value: "10th Std" },
-  { label: "11th Std", value: "11th Std" },
-  { label: "12th Std", value: "12th Std" },
+  { label: "1st Standard", value: "1st Standard" },
+  { label: "2nd Standard", value: "2nd Standard" },
+  { label: "3rd Standard", value: "3rd Standard" },
+  { label: "4th Standard", value: "4th Standard" },
+  { label: "5th Standard", value: "5th Standard" },
+  { label: "6th Standard", value: "6th Standard" },
+  { label: "7th Standard", value: "7th Standard" },
+  { label: "8th Standard", value: "8th Standard" },
+  { label: "9th Standard", value: "9th Standard" },
+  { label: "10th Standard", value: "10th Standard" },
+  { label: "11th Standard", value: "11th Standard" },
+  { label: "12th Standard", value: "12th Standard" },
   { label: "Adult Learner", value: "Adult Learner" }
 ];
 
@@ -270,7 +270,9 @@ const FormField = ({ label, name, ...props }: { label: string; name: string; [ke
         {...props}
         onChange={(e) => {
           if (name === "email" || props.type === "email") {
-            e.target.value = e.target.value.toLowerCase();
+            e.target.value = e.target.value.toLowerCase().slice(0, 35);
+          } else if (name === "phoneNumber" || name === "phone" || props.type === "tel") {
+            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
           }
           field.onChange(e);
         }}
@@ -317,12 +319,13 @@ const AuthModal = () => {
   const [districts, setDistricts] = useState<string[]>(GUJARAT_DISTRICTS);
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/somen-das/indian-states-and-districts-json/master/states-and-districts.json")
+    fetch("https://raw.githubusercontent.com/sab99r/Indian-States-And-Districts/master/states-and-districts.json")
       .then((res) => res.json())
       .then((data) => {
-        const gujState = data.states?.find((s: any) => s.state === "Gujarat");
-        if (gujState && Array.isArray(gujState.districts)) {
-          setDistricts(gujState.districts.sort());
+        if (data && data.states) {
+          const allDistricts = data.states.flatMap((s: any) => s.districts);
+          const uniqueDistricts = Array.from(new Set(allDistricts)).sort() as string[];
+          setDistricts(uniqueDistricts);
         }
       })
       .catch(() => {
@@ -526,6 +529,7 @@ const AuthModal = () => {
                   name="email"
                   placeholder="john@example.com"
                   autoComplete="email"
+                  maxLength={35}
                 />
 
                 <FormField
@@ -533,6 +537,7 @@ const AuthModal = () => {
                   name="phoneNumber"
                   placeholder="9876543210"
                   autoComplete="tel"
+                  maxLength={10}
                 />
 
                 <FormSelect
