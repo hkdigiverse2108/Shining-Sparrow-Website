@@ -172,29 +172,35 @@ const Gallery = () => {
                                       <span>Back to Folders</span>
                                     </button>
                                     
-                                    <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%", flexWrap: "wrap" }}>
-                                      <svg className="flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={{ color: "var(--edublink-color-primary, #f97316)", width: "26px", height: "26px" }}>
-                                        <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                                      </svg>
-                                      <h3 
-                                        className="m-0"
-                                        style={{
-                                          fontFamily: "var(--edublink-font-secondary)",
-                                          fontSize: "32px",
-                                          fontWeight: 800,
-                                          color: "var(--edublink-color-secondary, #1b223c)",
-                                          paddingTop:"20px"
-                                        }}
-                                      >
-                                        {selectedFolder.title}
-                                      </h3>
+                                    <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", width: "100%", flexWrap: "wrap", marginTop: "12px", marginBottom: "8px" }}>
+                                      {/* Icon and Title Group */}
+                                      <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", flex: "1 1 auto", minWidth: 0 }}>
+                                        <svg className="flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={{ color: "var(--edublink-color-primary, #f97316)", width: "24px", height: "24px", marginTop: "4px" }}>
+                                          <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                                        </svg>
+                                        <h3 
+                                          className="m-0 text-2xl md:text-3xl"
+                                          style={{
+                                            fontFamily: "var(--edublink-font-secondary)",
+                                            fontWeight: 800,
+                                            color: "var(--edublink-color-secondary, #1b223c)",
+                                            lineHeight: "1.3",
+                                            wordBreak: "break-word"
+                                          }}
+                                        >
+                                          {selectedFolder.title}
+                                        </h3>
+                                      </div>
+                                      
                                       <div 
-                                        className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 mt-4 md:mt-0 md:ml-4"
+                                        className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-100"
                                         style={{
                                           fontFamily: "var(--edublink-font-primary)",
-                                          fontSize: "15px",
+                                          fontSize: "14px",
                                           fontWeight: 600,
-                                          color: "#5b616c"
+                                          color: "#5b616c",
+                                          whiteSpace: "nowrap",
+                                          marginTop: "2px"
                                         }}
                                       >
                                         {selectedFolder.images?.length || 0} {selectedFolder.images?.length === 1 ? "Photo" : "Photos"}
@@ -202,7 +208,7 @@ const Gallery = () => {
                                     </div>
                                     
                                     <p 
-                                      className="mt-3 m-0 max-w-2xl leading-relaxed"
+                                      className="mt-3 m-0 w-full leading-relaxed"
                                       style={{
                                         fontFamily: "var(--edublink-font-primary)",
                                         fontSize: "15px",

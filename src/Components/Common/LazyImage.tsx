@@ -45,6 +45,7 @@ const LazyImage = ({
         alt={alt}
         className={`lazy-img-actual ${loaded ? "lazy-img-loaded" : "lazy-img-loading"} ${className}`}
         style={style}
+        loading="lazy"
         onLoad={() => setLoaded(true)}
         onError={() => { setLoaded(true); setError(true); }}
         {...rest}

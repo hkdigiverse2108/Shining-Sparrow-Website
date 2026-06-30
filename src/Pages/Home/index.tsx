@@ -20,7 +20,7 @@ const Home = () => {
 
 
 
-  const { data: courseData } =
+  const { data: courseData, isLoading: isCourseLoading } =
     Queries.useGetAllCourses();
   const Courses = courseData?.data?.course_data || [];
 
@@ -45,7 +45,7 @@ const Home = () => {
       <HeroBanner banner={banner} />
 
       <AboutUsSection />
-      <CourseSection courses={Courses} />
+      <CourseSection courses={Courses} isLoading={isCourseLoading} />
       <VideoAreaSection />
       <CounterSection />
       <TestimonialSection testimonials={testimonials} />

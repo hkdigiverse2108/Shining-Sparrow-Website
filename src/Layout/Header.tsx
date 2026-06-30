@@ -177,7 +177,7 @@ const Header = () => {
                   </nav>
                 ) : (
                   <a
-                    href={import.meta.env.VITE_LOGIN_URL || "https://student.shiningsparrow.com"}
+                    href={"https://student.shiningsparrow.com"}
                     className="main-header-btn edu-btn btn-medium"
                   >
                     Login <i className="icon-4" />

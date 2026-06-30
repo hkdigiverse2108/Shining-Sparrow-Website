@@ -1,18 +1,23 @@
 import { useAppSelector } from "../../Store/Hook";
+import CountUp from "../Common/CountUp";
 
 const CounterSection = () => {
   const AllSettings = useAppSelector((state) => state.settings.settings);
 
-  const formatNumber = (num: number) => {
-    if (!num) return "0";
+  const getFormattedNumberParts = (num: number) => {
+    if (!num) return { value: 0, suffix: "+" };
     if (num >= 1000000) {
-      return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+';
+      return { value: Number((num / 1000000).toFixed(1)), suffix: "M+" };
     }
     if (num >= 1000) {
-      return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K+';
+      return { value: Number((num / 1000).toFixed(1)), suffix: "K+" };
     }
-    return num.toString() + '+';
+    return { value: num, suffix: "+" };
   };
+
+  const enrolledParts = getFormattedNumberParts(AllSettings?.enrolledLearners ?? 0);
+  const classParts = getFormattedNumberParts(AllSettings?.classCompleted ?? 0);
+  const satisfactionRate = AllSettings?.satisfactionRate ?? 0;
 
   return (
     <section
@@ -38,9 +43,9 @@ const CounterSection = () => {
                   className="edublink-counter-item"
                   id="edublink-counter-id-ef72a20"
                 >
-                  <span className="odometer" data-odometer-final="29.3" />
-                  <span className="edublink-counter-suffix">
-                    {formatNumber(AllSettings?.enrolledLearners ?? 0)}
+                  <span className="edublink-counter-suffix" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <CountUp from={0} to={enrolledParts.value} duration={2} />
+                    {enrolledParts.suffix}
                   </span>
                 </div>
               </div>
@@ -76,9 +81,9 @@ const CounterSection = () => {
                   className="edublink-counter-item"
                   id="edublink-counter-id-a68e20d"
                 >
-                  <span className="odometer" data-odometer-final="32.4" />
-                  <span className="edublink-counter-suffix">
-                    {formatNumber(AllSettings?.classCompleted ?? 0)}
+                  <span className="edublink-counter-suffix" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <CountUp from={0} to={classParts.value} duration={2} />
+                    {classParts.suffix}
                   </span>
                 </div>
               </div>
@@ -114,9 +119,9 @@ const CounterSection = () => {
                   className="edublink-counter-item"
                   id="edublink-counter-id-e0925c1"
                 >
-                  <span className="odometer" data-odometer-final={100} />
-                  <span className="edublink-counter-suffix">
-                    {AllSettings?.satisfactionRate ?? 0}%
+                  <span className="edublink-counter-suffix" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <CountUp from={0} to={satisfactionRate} duration={2} />
+                    %
                   </span>
                 </div>
               </div>
@@ -141,3 +146,4 @@ const CounterSection = () => {
 };
 
 export default CounterSection;
+
